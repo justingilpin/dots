@@ -1,0 +1,137 @@
+#------------Justin's config for Zoomer Shell ------------#
+# many thanks to https://github.com/sayanarijit/.files/blob/ac855d65ba0b1260f25353f6d139fc03b16c3b3e/nixos/files/zshrc
+# Flex on ubuntu users
+#neofetch # remove pkg count for more speed
+
+# github.com/arsham/figurine
+# Manually install or ancible
+# go install github.com/arsham/figurine@latest
+# mv go .go
+/home/justin/.go/bin/figurine -f "3d.flf" $HOST 
+# export SOPS_AGE_KEY_FILE=$HOME/.config/sops/age/keys.txt
+export EDITOR=code
+BROWSER=firefox
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots) 		# Include hidden files.
+
+#-------ZSH Default vi mode----------#
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+## Change cursor shape for different vi modes.
+#function zle-keymap-select {
+#  if [[ ${KEYMAP} == vicmd ]] ||
+#     [[ $1 = 'block' ]]; then
+#    echo -ne '\e[1 q'
+#  elif [[ ${KEYMAP} == main ]] ||
+#       [[ ${KEYMAP} == viins ]] ||
+#       [[ ${KEYMAP} = '' ]] ||
+#       [[ $1 = 'beam' ]]; then
+#    echo -ne '\e[5 q'
+#  fi
+#}
+#zle -N zle-keymap-select
+#zle-line-init() {
+#    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#    echo -ne "\e[5 q"
+#}
+#zle -N zle-line-init
+#echo -ne '\e[5 q' # Use beam shape cursor on startup.
+#preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+#-----------LF File Manager-----------#
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# --------------- Alias -------------- #
+
+# Shortcuts
+alias l='ls -alh'
+alias ll='ls -l'
+alias ls='ls --color=tty'
+alias c='clear'
+alias h='history'
+alias ec='nvim ~/.dotfiles/home/files/zshrc'
+alias sc='source ~/.dotfiles/home/files/zshrc'
+
+
+# SOPS
+# alias se="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE |grep -oP "public key: \K(.*)") --in-place" # then name file
+# alias sd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE |grep -oP "public key: \K(.*)") --in-place"
+
+
+# Nix Shortcuts
+alias rebuild-laptop='cd ~/.dotfiles/;sudo nixos-rebuild switch --flake .#fibonacci' # rebuilds laptop machine
+alias rebuild-desktop='cd ~/.dotfiles/;sudo nixos-rebuild switch --flake .#seykota' # rebuilds desktop machine
+alias rebuild-server='cd ~/.dotfiles/;sudo nixos-rebuild switch --flake .#server' # rebuilds server machine
+alias rebuild-hypr-desktop='cd ~/.dotfiles/;sudo nixos-rebuild switch --flake .#donchian' # rebuilds desktop hyprland
+alias rebuild-hypr-laptop='cd ~/.dotfiles/;sudo nixos-rebuild switch --flake .#markowitz' # rebuilds hypr laptop
+alias cefi='sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system;sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch' # Clean EFI when disk is full 
+alias train='vimtutor'
+alias aigraphics='export NIXPKGS_ALLOW_UNFREE=1;nvidia-offload nix-shell;nvidia-offload bash webui.sh --skip-torch-cuda-test --precision full --no-half'
+alias nixgarbage="nix-collect-garbage -d"
+
+# Kitty / Enter root@whatever after alias to prevent xterm errors
+alias kssh='kitty +kitten ssh'
+
+# Neovim
+alias -s txt=nvim
+alias -s nix=nvim
+alias vim=nvim
+
+# Sioyek PDF Reader
+alias -s pdf=sioyek
+
+# Git
+alias gs='git status'
+alias gc='git commit -m'
+alias gp='git push origin master'
+alias ga='git add'
+alias gaa='git add .'
+
+# CD Stuff
+alias .='cd && ld'
+alias ..='cd .. && ld'
+alias ...='cd ../.. && ld'
+alias ,='cd'
+alias ,,='cd ..'
+
+#----------------Source--------------#
+
+SPACESHIP_TIME_12HR=true
+eval "$(starship init zsh)"
+## source /usr/share/zsh/site-contrib/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# Load zsh-syntax-highlighting; should be last.
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+#
+
