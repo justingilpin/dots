@@ -18,9 +18,6 @@
     docker-compose
 #    drill
 #    entr # Modern Unix `watch`
-    wget
-    git
-    git-crypt
     alacritty
     firefox
     esptool
@@ -57,7 +54,6 @@
 #    unzip
     watch
     wireguard-tools
-#    vim
 
 #   (python39.withPackages(p: with p; [
 #       fontforge
@@ -76,8 +72,6 @@
     #----------Utilies--------------#
     mesa
     ntfs3g
-    cifs-utils
-
 
     #-------Favorite Software-------#
  #       gimp-with-plugins

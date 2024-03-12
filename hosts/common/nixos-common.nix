@@ -9,6 +9,7 @@ in
     settings = {
         experimental-features = [ "nix-command" "flakes" ];
         warn-dirty = false;
+	auto-optimise-store = true;
     };
     # Automate garbage collection
     gc = {
@@ -19,14 +20,14 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-#  nixpkgs.config.permittedInsecurePackages = [
-#    "electron-24.8.6"
-#    "electron-25.9.0"
-#  ];
 
   environment.systemPackages = with pkgs; [
-    # jellyfin-ffmpeg
-    # hddtemp
-    # synergy
+    neovim
+    wget
+    git
+    git-crypt
+    tailscale
+    cifs-utils
+    neofetch
   ];
 }
