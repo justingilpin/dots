@@ -13,36 +13,33 @@
       ./../../modules/jellyfin
 #      ./../../modules/code-server
     ];
-#  services.vscode-server.enable = true;
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+#  nixpkgs = {
+#    config = {
+#      allowUnfree = true;
+#    };
+#  };
 
-  nix = {
-    settings = {
+#  nix = {
+#    settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+#      experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-      warn-dirty = false; # remove git warnings
-    };
-  };
+#      auto-optimise-store = true;
+#      warn-dirty = false; # remove git warnings
+#    };
+#  };
 
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "jim_simons"; # Define your hostname.
+#  networking.hostName = "jim_simons"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
   
   # Tailscale Mesh VPN 
   services.tailscale.enable = true;
@@ -82,6 +79,8 @@
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
+    ffmpeg-headless
+    neofetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
