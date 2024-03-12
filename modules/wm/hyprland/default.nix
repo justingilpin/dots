@@ -23,6 +23,7 @@
 #    xdg-dbus-proxy # Dbus launch proxy for flatpak
 #    dbus # default dbus-launch
     wl-clipboard
+    waybar
   ];
 
 }
