@@ -6,6 +6,9 @@ let
     ipdb
     ipython
     numpy
+    numba
+    pandas
+    vectorbt
     jupyter
     openpyxl
     pip
