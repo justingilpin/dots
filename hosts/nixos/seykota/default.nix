@@ -35,35 +35,6 @@
   users.defaultUserShell = pkgs.zsh;
   # Also check that user has shell enabled
 
-  # Enable the Plasma 5 Desktop Environment.
-#  services.xserver.enable = true; # X11
-#  services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.displayManager.sddm.wayland.enable = true; # Enable Wayland commit out for X11
-#  services.xserver.desktopManager.plasma5.enable = true;
-#  services.xserver.displayManager.defaultSession ="plasma"; # Enable Wayland 'plasmawayland'
-#  services.xserver.desktopManager.wallpaper.mode = "fill";
-
-  #nixpkgs.config.permittedInsecurePackages = [
-  #  "electron-25.9.0"
-  #];
-
-#  nixpkgs.config.permittedInsecurePackages = [
-#    "electron-25.9.0"
-#  ];
-
-  # Enable Plasma 6
-#  services.xserver.enable = true;
-#  services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.desktopManager.plasma6.enable = true;
-#  services.xserver.displayManager.defaultSession = "plasma"; #'plasmax11' for X11 default plasma
-
-#  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-#    plasma-browser-integration
-#    konsole
-#    oxygen
-#  ];
-
-
   # Enable Sunshine at Boot
 #  security.wrappers.sunshine = {
 #    owner = "root";
@@ -124,17 +95,6 @@
     extraGroups = [ "wheel" "networkmanager"]; 
     packages = with pkgs; [
 #      zoom-us
-#      obsidian
-#      heroic
-#      prismlauncher
-#      xsel
-#      xclip
-#      dig
-#      go
-#      sunshine
-#      ffmpeg #encoder
-#      mesa
-#      ntfs3g
     #---------Games--------------#
       lutris
       heroic
@@ -143,7 +103,7 @@
       gamescope
 
       # unstable below this line
-#      unstablePkgs.vscode
+      unstablePkgs.vscode
       unstablePkgs.obsidian
 
 #      unstable.hello
