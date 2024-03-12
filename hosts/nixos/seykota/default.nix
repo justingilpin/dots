@@ -18,7 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ]; # allows NTFS support at boot
 
-  networking.hostName = "seykota"; # Define your hostname.
+#  networking.hostName = "seykota"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Fixes desktop error when rebuilding Nixos
@@ -34,23 +34,6 @@
   environment.binsh = "${pkgs.dash}/bin/dash";
   users.defaultUserShell = pkgs.zsh;
   # Also check that user has shell enabled
-
-  # Enable Sunshine at Boot
-#  security.wrappers.sunshine = {
-#    owner = "root";
-#    group = "root";
-#    capabilities = "cap_sys_admin+p";
-#    source = "${pkgs.sunshine}/bin/sunshine";
-#  };
-
-#  systemd.user.services.sunshine =
-#    {
-#      description = "sunshine";
-#      wantedBy = [ "graphical-session.target" ];
-#      serviceConfig = {
-#      ExecStart = "${config.security.wrapperDir}/sunshine";
-#    };
-#  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -94,32 +77,19 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager"]; 
     packages = with pkgs; [
-#      zoom-us
     #---------Games--------------#
       lutris
       heroic
       prismlauncher
       gamemode
       gamescope
+    #------Desktop Software------#
 
       # unstable below this line
       unstablePkgs.vscode
       unstablePkgs.obsidian
-
-#      unstable.hello
-
-      # Wayland
-#      wlroots
-#      wlrctl
-#      vaapiVdpau #encoder
-#      vaapi-intel-hybrid #encoder
-#      nv-codec-headers-12 # encoder
-#      x265 # encoder
-#      blender-hip # 3D Creation using HIP enabled in AMD.nix
-#      clinfo # OpenCL info
-#      gpu-viewer
- #     warp-terminal
     ];
+
    shell = pkgs.zsh;
    useDefaultShell =true;
     openssh.authorizedKeys.keys = [
@@ -131,9 +101,6 @@
 #    wget
 #    git
 #    git-crypt
-#    alacritty
-#    firefox
-#    cifs-utils # needed for mounting samba shares
 #  ];
 
 #  virtualisation.libvirtd.enable = true;
@@ -149,16 +116,10 @@
 #    };
 #  };
 
-  # KDE apps
-#  programs.partition-manager.enable = true;
-#  programs.kdeconnect.enable = true;
-
 #  programs.gnupg.agent = {
 #    enable = true;
 #    enableSSHSupport = true;
 #  };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
 #  services.openssh.enable = true;
@@ -169,6 +130,5 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11"; # Did you read the comment?
-
+  system.stateVersion = "23.11"; 
 }
