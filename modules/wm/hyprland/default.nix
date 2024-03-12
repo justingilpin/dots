@@ -24,6 +24,10 @@
 #    dbus # default dbus-launch
     wl-clipboard
     waybar
+    networkmanagerapplet
+    gtkmm3
+    gtk3
+    dbus
   ];
 
 }
