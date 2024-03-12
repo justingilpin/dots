@@ -22,6 +22,11 @@
     };
   };
 
+#  services.xserver.windowManager.i3.extraSessionCommands = ''
+#    eval $(gnome-keyring-daemon --daemonize)
+#    export SSH_AUTH_SOCK
+#  '';
+
 #  sound = {
 #    enable = true;
 #    mediaKeys.enable = true;
@@ -47,7 +52,8 @@
       packages = with pkgs; [
         # apps specific for Hyprland
         wl-clipboard 
-        libgnome-keyring
+#        libgnome-keyring
+	gnome.gnome-keyring
         gsettings-qt
         amarena-theme # gtk theme amarena
 
