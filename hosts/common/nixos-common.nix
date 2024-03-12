@@ -29,5 +29,29 @@ in
     tailscale
     cifs-utils
     neofetch
+    ntfs3g
+    htop
+    btop
+    coreutils
+    bitwarden-cli
+    go
+    figurine
+
+    #-------------Encoders--------------#
+    ffmpeg # possibly use ffmpeg-headless
+
+    #--------------ZSH------------------#
+    starship
+    zsh-syntax-highlighting
+    zsh-vi-mode
+
+    #-------------Security--------------#
+#    gnupg
+#    sops
+#    age
+    
+    #--------------Fonts----------------#
+    jetbrains-mono
+
   ];
 }

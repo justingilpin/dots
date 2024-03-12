@@ -7,9 +7,6 @@
 
     ## stable
 #    asciinema
-#    bitwarden-cli
-#    btop
-#    coreutils
 #    diffr # Modern Unix `diff`
 #    difftastic # Modern Unix `diff`
 #    dua # Modern Unix `du`
@@ -24,13 +21,9 @@
     fira-code
     fira-mono
 #    fd
-    figurine
     #fzf # programs.fzf
-    git # programs.git
     gh
-    go
     gnused
-    htop # programs.htop
     xsel
     xclip
 
@@ -38,7 +31,6 @@
 #    hugo
 #    iperf3
 #    ipmitool
-    jetbrains-mono # font
 #    just
 #    jq
 #    kubectl
@@ -70,13 +62,11 @@
 #      pygobject3
 #    ]))
     #----------Utilies--------------#
-    mesa
-    ntfs3g
+    mesa # video drivers
 
     #-------Favorite Software-------#
  #       gimp-with-plugins
     lf # file manager | ranger replacement
-    neofetch
  #  sioyek # pdf viewer
     libreoffice-still
     unstablePkgs.obsidian
@@ -84,24 +74,11 @@
     vivaldi
     tor
     tor-browser
+
     #---------Media----------------#
     vlc
     discord
     zoom-us
-    #----------Encoders-------------#
-    ffmpeg # possibly ffmpeg-headless
-
-    #------------ZSH----------------#
-    starship
-    zsh-syntax-highlighting
-    zsh-vi-mode
-
-
-    #-----------Security------------#
- #   gnupg
- #   sops
- #   age
-
 
     # requires nixpkgs.config.allowUnfree = true;
     vscode-extensions.ms-vscode-remote.remote-ssh
