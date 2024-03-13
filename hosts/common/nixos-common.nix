@@ -8,7 +8,6 @@ let
     numpy
     numba
     pandas
-    vectorbt
     jupyter
     openpyxl
     pip

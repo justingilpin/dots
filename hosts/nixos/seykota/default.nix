@@ -73,6 +73,9 @@
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.motherboard = "amd";
 
+  # USB
+  services.usbmuxd.enable = true;
+
   users.users.justin = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager"]; 
@@ -88,8 +91,11 @@
       # unstable below this line
       unstablePkgs.vscode
       unstablePkgs.obsidian
+    #---------iPhone-------------#
+      checkra1n
+      ifuse
+      libimobiledevice
     ];
-
    shell = pkgs.zsh;
    useDefaultShell =true;
     openssh.authorizedKeys.keys = [
