@@ -28,6 +28,7 @@
     gtkmm3
     gtk3
     dbus
+    wofi
   ];
 
 }
