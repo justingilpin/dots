@@ -29,6 +29,7 @@
     gtk3
     dbus
     wofi
+    hyprpaper
   ];
 
 }
