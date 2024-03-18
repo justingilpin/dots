@@ -87,7 +87,7 @@
       gamemode
       gamescope
       protontricks
-      ckan # ksp mod manager
+#      ckan # ksp mod manager
       mono5 #ckan requirement
       msbuild #ckan requirement
     #------Desktop Software------#
