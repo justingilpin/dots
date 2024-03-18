@@ -1,5 +1,5 @@
 
-{ config, lib, pkgs, unstablePkgs, nixos-hardware, ... }:
+{ config, lib, pkgs, inputs, unstablePkgs, nixos-hardware, ... }:
 
 
 {
@@ -86,6 +86,10 @@
       prismlauncher
       gamemode
       gamescope
+      protontricks
+      ckan # ksp mod manager
+      mono5 #ckan requirement
+      msbuild #ckan requirement
     #------Desktop Software------#
 
       # unstable below this line

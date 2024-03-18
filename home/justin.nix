@@ -38,6 +38,20 @@
       };
     }; # end git
 
+#  programs.firefox = {
+#    enable = true;
+#    profiles.justin = {
+#      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+#        bitwarden
+#	ublock-origin
+#	sponsorblock
+#	darkreader
+#	tridactyl
+#	youtube-shorts-block
+#      ];
+#    };
+#  };
+
   programs.htop = {
     enable = true;
     settings.show_program_path = true;
