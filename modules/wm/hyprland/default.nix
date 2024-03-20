@@ -30,6 +30,13 @@
     dbus
     wofi
     hyprpaper
+    hyprlock # unstable only
+    hypridle # unstable only
+    wlr-protocols # hyprlock dependency
+    hyprlang # hyprlock dependency
+    sdbus-cpp # hyprlock depenency
+
+
   ];
 
 }
