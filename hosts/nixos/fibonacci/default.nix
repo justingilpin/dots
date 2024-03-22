@@ -11,7 +11,7 @@
       ./e15.nix
       ./../../common/wayland-packages.nix
       ./../../../modules/wm/hyprland
-      ./../../../modules/vectorbt
+#      ./../../../modules/vectorbt
     ];
 
 #  nixpkgs = {
@@ -110,6 +110,19 @@
     kitty
     firefox
     cifs-utils # needed for mounting samba shares
+    python3
+    python3Packages.scipy
+    python3Packages.numpy
+    python3Packages.pandas
+    python3Packages.plotly
+    python3Packages.fonttools
+    python3Packages.regex
+    python3Packages.tqdm
+    python3Packages.contourpy
+    python3Packages.cycler
+    python3Packages.joblib
+    python3Packages.kiwisolver
+
   ];
 
   # mount cifs truenas scale need cifs-utils package
