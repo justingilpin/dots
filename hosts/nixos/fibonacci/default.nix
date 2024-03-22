@@ -12,6 +12,7 @@
       ./../../common/wayland-packages.nix
       ./../../../modules/wm/hyprland
 #      ./../../../modules/vectorbt
+#      ./../../../modules/pypi
     ];
 
 #  nixpkgs = {
@@ -111,6 +112,7 @@
     firefox
     cifs-utils # needed for mounting samba shares
     python3
+    python3Packages.virtualenv
     python3Packages.scipy
     python3Packages.numpy
     python3Packages.pandas

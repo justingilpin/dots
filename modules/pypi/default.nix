@@ -10,7 +10,7 @@ let
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "0d6f53a15db4120f2b08c94f11e7dc8d2e05c6e5c38e6c7b1a5b7996355f096c";
+      sha256 = "uKpY+M95P/2HgtPYyxnmbvNverpDU+7IWedGeLAbB6c=";
     };
 
     propagatedBuildInputs = with pythonPackages; [
