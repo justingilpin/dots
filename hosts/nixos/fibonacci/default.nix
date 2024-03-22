@@ -11,6 +11,7 @@
       ./e15.nix
       ./../../common/wayland-packages.nix
       ./../../../modules/wm/hyprland
+      ./../../../modules/vectorbt
     ];
 
 #  nixpkgs = {
