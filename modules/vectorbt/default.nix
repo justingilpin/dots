@@ -1,14 +1,21 @@
 { config, pkgs, lib, unstablePkgs, ... }:
 
 let
+  poetry2nix = import (pkgs.fetchFromGitHub {
+    owner = "nix-community";
+    repo = "poetry2nix";
+    rev = "1.21.0";  # Use the latest release
+    sha256 = "sha256:11r27qy4pnqsqhbvxd3vn6sm1s8zl190d2q1v9k2w0r296bdrw4c";  # Replace with the correct SHA-256 hash
+  }) {};
+
   kaleido = pkgs.poetry2nix.mkPoetryApplication {
     pname = "kaleido";
     version = "0.2.1";
     pyModule = "kaleido";
     src = pkgs.fetchFromGitHub {
       owner = "plotly";
-      repo = pname;
-      rev = "v${version}";  # Use the tag for the version
+      repo = "kaleido";
+      rev = "version"; 
       sha256 = "sha256:1k1hlkdlh4h00p0xjqn9ypvnhycv1pjqn2m9f3qg2s5pribh36wl";
     };
     format = "pyproject";
@@ -18,6 +25,7 @@ let
       license = licenses.mit;
     };
   };  
+
 
   vectorbt = pkgs.python3Packages.buildPythonPackage rec {
     pname = "vectorbt";

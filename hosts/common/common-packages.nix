@@ -4,7 +4,7 @@
     ## unstable
     unstablePkgs.yt-dlp
     unstablePkgs.get_iplayer
-
+    nix-prefetch-git
     ## stable
 #    asciinema
 #    diffr # Modern Unix `diff`
