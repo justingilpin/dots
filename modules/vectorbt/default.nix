@@ -1,29 +1,39 @@
-{ config, pkgs, lib, unstablePkgs, ... }:
+{ config, pkgs, lib, unstablePkgs, poetry2nix, ... }:
 
 let
-  poetry2nix = import (pkgs.fetchFromGitHub {
-    owner = "nix-community";
-    repo = "poetry2nix";
-    rev = "1.21.0";  # Use the latest release
-    sha256 = "sha256:11r27qy4pnqsqhbvxd3vn6sm1s8zl190d2q1v9k2w0r296bdrw4c";  # Replace with the correct SHA-256 hash
-  }) {};
+#  poetry2nix = import (pkgs.fetchFromGitHub {
+#    owner = "nix-community";
+#    repo = "poetry2nix";
+#    rev = "1.21.0";  # Use the latest release
+#    sha256 = "sha256:11r27qy4pnqsqhbvxd3vn6sm1s8zl190d2q1v9k2w0r296bdrw4c";
+#  });
 
-  kaleido = pkgs.poetry2nix.mkPoetryApplication {
+
+  kaleido = pkgs.python3Packages.buildPythonPackage rec {
     pname = "kaleido";
     version = "0.2.1";
-    pyModule = "kaleido";
+    # pyModule = "kaleido";
     src = pkgs.fetchFromGitHub {
       owner = "plotly";
       repo = "kaleido";
-      rev = "version"; 
-      sha256 = "sha256:1k1hlkdlh4h00p0xjqn9ypvnhycv1pjqn2m9f3qg2s5pribh36wl";
+      rev = "v${version}"; 
+      sha256 = "sha256:/ZDPZCbm/y5ycQ4KaPuptR/FIcdP7gUjWHURBXlr+1w=";
     };
-    format = "pyproject";
+  #  format = "pyproject";
     meta = with pkgs.lib; {
       description = "Static image export for web-based visualization libraries";
       homepage = "https://github.com/plotly/kaleido";
       license = licenses.mit;
     };
+#      buildPhase = ''
+    # replace this with the actual build commands for the package
+#    poetry build
+#  '';
+
+#  installPhase = ''
+    # replace this with the actual install commands for the package
+#    poetry install --no-root
+#  '';
   };  
 
 
