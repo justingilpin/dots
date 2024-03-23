@@ -6,6 +6,8 @@
     unstablePkgs.get_iplayer
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
+    lua # requirement for neovim to be modified / treesitter
+    gccgo12 # requirement for neovim / treesitter
     ## stable
 #    asciinema
 #    diffr # Modern Unix `diff`
@@ -19,8 +21,7 @@
     alacritty
     firefox
     esptool
-    fira-code
-    fira-mono
+
 #    fd
     #fzf # programs.fzf
     gh
@@ -83,5 +84,11 @@
 
     # requires nixpkgs.config.allowUnfree = true;
     vscode-extensions.ms-vscode-remote.remote-ssh
+  ];
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-mono
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" "IBMPlexMono" "Mononoki" "Monofur"
+    ]; })
   ];
 }
