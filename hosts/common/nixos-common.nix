@@ -55,7 +55,7 @@ in
     bitwarden-cli
     go
     figurine
-    python-with-my-packages
+#    python-with-my-packages
 
     #-------------Encoders--------------#
     ffmpeg # possibly use ffmpeg-headless

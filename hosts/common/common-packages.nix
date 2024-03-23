@@ -5,6 +5,7 @@
     unstablePkgs.yt-dlp
     unstablePkgs.get_iplayer
     nix-prefetch-git
+    ripgrep #neovim telescope grep requirement
     ## stable
 #    asciinema
 #    diffr # Modern Unix `diff`
