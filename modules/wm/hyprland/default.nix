@@ -4,6 +4,7 @@
 
   imports =
     [
+    ./hyprlock.nix
 
     ];
 
@@ -32,7 +33,7 @@
 #    dbus
     wofi
     hyprpaper
-    hyprlock # unstable only
+#    hyprlock # unstable only
     hypridle # unstable only
     wlr-protocols # hyprlock dependency
     mesa # hyprlock dependency
