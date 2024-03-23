@@ -88,7 +88,6 @@
   fonts.packages = with pkgs; [
     fira-code
     fira-mono
-    nerdfonts
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" "IBMPlexMono" "Mononoki" "Monofur"
     ]; })
   ];
