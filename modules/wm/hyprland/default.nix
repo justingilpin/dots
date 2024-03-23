@@ -24,12 +24,24 @@
 #    dbus # default dbus-launch
     wl-clipboard
     waybar
+    dunst
+    libnotify # dunst dependency
     networkmanagerapplet
     gtkmm3
     gtk3
-    dbus
+#    dbus
     wofi
     hyprpaper
+    hyprlock # unstable only
+    hypridle # unstable only
+    wlr-protocols # hyprlock dependency
+    mesa # hyprlock dependency
+    hyprlang # hyprlock dependency
+    sdbus-cpp # hyprlock depenency
+    swaylock-effects
+    swaylock
+    wlogout
+
   ];
 
 }

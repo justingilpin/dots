@@ -21,6 +21,9 @@ in
 {
   time.timeZone = "Asia/Manila";
 
+#  time.timeZone = "Etc/GMT+0"; # Temperary fix to get correct time
+
+
   nix = {
     settings = {
         experimental-features = [ "nix-command" "flakes" ];
