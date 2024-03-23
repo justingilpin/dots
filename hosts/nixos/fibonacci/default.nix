@@ -79,7 +79,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       zoom-us
       tailscale
@@ -111,19 +111,21 @@
     kitty
     firefox
     cifs-utils # needed for mounting samba shares
-    python3
-    python3Packages.virtualenv
-    python3Packages.scipy
-    python3Packages.numpy
-    python3Packages.pandas
-    python3Packages.plotly
-    python3Packages.fonttools
-    python3Packages.regex
-    python3Packages.tqdm
-    python3Packages.contourpy
-    python3Packages.cycler
-    python3Packages.joblib
-    python3Packages.kiwisolver
+    docker
+    docker-compose
+#    python3
+#    python3Packages.virtualenv
+#    python3Packages.scipy
+#    python3Packages.numpy
+#    python3Packages.pandas
+#    python3Packages.plotly
+#    python3Packages.fonttools
+#    python3Packages.regex
+#    python3Packages.tqdm
+#    python3Packages.contourpy
+#    python3Packages.cycler
+#    python3Packages.joblib
+#    python3Packages.kiwisolver
 
   ];
 
