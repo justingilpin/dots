@@ -13,6 +13,8 @@
 
   # Enable Gnome Keyring
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
   # security.pam.services<yourDisplayManager>.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
