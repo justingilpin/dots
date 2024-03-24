@@ -1,17 +1,10 @@
 { config, lib, pkgs, unstablePkgs, ... }:
-
 {
-
   imports =
     [
 
     ];
 
-  # Enable Plasma 6
-#  services.xserver.enable = true;
-#  services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.desktopManager.plasma6.enable = true;
-#  services.xserver.displayManager.defaultSession = "plasma"; #'plasmax11' for X11 default plasma
   services = {
     xserver = {
       enable = true;
