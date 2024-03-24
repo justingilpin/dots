@@ -17,6 +17,7 @@
 #    dua # Modern Unix `du`
 #    duf # Modern Unix `df`
 #    du-dust # Modern Unix `du`
+    docker
     docker-compose
 #    drill
 #    entr # Modern Unix `watch`
@@ -69,9 +70,9 @@
     discord
     zoom-us
 
-    # requires nixpkgs.config.allowUnfree = true;
     vscode-extensions.ms-vscode-remote.remote-ssh
   ];
+
   fonts.packages = with pkgs; [
     fira-code
     fira-mono
