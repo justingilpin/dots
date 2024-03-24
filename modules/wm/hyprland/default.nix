@@ -39,10 +39,8 @@
     mesa # hyprlock dependency
     hyprlang # hyprlock dependency
     sdbus-cpp # hyprlock depenency
-    swaylock-effects
-    swaylock
-    wlogout
-
+    pipewire # wayland screen share dep
+    wireplumber # for pipewire
   ];
 
 }

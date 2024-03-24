@@ -48,21 +48,6 @@
 #    unzip
     watch
     wireguard-tools
-#    python39
-#   (python39.withPackages(p: with p; [
-#      fontforge
-#      numpy
-#      jupyter
-#      ipykernel
-#      matplotlib
-#      tensorflow
-#      pandas
-#      flask
-#      virtualenvwrapper
-#      pip
-#      httpx
-#      pygobject3
-#    ]))
     #----------Utilies--------------#
     mesa # video drivers
 

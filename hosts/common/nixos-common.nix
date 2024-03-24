@@ -1,22 +1,6 @@
 { pkgs, unstablePkgs, lib, inputs, ... }:
 let
   inherit (inputs) nixpkgs nixpkgs-unstable;
-#  my-python-packages = python-packages: with python-packages; [
-#    appdirs
-#    ipdb
-#    ipython
-#    numpy
-#    numba
-#    pandas
-#    jupyter
-#    openpyxl
-#    pip
-#    requests
-#    tox
-#    virtualenv
-#    virtualenvwrapper
-#  ];
-#  python-with-my-packages = pkgs.python311.withPackages my-python-packages;
 in
 {
   time.timeZone = "Asia/Manila";
@@ -55,7 +39,6 @@ in
     bitwarden-cli
     go
     figurine
-#    python-with-my-packages
 
     #-------------Encoders--------------#
     ffmpeg # possibly use ffmpeg-headless
