@@ -41,7 +41,6 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     git
     git-crypt

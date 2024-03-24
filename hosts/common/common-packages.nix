@@ -9,6 +9,8 @@
     lua # requirement for neovim to be modified / treesitter
     gccgo12 # requirement for neovim / treesitter
     ## stable
+#    luajitPackages.lua-lsp
+#    nodePackages_latest.pyright
 #    asciinema
 #    diffr # Modern Unix `diff`
 #    difftastic # Modern Unix `diff`

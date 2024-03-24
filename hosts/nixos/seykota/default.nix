@@ -10,6 +10,7 @@
       ./mounts.nix
       ./../../common/common-packages.nix
       ./../../../modules/wm/plasma6
+#      ./../../../modules/nvim
     ];
 
 
