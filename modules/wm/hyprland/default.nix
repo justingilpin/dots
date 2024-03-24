@@ -4,6 +4,7 @@
 
   imports =
     [
+#    ./hyprlock.nix
 
     ];
 
@@ -12,6 +13,8 @@
 
   # Enable Gnome Keyring
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
   # security.pam.services<yourDisplayManager>.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
@@ -38,10 +41,8 @@
     mesa # hyprlock dependency
     hyprlang # hyprlock dependency
     sdbus-cpp # hyprlock depenency
-    swaylock-effects
-    swaylock
-    wlogout
-
+    pipewire # wayland screen share dep
+    wireplumber # for pipewire
   ];
 
 }

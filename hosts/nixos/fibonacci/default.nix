@@ -11,15 +11,7 @@
       ./e15.nix
       ./../../common/wayland-packages.nix
       ./../../../modules/wm/hyprland
-#      ./../../../modules/vectorbt
-#      ./../../../modules/pypi
     ];
-
-#  nixpkgs = {
-#    config = {
-#      allowUnfree = true;
-#    };
-#  };
 
   # Quick fix for Obsidian to allow insecure install
     nixpkgs.config.permittedInsecurePackages = [
@@ -32,16 +24,6 @@
     nerd-font-patcher
   ];
  
-#  nix = {
-#    settings = {
-      # Enable flakes and new 'nix' command
-#      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-#      auto-optimise-store = true;
-#      warn-dirty = false; # remove git warnings
-#    };
-#  };
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -62,7 +44,6 @@
   programs.zsh.enable = true; # configured in /modules/shell
   environment.shells = with pkgs; [ zsh ]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
-  # users.defaultUserShell = pkgs.zsh;
   # Also check that user has shell enabled
 
 
@@ -72,9 +53,6 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.justin = {
@@ -89,21 +67,19 @@
       go
 
       #------ Laptop Software ------#
-
+      brightnessctl
       #------ Unstable Below -------#
       unstablePkgs.vscode
     ];
     shell = pkgs.zsh;
     useDefaultShell =true;
     openssh.authorizedKeys.keys = [
-    # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
   ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
     git-crypt
@@ -113,20 +89,6 @@
     cifs-utils # needed for mounting samba shares
     docker
     docker-compose
-#    python3
-#    python3Packages.virtualenv
-#    python3Packages.scipy
-#    python3Packages.numpy
-#    python3Packages.pandas
-#    python3Packages.plotly
-#    python3Packages.fonttools
-#    python3Packages.regex
-#    python3Packages.tqdm
-#    python3Packages.contourpy
-#    python3Packages.cycler
-#    python3Packages.joblib
-#    python3Packages.kiwisolver
-
   ];
 
   # mount cifs truenas scale need cifs-utils package
@@ -148,39 +110,14 @@
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
