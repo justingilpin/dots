@@ -1,37 +1,46 @@
-
-{ config, lib, pkgs, inputs, unstablePkgs, nixos-hardware, ... }:
-
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./amd.nix
-      ./mounts.nix
-      ./../../common/common-packages.nix
-      ./../../../modules/wm/plasma6
-#      ./../../../modules/nvim
-    ];
-
+  config,
+  lib,
+  pkgs,
+  inputs,
+  unstablePkgs,
+  nixos-hardware,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./amd.nix
+    ./mounts.nix
+    ./../../common/common-packages.nix
+    ./../../../modules/wm/plasma6
+    #      ./../../../modules/wm/hyprland
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" ]; # allows NTFS support at boot
+  boot.supportedFilesystems = ["ntfs"]; # allows NTFS support at boot
 
-#  networking.hostName = "seykota"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  #  networking.hostName = "seykota"; # Define your hostname.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Fixes desktop error when rebuilding Nixos
-  systemd.services.NetworkManager-wait-online.enable = false; 
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Services
   services.tailscale.enable = true;
+
+  # Enable Flatpaks
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk]; ## for GTK based desktops
+  ## or
+  ## xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];  ## for KDE based desktops
 
   # Shell
   programs.zsh.enable = true; # configured in /modules/shell
-  environment.shells = with pkgs; [ zsh ]; # Many programs look if user is a 'normal' user
+  environment.shells = with pkgs; [zsh]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
   users.defaultUserShell = pkgs.zsh;
   # Also check that user has shell enabled
@@ -55,14 +64,14 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-#  security.rtkit.enable = true;
-#  services.pipewire = {
-#    enable = true;
-#    alsa.enable = true;
-#    alsa.support32Bit = true;
-#    pulse.enable = true;
-    #jack.enable = true;
-#  };
+  #  security.rtkit.enable = true;
+  #  services.pipewire = {
+  #    enable = true;
+  #    alsa.enable = true;
+  #    alsa.support32Bit = true;
+  #    pulse.enable = true;
+  #jack.enable = true;
+  #  };
 
   programs.steam = {
     enable = true;
@@ -79,61 +88,61 @@
 
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager"]; 
+    extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
-    #---------Games--------------#
+      #---------Games--------------#
       lutris
       heroic
       prismlauncher
       gamemode
       gamescope
       protontricks
-#      ckan # ksp mod manager
+      #      ckan # ksp mod manager
       mono5 #ckan requirement
       msbuild #ckan requirement
-    #------Desktop Software------#
+      #------Desktop Software------#
 
       # unstable below this line
       unstablePkgs.vscode
       unstablePkgs.obsidian
-    #---------iPhone-------------#
+      #---------iPhone-------------#
       checkra1n
       ifuse
       libimobiledevice
     ];
-   shell = pkgs.zsh;
-   useDefaultShell =true;
+    shell = pkgs.zsh;
+    useDefaultShell = true;
     openssh.authorizedKeys.keys = [
-    # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-  ];
+      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+    ];
   };
 
-#  environment.systemPackages = with pkgs; [
-#    wget
-#    git
-#    git-crypt
-#  ];
+  #  environment.systemPackages = with pkgs; [
+  #    wget
+  #    git
+  #    git-crypt
+  #  ];
 
-#  virtualisation.libvirtd.enable = true;
-#  virtualisation.spiceUSBRedirection.enable = true;
-#  virtualisation =
-#  {
-#    docker = {
-#      enable = true;
-#      autoPrune = {
-#        enable = true;
-#        dates = "weekly";
-#      };
-#    };
-#  };
+  #  virtualisation.libvirtd.enable = true;
+  #  virtualisation.spiceUSBRedirection.enable = true;
+  #  virtualisation =
+  #  {
+  #    docker = {
+  #      enable = true;
+  #      autoPrune = {
+  #        enable = true;
+  #        dates = "weekly";
+  #      };
+  #    };
+  #  };
 
-#  programs.gnupg.agent = {
-#    enable = true;
-#    enableSSHSupport = true;
-#  };
+  #  programs.gnupg.agent = {
+  #    enable = true;
+  #    enableSSHSupport = true;
+  #  };
 
   # Enable the OpenSSH daemon.
-#  services.openssh.enable = true;
+  #  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -141,5 +150,5 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11"; 
+  system.stateVersion = "23.11";
 }
