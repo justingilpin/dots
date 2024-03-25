@@ -13,6 +13,7 @@
       nixvim = {
         url = "github:nix-community/nixvim";
         inputs.nixpkgs.follows = "nixpkgs";
+	inputs.home-manager.follows = "home-manager";
       };
 
 #      firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -60,6 +61,7 @@
                 home-manager.users.${username} = { imports = [ ./home/${username}.nix ]; };
               }
               ./hosts/common/nixos-common.nix
+	      inputs.nixvim.nixosModules.nixvim
             ];
           };
     in {

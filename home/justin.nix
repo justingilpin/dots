@@ -1,18 +1,11 @@
-{ config, pkgs, inputs, lib, nixvim, outputs, ... }:
+{ config, pkgs, unstablePkgs, inputs, lib, nixvim, outputs, ... }:
 {
   home.stateVersion = "23.11";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
-  imports = [
-#    inputs.nixvim.homeManagerModules.nixvim
-    ./../modules/justinsnvim
+  imports = [    
+#    ./../modules/justinsnvim
   ];
-
-#  nixpkgs = {
-#    overlays = [
-#      outputs.overlays.unstable-packages
-#    ];
-#  };
 
 
 #  programs.nixvim = {

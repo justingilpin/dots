@@ -64,6 +64,7 @@
  #  sioyek # pdf viewer
     libreoffice-still
     unstablePkgs.obsidian
+    unstablePkgs.vscode
     feh
     vivaldi
     tor

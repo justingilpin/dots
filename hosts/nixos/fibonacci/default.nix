@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, nixos-hardware, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -22,7 +22,19 @@
 #    jetbrains-mono
 #    nerd-font-patcher
 #  ];
- 
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
+      "experimental-features = nix-command flakes";
+  };
+  
+  programs.nixvim = {
+    enable = true;
+    colorschemes.gruvbox.enable = true;
+    plugins.lightline.enable = true;
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -68,8 +80,8 @@
 
       #------ Laptop Software ------#
       brightnessctl
-      #------ Unstable Below -------#
-#      unstablePkgs.vscode
+
+
     ];
     shell = pkgs.zsh;
     useDefaultShell =true;
