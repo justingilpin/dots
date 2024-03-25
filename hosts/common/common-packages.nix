@@ -6,8 +6,8 @@
   ];
   environment.systemPackages = with pkgs; [
     ## unstable
-    unstablePkgs.yt-dlp
-    unstablePkgs.get_iplayer
+#    unstablePkgs.yt-dlp
+#    unstablePkgs.get_iplayer
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
@@ -21,13 +21,13 @@
 #    dua # Modern Unix `du`
 #    duf # Modern Unix `df`
 #    du-dust # Modern Unix `du`
-    docker
-    docker-compose
+#    docker
+#    docker-compose
 #    drill
 #    entr # Modern Unix `watch`
     alacritty
     firefox
-    esptool
+#    esptool
 
 #    fd
     #fzf # programs.fzf
@@ -63,8 +63,8 @@
     lf # file manager | ranger replacement
  #  sioyek # pdf viewer
     libreoffice-still
-    unstablePkgs.obsidian
-    unstablePkgs.vscode
+#    unstablePkgs.obsidian
+#    unstablePkgs.vscode
     feh
     vivaldi
     tor

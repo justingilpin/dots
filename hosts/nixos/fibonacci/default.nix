@@ -73,10 +73,10 @@
     packages = with pkgs; [
       zoom-us
       tailscale
-      obsidian
       xclip
       xsel
       go
+			neovim
 
       #------ Laptop Software ------#
       brightnessctl
@@ -99,8 +99,6 @@
     kitty
     firefox
     cifs-utils # needed for mounting samba shares
-    docker
-    docker-compose
   ];
 
   # mount cifs truenas scale need cifs-utils package

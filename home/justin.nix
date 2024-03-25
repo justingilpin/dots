@@ -4,7 +4,7 @@
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [    
-    ./../modules/nvim
+#    ./../modules/nvim
   ];
 
 
@@ -67,19 +67,19 @@
 
   programs.lf.enable = true;
 
-  programs.tmux = {
-    enable = true;
-    #keyMode = "vi";
-    clock24 = true;
-    historyLimit = 10000;
-    plugins = with pkgs.tmuxPlugins; [
-      gruvbox
-    ];
-    extraConfig = ''
-      new-session -s main
-      bind-key -n C-a send-prefix
-    '';
-  };
+#  programs.tmux = {
+#    enable = true;
+#    #keyMode = "vi";
+#    clock24 = true;
+#    historyLimit = 10000;
+#    plugins = with pkgs.tmuxPlugins; [
+#      gruvbox
+#    ];
+#    extraConfig = ''
+#      new-session -s main
+#      bind-key -n C-a send-prefix
+#    '';
+#  };
 
   programs.zsh = {
     enable = true;
