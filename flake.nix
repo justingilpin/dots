@@ -58,7 +58,10 @@
                 networking.hostName = hostname;
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.${username} = { imports = [ ./home/${username}.nix ]; };
+                home-manager.users.${username} = { imports = [ 
+		./home/${username}.nix 
+		nixvim.homeManagerModules.nixvim
+		]; };
               }
               ./hosts/common/nixos-common.nix
 	      inputs.nixvim.nixosModules.nixvim

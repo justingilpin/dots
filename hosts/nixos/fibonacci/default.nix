@@ -23,17 +23,17 @@
 #    nerd-font-patcher
 #  ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
-      "experimental-features = nix-command flakes";
-  };
+#  nix = {
+#    package = pkgs.nixFlakes;
+#    extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
+#      "experimental-features = nix-command flakes";
+#  };
   
-  programs.nixvim = {
-    enable = true;
-    colorschemes.gruvbox.enable = true;
-    plugins.lightline.enable = true;
-  };
+#  programs.nixvim = {
+#    enable = true;
+#    colorschemes.gruvbox.enable = true;
+#    plugins.lightline.enable = true;
+#  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
