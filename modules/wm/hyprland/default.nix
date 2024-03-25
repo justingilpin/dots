@@ -35,11 +35,11 @@
 #    dbus
     wofi
     hyprpaper
-    hyprlock # unstable only
-    hypridle # unstable only
+    unstablePkgs.hyprlock # unstable only
+    unstablePkgs.hypridle # unstable only
     wlr-protocols # hyprlock dependency
     mesa # hyprlock dependency
-    hyprlang # hyprlock dependency
+    unstablePkgs.hyprlang # hyprlock dependency
     sdbus-cpp # hyprlock depenency
     pipewire # wayland screen share dep
     wireplumber # for pipewire

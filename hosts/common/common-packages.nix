@@ -1,5 +1,9 @@
 { pkgs, unstablePkgs, config, lib, ... }:
 {
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   environment.systemPackages = with pkgs; [
     ## unstable
     unstablePkgs.yt-dlp

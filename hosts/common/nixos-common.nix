@@ -24,6 +24,10 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   environment.systemPackages = with pkgs; [
     wget
     git

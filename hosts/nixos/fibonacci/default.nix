@@ -2,14 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, unstablePkgs, nixos-hardware, ... }:
+{ config, lib, pkgs, inputs, nixos-hardware, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./e15.nix
-      ./../../common/wayland-packages.nix
+      ./../../common/common-packages.nix
       ./../../../modules/wm/hyprland
     ];
 
@@ -17,12 +17,11 @@
     nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
   # Fonts
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-    nerd-font-patcher
-  ];
+#  fonts.packages = with pkgs; [
+#    jetbrains-mono
+#    nerd-font-patcher
+#  ];
  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -30,12 +29,13 @@
   boot.supportedFilesystems = [ "ntfs" ]; # allows NTFS at boot
 
   networking.hostName = "fibonacci"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Fixes laptop error when rebuilding Nixos
   systemd.services.systemd-udevd.restartIfChanged = true;
+
+  # Fixes Network error when rebuilding Nixos
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable Tailscale
   services.tailscale.enable = true;
@@ -69,7 +69,7 @@
       #------ Laptop Software ------#
       brightnessctl
       #------ Unstable Below -------#
-      unstablePkgs.vscode
+#      unstablePkgs.vscode
     ];
     shell = pkgs.zsh;
     useDefaultShell =true;

@@ -1,12 +1,19 @@
-{ config, pkgs, lib, unstablePkgs, nixvim, ... }:
+{ config, pkgs, inputs, lib, nixvim, outputs, ... }:
 {
   home.stateVersion = "23.11";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-#    nixvim.homeManagerModules.nixvim
+#    inputs.nixvim.homeManagerModules.nixvim
     ./../modules/justinsnvim
   ];
+
+#  nixpkgs = {
+#    overlays = [
+#      outputs.overlays.unstable-packages
+#    ];
+#  };
+
 
 #  programs.nixvim = {
 #    enable = true;
@@ -100,6 +107,10 @@
   programs.home-manager.enable = true;
   programs.nix-index.enable = true;
   programs.zoxide.enable = true;
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
 
   programs.ssh = {
     enable = true;

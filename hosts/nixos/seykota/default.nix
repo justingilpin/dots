@@ -26,7 +26,7 @@
   #  networking.hostName = "seykota"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  # Fixes desktop error when rebuilding Nixos
+  # Fixes Network error when rebuilding Nixos
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Services
