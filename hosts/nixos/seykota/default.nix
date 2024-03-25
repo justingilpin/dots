@@ -5,6 +5,7 @@
   inputs,
   unstablePkgs,
   nixos-hardware,
+  nixvim,
   ...
 }: {
   imports = [
@@ -78,6 +79,13 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+
+#  programs.nixvim = {
+#    enable = true;
+#    colorschemes.gruvbox.enable = true;
+#    plugins.lightline.enable = true;
+#    defaultPackage = pkgs.vimPlugins.base16-vim;
+#  };
 
   # Enable OpenRGB
   services.hardware.openrgb.enable = true;

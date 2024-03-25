@@ -4,7 +4,8 @@
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-#    ./../modules/justinsnvim
+#    nixvim.homeManagerModules.nixvim
+    ./../modules/justinsnvim
   ];
 
 #  programs.nixvim = {
@@ -97,7 +98,6 @@
   }; 
 
   programs.home-manager.enable = true;
-  programs.neovim.enable = true;
   programs.nix-index.enable = true;
   programs.zoxide.enable = true;
 

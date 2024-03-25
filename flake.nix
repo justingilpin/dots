@@ -9,8 +9,10 @@
       home-manager.url = "github:nix-community/home-manager/release-23.11";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-      nixvim.url = "github:nix-community/nixvim";
-      nixvim.inputs.nixpkgs.follows = "nixpkgs";
+      nixvim = {
+        url = "github:nix-community/nixvim";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
 #      firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 #      firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +27,7 @@
     , nixpkgs, nixpkgs-unstable
     , home-manager, disko, vscode-server, nixvim, nixos-hardware, ... }:
     let
-      inputs = { inherit disko nixvim home-manager nixpkgs nixpkgs-unstable; };
+      inputs = { inherit disko home-manager nixvim nixpkgs nixpkgs-unstable; };
 
       genPkgs = system: import nixpkgs { inherit system; config.allowUnfree = true; };
       genUnstablePkgs = system: import nixpkgs-unstable { inherit system; config.allowUnfree = true; };
@@ -46,9 +48,9 @@
             modules = [
               #disko.nixosModules.disko
               #./hosts/nixos/${hostname}/disko-config.nix
-
+#              inputs.nixvim.homeManagerModules.nixvim
+#              nixvim.homeManagerModules.nixvim
               ./hosts/nixos/${hostname}
-
               vscode-server.nixosModules.default
               home-manager.nixosModules.home-manager {
                 networking.hostName = hostname;
