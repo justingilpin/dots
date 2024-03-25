@@ -13,7 +13,7 @@
     ./amd.nix
     ./mounts.nix
     ./../../common/common-packages.nix
-    ./../../../modules/wm/plasma6
+    ./../../../modules/wm/plasma5
     #      ./../../../modules/wm/hyprland
   ];
 
@@ -56,8 +56,8 @@
   # Enable Printer Auto Discovery
   services.avahi = {
     enable = true;
-    # nssmdns = true; # Renamed to nssmdns4 in Unstable
-    nssmdns4 = true;
+    nssmdns = true; # Renamed to nssmdns4 in Unstable
+  #  nssmdns4 = true; # Unstable only
     openFirewall = true;
   };
 
@@ -104,7 +104,6 @@
 
       # unstable below this line
       unstablePkgs.vscode
-      unstablePkgs.obsidian
       #---------iPhone-------------#
       checkra1n
       ifuse
@@ -116,33 +115,6 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
-
-  #  environment.systemPackages = with pkgs; [
-  #    wget
-  #    git
-  #    git-crypt
-  #  ];
-
-  #  virtualisation.libvirtd.enable = true;
-  #  virtualisation.spiceUSBRedirection.enable = true;
-  #  virtualisation =
-  #  {
-  #    docker = {
-  #      enable = true;
-  #      autoPrune = {
-  #        enable = true;
-  #        dates = "weekly";
-  #      };
-  #    };
-  #  };
-
-  #  programs.gnupg.agent = {
-  #    enable = true;
-  #    enableSSHSupport = true;
-  #  };
-
-  # Enable the OpenSSH daemon.
-  #  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

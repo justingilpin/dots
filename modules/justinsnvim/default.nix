@@ -1,45 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
 {
-  programs = {
-    neovim = {
-      enable = true;
-      package = pkgs.neovim-unwrapped;
-#      plugins = with pkgs.vimPlugins; [
-#        catppuccin-nvim
-#      {
-#        plugin = catppuccin-nvim;
-#	type = "lua";
-#	config = /*lua*/ ''
-#        return {
-#        "catppuccin/nvim",
-#        lazy = false,
-#        name = "catppuccin",
-#        priority = 1000,
-#        config = function()
-#        vim.cmd.colorscheme "catppuccin"
-#        end
-#        }
-#	'';
+  programs.nixvim = {
+    enable = true;
 
-#      }
-#
-#      ];
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      extraLuaConfig = ''
-        -- Write Lua code here
-	${builtins.readFile ./nvim/init.lua}
-        ${builtins.readFile ./nvim/vim-options.lua}
-	${builtins.readFile ./nvim/plugins/lsp-config.lua}
-        ${builtins.readFile ./nvim/plugins/catppuccin.lua}
-	${builtins.readFile ./nvim/plugins/lualine.lua}
-	${builtins.readFile ./nvim/plugins/neo-tree.lua}
-	${builtins.readFile ./nvim/plugins/telescope.lua}
-	${builtins.readFile ./nvim/plugins/treesitter.lua}
-
-      '';
-     };
+    colorschemes.gruvbox.enable = true;
+    plugins.lightline.enable = true;
   };
 }
-

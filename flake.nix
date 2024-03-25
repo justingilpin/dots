@@ -1,7 +1,6 @@
 {
   inputs = {
-#      nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
       #nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -10,12 +9,12 @@
       home-manager.url = "github:nix-community/home-manager/release-23.11";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+      nixvim.url = "github:nix-community/nixvim";
+      nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
 #      firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 #      firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
-      poetry2nix = {
-        url = "github:nix-community/poetry2nix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+
       disko.url = "github:nix-community/disko";
       disko.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -24,9 +23,9 @@
 
   outputs = inputs@{ self
     , nixpkgs, nixpkgs-unstable
-    , home-manager, disko, vscode-server, nixos-hardware, poetry2nix, ... }:
+    , home-manager, disko, vscode-server, nixvim, nixos-hardware, ... }:
     let
-      inputs = { inherit disko poetry2nix home-manager nixpkgs nixpkgs-unstable; };
+      inputs = { inherit disko nixvim home-manager nixpkgs nixpkgs-unstable; };
 
       genPkgs = system: import nixpkgs { inherit system; config.allowUnfree = true; };
       genUnstablePkgs = system: import nixpkgs-unstable { inherit system; config.allowUnfree = true; };

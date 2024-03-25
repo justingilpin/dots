@@ -51,9 +51,6 @@ in
 #    gnupg
 #    sops
 #    age
-    
-    #--------------Fonts----------------#
-    jetbrains-mono
 
   ];
 }

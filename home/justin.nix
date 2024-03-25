@@ -1,11 +1,18 @@
-{ config, pkgs, lib, unstablePkgs, ... }:
+{ config, pkgs, lib, unstablePkgs, nixvim, ... }:
 {
   home.stateVersion = "23.11";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-    ./../modules/justinsnvim
+#    ./../modules/justinsnvim
   ];
+
+#  programs.nixvim = {
+#    enable = true;
+#    colorschemes.gruvbox.enable = true;
+#    plugins.lightline.enable = true;
+#  };
+
 
   programs.direnv = {
     enable = true;
