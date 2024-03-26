@@ -1,11 +1,20 @@
-{ pkgs, lib, unstablePkgs, ... }:
+{ ... }:
 
 {
 
   imports = [
 	  ./theme.nix
-#    ./settings.nix
-
+    ./settings.nix
+    ./keybindings.nix
+		./filetype.nix
+		./autocmd.nix
+		./plugins/completion.nix
+		./plugins/lsp.nix
+		./plugins/misc.nix
+		./plugins/taboo.nix
+		./plugins/telescope.nix
+		./plugins/treesitter.nix
+		./plugins/winshift.nix
 	];
 
   programs.nixvim = {
@@ -13,22 +22,22 @@
     vimAlias = true;
 
     # Configure neovim options...
-    options = {
-      relativenumber = true;
-      incsearch = true;
-    };
-#    colorschemes.gruvbox.enable = true;
+#    options = {
+#      relativenumber = true;
+#      incsearch = true;
+#    };
+
     # ...mappings...
-    maps = {
-      normal = {
-        "<C-s>" = ":w<CR>";
-        "<esc>" = { action = ":noh<CR>"; silent = true; };
-      };
-      visual = {
-        ">" = ">gv";
-        "<" = "<gv";
-      };
-    };
+#    maps = {
+#      normal = {
+#        "<C-s>" = ":w<CR>";
+#        "<esc>" = { action = ":noh<CR>"; silent = true; };
+#      };
+#      visual = {
+#        ">" = ">gv";
+#      "<" = "<gv";
+#      };
+#    };
 
     # ...plugins...
     plugins = {
@@ -36,7 +45,7 @@
 #			lightline.enable = true;
       harpoon = {  # Hi Prime :)
         enable = true;
-        keymaps.addFile = "<leader>a";
+      keymaps.addFile = "<leader>a";
       };
 
       lsp = {
