@@ -1,25 +1,29 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  environment.systemPackages = [
+    pkgs.fd
+  ];
 
   imports = [
-	  ./theme.nix
+    ./theme.nix
     ./settings.nix
-    ./keybindings.nix
-		./filetype.nix
-		./autocmd.nix
-		./plugins/completion.nix
-		./plugins/lsp.nix
-		./plugins/misc.nix
-		./plugins/taboo.nix
-		./plugins/telescope.nix
-		./plugins/treesitter.nix
-		./plugins/winshift.nix
+#    ./keybindings.nix
+#    ./filetype.nix
+#    ./autocmd.nix
+#    ./plugins/completion.nix
+#    ./plugins/lsp.nix
+#    ./plugins/misc.nix
+#    ./plugins/taboo.nix
+#    ./plugins/telescope.nix
+#    ./plugins/treesitter.nix
+#    ./plugins/winshift.nix
 	];
 
   programs.nixvim = {
     enable = true;
     vimAlias = true;
+		globals.mapleader = " ";
 
     # Configure neovim options...
 #    options = {
@@ -41,6 +45,7 @@
 
     # ...plugins...
     plugins = {
+			treesitter.enable = true;
       telescope.enable = true;
 #			lightline.enable = true;
       harpoon = {  # Hi Prime :)
