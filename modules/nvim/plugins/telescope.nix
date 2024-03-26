@@ -67,15 +67,15 @@
         options.desc = "find line in buffer";
       }
       {
-        key = "<leader>fld";
+        key = "<leader>fg";
         action = "<cmd>Telescope live_grep<cr>";
         options.desc = "find line in cwd";
       }
-      {
-        key = "<leader>fg";
-        action = "<cmd>Telescope git_files<cr>";
-        options.desc = "find git file";
-      }
+#      {
+#        key = "<leader>fg";
+#        action = "<cmd>Telescope git_files<cr>";
+#        options.desc = "find git file";
+#      }
     ];
   };
 }

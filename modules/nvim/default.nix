@@ -15,13 +15,14 @@
 #    ./plugins/lsp.nix
 #    ./plugins/misc.nix
 #    ./plugins/taboo.nix
-#    ./plugins/telescope.nix
-#    ./plugins/treesitter.nix
+    ./plugins/telescope.nix
+    ./plugins/treesitter.nix
 #    ./plugins/winshift.nix
 	];
 
   programs.nixvim = {
     enable = true;
+		viAlias = true;
     vimAlias = true;
 		globals.mapleader = " ";
 
@@ -46,7 +47,7 @@
     # ...plugins...
     plugins = {
 			treesitter.enable = true;
-      telescope.enable = true;
+#      telescope.enable = true;
 #			lightline.enable = true;
       harpoon = {  # Hi Prime :)
         enable = true;
