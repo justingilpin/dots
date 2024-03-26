@@ -47,6 +47,10 @@
       };
     }; # end git
 
+  # Source Dot Files
+#		home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf; 
+
+
 #  programs.firefox = {
 #    enable = true;
 #    profiles.justin = {
