@@ -14,8 +14,8 @@
     ./amd.nix
     ./mounts.nix
     ./../../common/common-packages.nix
-    ./../../../modules/wm/plasma5
-    #      ./../../../modules/wm/hyprland
+#    ./../../../modules/wm/plasma5
+    ./../../../modules/wm/hyprland
   ];
 
   # Use the systemd-boot EFI boot loader.
