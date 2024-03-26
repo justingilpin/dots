@@ -1,4 +1,7 @@
 { ... }: {
+	imports = [
+	  ./nord.nix
+	];
   programs.alacritty = {
     enable = true;
     settings = {
@@ -43,42 +46,42 @@
       cursor.style = "Block";
 
       # nord theme
-      colors = {
-        primary = {
-          background = "#2e3440";
-          foreground = "#d8dee9";
-        };
-        normal = {
-          black = "0x15161e";
-          red = "0xf7768e";
-          green = "0x9ece6a";
-          yellow = "0xe0af68";
-          blue = "0x7aa2f7";
-          magenta = "0xbb9af7";
-          cyan = "0x7dcfff";
-          white = "0xa9b1d6";
-        };
-        bright = {
-          black = "0x414868";
-          red = "0xf7768e";
-          green = "0x9ece6a";
-          yellow = "0xe0af68";
-          blue = "0x7aa2f7";
-          magenta = "0xbb9af7";
-          cyan = "0x7dcfff";
-          white = "0xc0caf5";
-        };
-        indexed_colors = [
-          {
-            index = 16;
-            color = "0xff9e64";
-          }
-          {
-            index = 17;
-            color = "0xdb4b4b";
-          }
-        ];
-      };
+#      colors = {
+#        primary = {
+#          background = "#2e3440";
+#          foreground = "#d8dee9";
+#        };
+#        normal = {
+#          black = "#3b4252";
+#          red = "#bf616a";
+#          green = "#a3be8c";
+#          yellow = "#ebcb8b";
+          blue = "#81a1c1";
+          magenta = "#b48ead";
+          cyan = "#88c0d0";
+#          white = "#e5e9f0";
+#        };
+#        bright = {
+#          black = "#4c566a";
+#          red = "#bf616a";
+#          green = "#a3be8c";
+#          yellow = "#ebcb8b";
+#          blue = "#81a1c1";
+#          magenta = "#b48ead";
+#          cyan = "#8fbcbb";
+#          white = "#eceff4";
+#        };
+#        indexed_colors = [
+#          {
+#            index = 16;
+#            color = "#4c566a"; # 0xff9e64
+#          }
+#          {
+#            index = 17;
+#            color = "#2e3440"; # 0xdb4b4b
+#          }
+#        ];
+#      };
     };
   };
 }
