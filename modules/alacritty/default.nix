@@ -2,20 +2,20 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      window = {
-        opacity = 1;
-        dynamic_title = true;
-        dynamic_padding = true;
-        decorations = "full";
-        dimensions = {
-          lines = 0;
-          columns = 0;
-        };
-        padding = {
-          x = 5;
-          y = 5;
-        };
-      };
+#      window = {
+#        opacity = 1;
+#        dynamic_title = true;
+#        dynamic_padding = true;
+#        decorations = "full";
+#        dimensions = {
+#          lines = 0;
+#          columns = 0;
+#        };
+#        padding = {
+#          x = 5;
+#          y = 5;
+#        };
+#      };
 
       scrolling = {
         history = 10000;
@@ -38,15 +38,15 @@
           family = fontname;
           style = "ExtraLight";
         };
-        size = 17;
+#        size = 17;
       };
       cursor.style = "Block";
 
       # nord theme
       colors = {
         primary = {
-          background = "0x1a1b26";
-          foreground = "0xc0caf5";
+          background = "#2e3440";
+          foreground = "#d8dee9";
         };
         normal = {
           black = "0x15161e";

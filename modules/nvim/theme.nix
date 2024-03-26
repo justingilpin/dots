@@ -1,42 +1,19 @@
-{config, ...}: let
-  nvimTheme = {
-    ayu-dark = {
-      name = "ayu";
-      config = ''
-        vim.go.background = "dark"
-        require("ayu").colorscheme()
-        require("lualine").setup({
-          options = { theme = "ayu_dark" }
-        })
-      '';
-    };
-    ayu-mirage = {
-      name = "ayu";
-      config = ''
-        vim.go.background = "dark"
-        require("ayu").setup({ mirage = true })
-        require("ayu").colorscheme()
-        require("lualine").setup({
-          options = { theme = "ayu_mirage" }
-        })
-      '';
-    };
-    ayu-light = {
-      name = "ayu";
-      config = ''
-        vim.go.background = "light"
-        require("ayu").colorscheme()
-        require("lualine").setup({
-          options = { theme = "ayu_light" }
-        })
-      '';
-    };
-  };
-in {
+{pkgs, lib, unstablePkgs, config, ...}: 
+{
   programs.nixvim = {
-    colorschemes.${nvimTheme.${config.colorScheme.slug}.name}.enable = true;
-    extraConfigLua = ''
-      ${nvimTheme.${config.colorScheme.slug}.config}
-    '';
+	  colorschemes.ayu.enable = false;
+	  colorschemes.base16.enable = false;
+	  colorschemes.catppuccin.enable = false;
+	  colorschemes.dracula.enable = false;
+	  colorschemes.gruvbox.enable = false;
+	  colorschemes.kanagawa.enable = false;
+	  colorschemes.melange.enable = false;
+	  colorschemes.nord.enable = true;
+	  colorschemes.one.enable = false;
+	  colorschemes.onedark.enable = false; #maybe
+	  colorschemes.oxocarbon.enable = false;
+	  colorschemes.rose-pine.enable = false;
+	  colorschemes.tokyonight.enable = false;
   };
+
 }

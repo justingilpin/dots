@@ -5,6 +5,7 @@
   # https://mipmip.github.io/home-manager-option-search
   imports = [    
     ./../modules/nvim
+		./../modules/alacritty
   ];
 
 

@@ -25,7 +25,6 @@
 #    docker-compose
 #    drill
 #    entr # Modern Unix `watch`
-    alacritty
     firefox
 #    esptool
 
@@ -63,12 +62,13 @@
     lf # file manager | ranger replacement
  #  sioyek # pdf viewer
     libreoffice-still
-#    unstablePkgs.obsidian
-#    unstablePkgs.vscode
+    unstablePkgs.obsidian
+    unstablePkgs.vscode
     feh
     vivaldi
     tor
     tor-browser
+		element-desktop
 
     #---------Media----------------#
     vlc

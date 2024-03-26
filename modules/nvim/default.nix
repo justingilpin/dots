@@ -3,8 +3,8 @@
 {
 
   imports = [
-#	  ./theme.nix
-    ./settings.nix
+	  ./theme.nix
+#    ./settings.nix
 
 	];
 
@@ -17,7 +17,7 @@
       relativenumber = true;
       incsearch = true;
     };
-    colorschemes.gruvbox.enable = true;
+#    colorschemes.gruvbox.enable = true;
     # ...mappings...
     maps = {
       normal = {
