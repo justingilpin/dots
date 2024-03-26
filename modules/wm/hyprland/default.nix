@@ -1,11 +1,8 @@
 { config, lib, pkgs, unstablePkgs, ... }:
-
 {
-
   imports =
     [
 #    ./hyprlock.nix
-
     ];
 
   # Enable Hyprland
@@ -34,6 +31,7 @@
     gtk3
 #    dbus
     wofi
+		kitty
     hyprpaper
     unstablePkgs.hyprlock # unstable only
     unstablePkgs.hypridle # unstable only
