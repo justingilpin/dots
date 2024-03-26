@@ -10,9 +10,9 @@
       home-manager.url = "github:nix-community/home-manager/release-23.11";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-      nixvim.url = "github:nix-community/nixvim";
+      nixvim.url = "github:nix-community/nixvim/nixos-23.11";
       nixvim.inputs.nixpkgs.follows = "nixpkgs";
-      nixvim.inputs.home-manager.follows = "home-manager";
+#      nixvim.inputs.home-manager.follows = "home-manager";
 
 #      firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 #      firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
@@ -58,11 +58,11 @@
                 home-manager.useUserPackages = true;
                 home-manager.users.${username} = { imports = [ 
                 ./home/${username}.nix 
- #               nixvim.homeManagerModules.nixvim
+                nixvim.homeManagerModules.nixvim
               	]; };
               }
               ./hosts/common/nixos-common.nix
-	      inputs.nixvim.nixosModules.nixvim
+#	      inputs.nixvim.nixosModules.nixvim
             ];
           };
     in {

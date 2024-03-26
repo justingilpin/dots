@@ -1,6 +1,13 @@
-{ pkgs, lib, unstablePkgs, home-manager, ... }:
+{ pkgs, lib, unstablePkgs, ... }:
 
 {
+
+  imports = [
+#	  ./theme.nix
+    ./settings.nix
+
+	];
+
   programs.nixvim = {
     enable = true;
     vimAlias = true;
@@ -12,21 +19,21 @@
     };
     colorschemes.gruvbox.enable = true;
     # ...mappings...
-#    maps = {
-#      normal = {
-#        "<C-s>" = ":w<CR>";
-#        "<esc>" = { action = ":noh<CR>"; silent = true; };
-#      };
-#      visual = {
-#        ">" = ">gv";
-#        "<" = "<gv";
-#      };
-#    };
+    maps = {
+      normal = {
+        "<C-s>" = ":w<CR>";
+        "<esc>" = { action = ":noh<CR>"; silent = true; };
+      };
+      visual = {
+        ">" = ">gv";
+        "<" = "<gv";
+      };
+    };
 
     # ...plugins...
     plugins = {
       telescope.enable = true;
-			lightline.enable = true;
+#			lightline.enable = true;
       harpoon = {  # Hi Prime :)
         enable = true;
         keymaps.addFile = "<leader>a";

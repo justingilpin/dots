@@ -76,7 +76,6 @@
       xclip
       xsel
       go
-			neovim
 
       #------ Laptop Software ------#
       brightnessctl
