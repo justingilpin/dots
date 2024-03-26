@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.fd
+  home.packages = with pkgs; [
+    fd
   ];
 
   imports = [

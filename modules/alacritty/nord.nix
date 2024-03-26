@@ -1,5 +1,6 @@
 { ... }: {
   programs.alacritty = {
+		settings = {
       colors = {
         primary = {
           background = "#2e3440";
