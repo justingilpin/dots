@@ -66,25 +66,25 @@
 					change.text = "~";
 				};
 			};
-      lsp = {
-        keymaps = {
-          silent = true;
-          diagnostic = {
-            "<leader>k" = "goto_prev";
-            "<leader>j" = "goto_next";
-          };
+ #     lsp = {
+ #       keymaps = {
+ #         silent = true;
+ #         diagnostic = {
+ #           "<leader>k" = "goto_prev";
+ #           "<leader>j" = "goto_next";
+ #         };
 
-          lspBuf = {
-            gd = "definition";
-            K = "hover";
-          };
-        };
-        servers = {
-          bashls.enable = true;
-          clangd.enable = true;
-          nil_ls.enable = true;
-        };
-      };
+ #         lspBuf = {
+ #           gd = "definition";
+ #           K = "hover";
+ #         };
+ #       };
+ #       servers = {
+ #         bashls.enable = true;
+ #         clangd.enable = true;
+ #         nil_ls.enable = true;
+ #       };
+ #     };
     };
 
     # ... and even highlights and autocommands !

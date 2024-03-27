@@ -1,6 +1,13 @@
 {...}: {
   programs.nixvim.plugins.lsp = {
-    enable = true;
+		enable = true;
+#		keymaps = {
+#			silent = true;
+#			diagnostic = {
+#				"<leader>k" = "goto_prev";
+#				"<leader>j" = "goto_next:;
+#			};
+#		};
     servers = {
       lua-ls.enable = true;
       pyright.enable = true;
