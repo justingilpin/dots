@@ -17,6 +17,7 @@
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
+    ./plugins/none-ls.nix
     #    ./plugins/winshift.nix
   ];
 
@@ -76,22 +77,22 @@
         };
       };
 
-      none-ls = {
-        enable = true;
-        updateInInsert = true;
-        enableLspFormat = true;
-        sources = {
-          code_actions = { shellcheck.enable = true; };
-          diagnostics = { shellcheck.enable = true; };
-          formatting = {
-            gofmt.enable = true;
-            markdownlint.enable = true;
-            nixfmt.enable = true;
-            rustfmt.enable = true;
-            shfmt.enable = true;
-          };
-        };
-      };
+      #      none-ls = {
+      #        enable = true;
+      #        updateInInsert = true;
+      #        enableLspFormat = true;
+      #        sources = {
+      #          code_actions = { shellcheck.enable = true; };
+      #          diagnostics = { shellcheck.enable = true; };
+      #          formatting = {
+      #            gofmt.enable = true;
+      #            markdownlint.enable = true;
+      #            nixfmt.enable = true;
+      #            rustfmt.enable = true;
+      #            shfmt.enable = true;
+      #          };
+      #        };
+      #      };
 
       harpoon = {
         enable = true;

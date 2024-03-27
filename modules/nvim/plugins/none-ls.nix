@@ -3,9 +3,11 @@
     # null-ls has been forked to none-ls after the original author archived the project.
     none-ls = {
       enable = true;
+      updateInInsert = true;
       enableLspFormat = true;
       sources = {
         code_actions = {
+          spellcheck.enable = true; # required?
           gitsigns.enable = true;
           gitrebase.enable = true;
           ts_node_action.enable = true;
@@ -47,6 +49,7 @@
           revive.enable = true;
           staticcheck.enable = true;
           statix.enable = true;
+          spellcheck.enable = true; # required?
           vale.enable = true;
           write_good.enable = true;
           yamllint.enable = true;
@@ -76,6 +79,7 @@
           prettier.disableTsServerFormatter = true;
           protolint.enable = true;
           shellharden.enable = true;
+          shfmt.enable = true;
           sqlfluff.enable = true;
           stylua.enable = true;
           typstfmt.enable = true;
