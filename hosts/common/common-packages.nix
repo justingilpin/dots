@@ -12,6 +12,7 @@
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
     gccgo12 # requirement for neovim / treesitter
+		vim-full # for vimtutor
     ## stable
 #    luajitPackages.lua-lsp
 #    nodePackages_latest.pyright
