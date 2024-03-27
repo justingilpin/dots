@@ -1,5 +1,10 @@
-{...}: {
+{pkgs, ...}: {
+  # home.packages = with pkgs; [vimPlugins.telescope-ui-select-nvim];
   programs.nixvim = {
+    extraPlugins = with pkgs.vimPlugins; [
+      telescope-ui-select-nvim
+      plenary-nvim
+    ];
     plugins = {
       telescope = {
         enable = true;
@@ -15,8 +20,19 @@
             };
           };
         };
+        enabledExtensions = ["ui-select"];
+        #        extensionsConfig.ui-select = {};
+
         extensions = {
+          #          ui-select.enable = true;
           fzf-native.enable = true;
+          frecency.enable = true;
+          file_browser = {
+            enable = true;
+            hidden = true;
+            depth = 9999999999;
+            autoDepth = true;
+          };
         };
       };
     };
@@ -71,11 +87,11 @@
         action = "<cmd>Telescope live_grep<cr>";
         options.desc = "find line in cwd";
       }
-#      {
-#        key = "<leader>fg";
-#        action = "<cmd>Telescope git_files<cr>";
-#        options.desc = "find git file";
-#      }
+      #      {
+      #        key = "<leader>fg";
+      #        action = "<cmd>Telescope git_files<cr>";
+      #        options.desc = "find git file";
+      #      }
     ];
   };
 }

@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  home.packages = with pkgs; [ fd ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [fd];
 
   imports = [
     ./theme.nix
@@ -49,10 +47,10 @@
         autoEnableSources = true;
         snippet.expand = "luasnip";
         sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "path"; }
-          { name = "buffer"; }
+          {name = "nvim_lsp";}
+          {name = "luasnip";}
+          {name = "path";}
+          {name = "buffer";}
         ];
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";
@@ -72,7 +70,7 @@
                 end
               end
             '';
-            modes = [ "i" "s" ];
+            modes = ["i" "s"];
           };
         };
       };
@@ -109,10 +107,12 @@
       };
     };
 
-    autoCmd = [{
-      event = "FileType";
-      pattern = "nix";
-      command = "setlocal tabstop=2 shiftwidth=2";
-    }];
+    autoCmd = [
+      {
+        event = "FileType";
+        pattern = "nix";
+        command = "setlocal tabstop=2 shiftwidth=2";
+      }
+    ];
   };
 }
