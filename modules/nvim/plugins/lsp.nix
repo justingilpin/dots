@@ -1,7 +1,15 @@
 {...}: {
   programs.nixvim.plugins.lsp = {
 		enable = true;
-#		keymaps = {
+		keymaps.lspBuf = {
+			K = "hover";
+			gD = "references";
+			gd = "definition";
+			gi = "implementation";
+			gt = "type_definition";
+			gr = "rename";
+			"<leader>f" = "format";
+		};
 #			silent = true;
 #			diagnostic = {
 #				"<leader>k" = "goto_prev";
@@ -10,6 +18,7 @@
 #		};
     servers = {
       lua-ls.enable = true;
+#			pylyzer.enable = true;
       pyright.enable = true;
       nil_ls.enable = true;
       html.enable = true;
@@ -17,6 +26,11 @@
       jsonls.enable = true;
       yamlls.enable = true;
       ccls.enable = true;
+			rust-analyzer = {
+				enable = true;
+				installCargo = true;
+				installRustc = true;
+			};
     };
   };
 }
