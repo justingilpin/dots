@@ -12,9 +12,10 @@
 #    ./filetype.nix
 #    ./autocmd.nix
 #    ./plugins/completion.nix
-#    ./plugins/lsp.nix
+    ./plugins/lsp.nix
 #    ./plugins/misc.nix
 #    ./plugins/taboo.nix
+		./plugins/lualine.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
 		./plugins/neo-tree.nix
@@ -54,7 +55,17 @@
         enable = true;
       keymaps.addFile = "<leader>a";
       };
-
+      copilot-lua.enable = true;
+#      noice.enable = true;
+			#which-key.enable = true;
+			#nvim-autopairs.enable = true;
+			gitsigns = {
+				enable = true;
+				signs = {
+					add.text = "+";
+					change.text = "~";
+				};
+			};
       lsp = {
         keymaps = {
           silent = true;
