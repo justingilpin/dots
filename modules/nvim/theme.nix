@@ -14,6 +14,9 @@
 	  colorschemes.oxocarbon.enable = false;
 	  colorschemes.rose-pine.enable = false;
 	  colorschemes.tokyonight.enable = false;
+
+    # Additional Integrations
+#		colorschemes.nord.integrations.neotree = true;
   };
 
 }

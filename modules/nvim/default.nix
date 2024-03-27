@@ -17,6 +17,7 @@
 #    ./plugins/taboo.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
+		./plugins/neo-tree.nix
 #    ./plugins/winshift.nix
 	];
 

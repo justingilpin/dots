@@ -1,6 +1,7 @@
 { ... }: {
 	imports = [
 	  ./nord.nix
+#		./catppuccin-mocha.nix
 	];
   programs.alacritty = {
     enable = true;
