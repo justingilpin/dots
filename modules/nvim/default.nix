@@ -16,6 +16,7 @@
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
     ./plugins/none-ls.nix
+		.plugins/copilot.nix
     #    ./plugins/winshift.nix
   ];
 
