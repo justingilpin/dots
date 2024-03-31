@@ -16,7 +16,12 @@
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
     ./plugins/none-ls.nix
+<<<<<<< HEAD
 		.plugins/nvim-cmp.nix
+||||||| ea957db
+=======
+#		.plugins/copilot.nix
+>>>>>>> 9c696eeb08ed904fc1700d7bf71b5db9f9e10e83
     #    ./plugins/winshift.nix
   ];
 
