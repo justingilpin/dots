@@ -19,7 +19,7 @@
     ./plugins/nvim-cmp.nix
     ./plugins/copilot.nix
     #   ./plugins/winshift.nix
-    ./plugins/alpha2.nix
+    #    ./plugins/alpha2.nix
   ];
 
   programs.nixvim = {
