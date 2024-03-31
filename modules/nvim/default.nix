@@ -7,7 +7,7 @@
     #    ./keybindings.nix
     #    ./filetype.nix
     #    ./autocmd.nix
-#    ./plugins/completion.nix
+    #    ./plugins/completion.nix
     ./plugins/lsp.nix
     #    ./plugins/misc.nix
     #    ./plugins/taboo.nix
@@ -16,9 +16,10 @@
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
     ./plugins/none-ls.nix
-		./plugins/nvim-cmp.nix
-		./plugins/copilot.nix
-#   ./plugins/winshift.nix
+    ./plugins/nvim-cmp.nix
+    ./plugins/copilot.nix
+    #   ./plugins/winshift.nix
+    ./plugins/alpha2.nix
   ];
 
   programs.nixvim = {
@@ -43,48 +44,47 @@
         enable = true;
         viewOptions.showHidden = true;
       };
-      };
+    };
 
-      #      none-ls = {
-      #        enable = true;
-      #        updateInInsert = true;
-      #        enableLspFormat = true;
-      #        sources = {
-      #          code_actions = { shellcheck.enable = true; };
-      #          diagnostics = { shellcheck.enable = true; };
-      #          formatting = {
-      #            gofmt.enable = true;
-      #            markdownlint.enable = true;
-      #            nixfmt.enable = true;
-      #            rustfmt.enable = true;
-      #            shfmt.enable = true;
-      #          };
-      #        };
-      #      };
+    #      none-ls = {
+    #        enable = true;
+    #        updateInInsert = true;
+    #        enableLspFormat = true;
+    #        sources = {
+    #          code_actions = { shellcheck.enable = true; };
+    #          diagnostics = { shellcheck.enable = true; };
+    #          formatting = {
+    #            gofmt.enable = true;
+    #            markdownlint.enable = true;
+    #            nixfmt.enable = true;
+    #            rustfmt.enable = true;
+    #            shfmt.enable = true;
+    #          };
+    #        };
+    #      };
 
-#      harpoon = {
-#        enable = true;
-#        keymaps.addFile = "<leader>a";
-#      };
-#      copilot-lua.enable = true;
+    #      harpoon = {
+    #        enable = true;
+    #        keymaps.addFile = "<leader>a";
+    #      };
+    #      copilot-lua.enable = true;
 
-#      gitsigns = {
-#        enable = true;
-#        signs = {
-#          add.text = "+";
-#          change.text = "~";
-#        };
-#      };
-#    };
+    #      gitsigns = {
+    #        enable = true;
+    #        signs = {
+    #          add.text = "+";
+    #          change.text = "~";
+    #        };
+    #      };
+    #    };
 
-
-# This for nvim-cmp ?
-#    autoCmd = [
-#      {
-#        event = "FileType";
-#        pattern = "nix";
-#        command = "setlocal tabstop=2 shiftwidth=2";
-#      }
-#    ];
+    # This for nvim-cmp ?
+    #    autoCmd = [
+    #      {
+    #        event = "FileType";
+    #        pattern = "nix";
+    #        command = "setlocal tabstop=2 shiftwidth=2";
+    #      }
+    #    ];
   };
 }

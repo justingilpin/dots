@@ -1,20 +1,27 @@
-{ config, pkgs, unstablePkgs, inputs, lib, nixvim, outputs, ... }:
 {
+  config,
+  pkgs,
+  unstablePkgs,
+  inputs,
+  lib,
+  nixvim,
+  outputs,
+  ...
+}: {
   home.stateVersion = "23.11";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
-  imports = [    
+  imports = [
     ./../modules/nvim
-		./../modules/alacritty
+    ./../modules/alacritty
+    #		./../modules/eww
   ];
 
-
-#  programs.nixvim = {
-#    enable = true;
-#    colorschemes.gruvbox.enable = true;
-#    plugins.lightline.enable = true;
-#  };
-
+  #  programs.nixvim = {
+  #    enable = true;
+  #    colorschemes.gruvbox.enable = true;
+  #    plugins.lightline.enable = true;
+  #  };
 
   programs.direnv = {
     enable = true;
@@ -29,41 +36,35 @@
 
   programs.git = {
     enable = true;
-    userEmail = "justin.lee.gilpin@gmail.com";
     userName = "justin";
     diff-so-fancy.enable = true;
     lfs.enable = true;
     extraConfig = {
-      init = {
-        defaultBranch = "master";
-      };
+      init = {defaultBranch = "master";};
       merge = {
         conflictStyle = "diff3";
-          tool = "meld";
-        };
-        pull = {
-          rebase = false;
-        };
+        tool = "meld";
       };
-    }; # end git
+      pull = {rebase = false;};
+    };
+  }; # end git
 
   # Source Dot Files
-#		home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf; 
+  #		home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
 
-
-#  programs.firefox = {
-#    enable = true;
-#    profiles.justin = {
-#      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-#        bitwarden
-#	ublock-origin
-#	sponsorblock
-#	darkreader
-#	tridactyl
-#	youtube-shorts-block
-#      ];
-#    };
-#  };
+  #  programs.firefox = {
+  #    enable = true;
+  #    profiles.justin = {
+  #      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+  #        bitwarden
+  #	ublock-origin
+  #	sponsorblock
+  #	darkreader
+  #	tridactyl
+  #	youtube-shorts-block
+  #      ];
+  #    };
+  #  };
 
   programs.htop = {
     enable = true;
@@ -72,19 +73,19 @@
 
   programs.lf.enable = true;
 
-#  programs.tmux = {
-#    enable = true;
-#    #keyMode = "vi";
-#    clock24 = true;
-#    historyLimit = 10000;
-#    plugins = with pkgs.tmuxPlugins; [
-#      gruvbox
-#    ];
-#    extraConfig = ''
-#      new-session -s main
-#      bind-key -n C-a send-prefix
-#    '';
-#  };
+  #  programs.tmux = {
+  #    enable = true;
+  #    #keyMode = "vi";
+  #    clock24 = true;
+  #    historyLimit = 10000;
+  #    plugins = with pkgs.tmuxPlugins; [
+  #      gruvbox
+  #    ];
+  #    extraConfig = ''
+  #      new-session -s main
+  #      bind-key -n C-a send-prefix
+  #    '';
+  #  };
 
   programs.zsh = {
     enable = true;
@@ -97,10 +98,10 @@
     '';
     oh-my-zsh = {
       enable = true;
-     #   theme = "robbyrussell";
-      plugins = [ "python" ];
+      #   theme = "robbyrussell";
+      plugins = ["python"];
     };
-  }; 
+  };
 
   programs.home-manager.enable = true;
   programs.nix-index.enable = true;
@@ -109,27 +110,26 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-
   programs.ssh = {
     enable = true;
-  #  extraConfig = ''
-  #  Host *
-  #    StrictHostKeyChecking no
-  #  '';
-  #  matchBlocks = {
-      # wd
-  #    "dt deepthought" = {
-  #      hostname = "10.42.0.42";
-  #      user = "alex";
-  #    };
-  #    "a anton" = {
-  #      hostname = "10.42.1.20";
-  #      user = "root";
-  #    };
-  #    "bricktop" = {
-  #      hostname = "10.42.1.80";
-  #      user = "pi";
-  #    };
-  #  };
+    #  extraConfig = ''
+    #  Host *
+    #    StrictHostKeyChecking no
+    #  '';
+    #  matchBlocks = {
+    # wd
+    #    "dt deepthought" = {
+    #      hostname = "10.42.0.42";
+    #      user = "alex";
+    #    };
+    #    "a anton" = {
+    #      hostname = "10.42.1.20";
+    #      user = "root";
+    #    };
+    #    "bricktop" = {
+    #      hostname = "10.42.1.80";
+    #      user = "pi";
+    #    };
+    #  };
   };
 }
