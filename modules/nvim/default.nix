@@ -7,7 +7,7 @@
     #    ./keybindings.nix
     #    ./filetype.nix
     #    ./autocmd.nix
-    #    ./plugins/completion.nix
+#    ./plugins/completion.nix
     ./plugins/lsp.nix
     #    ./plugins/misc.nix
     #    ./plugins/taboo.nix
@@ -16,13 +16,9 @@
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
     ./plugins/none-ls.nix
-<<<<<<< HEAD
-		.plugins/nvim-cmp.nix
-||||||| ea957db
-=======
-#		.plugins/copilot.nix
->>>>>>> 9c696eeb08ed904fc1700d7bf71b5db9f9e10e83
-    #    ./plugins/winshift.nix
+		./plugins/nvim-cmp.nix
+		./plugins/copilot.nix
+#   ./plugins/winshift.nix
   ];
 
   programs.nixvim = {
@@ -47,8 +43,6 @@
         enable = true;
         viewOptions.showHidden = true;
       };
-
-
       };
 
       #      none-ls = {
@@ -68,27 +62,29 @@
       #        };
       #      };
 
-      harpoon = {
-        enable = true;
-        keymaps.addFile = "<leader>a";
-      };
-      copilot-lua.enable = true;
+#      harpoon = {
+#        enable = true;
+#        keymaps.addFile = "<leader>a";
+#      };
+#      copilot-lua.enable = true;
 
-      gitsigns = {
-        enable = true;
-        signs = {
-          add.text = "+";
-          change.text = "~";
-        };
-      };
-    };
+#      gitsigns = {
+#        enable = true;
+#        signs = {
+#          add.text = "+";
+#          change.text = "~";
+#        };
+#      };
+#    };
 
-    autoCmd = [
-      {
-        event = "FileType";
-        pattern = "nix";
-        command = "setlocal tabstop=2 shiftwidth=2";
-      }
-    ];
-#  };
+
+# This for nvim-cmp ?
+#    autoCmd = [
+#      {
+#        event = "FileType";
+#        pattern = "nix";
+#        command = "setlocal tabstop=2 shiftwidth=2";
+#      }
+#    ];
+  };
 }
