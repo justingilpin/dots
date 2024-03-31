@@ -9,6 +9,7 @@
 #    unstablePkgs.yt-dlp
 #    unstablePkgs.get_iplayer
     nix-prefetch-git
+		libsForQt5.dolphin
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
     gccgo12 # requirement for neovim / treesitter
