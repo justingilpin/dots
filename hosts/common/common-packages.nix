@@ -13,6 +13,7 @@
     lua # requirement for neovim to be modified / treesitter
     gccgo12 # requirement for neovim / treesitter
 		vim-full # for vimtutor
+		calibre
     ## stable
 #    luajitPackages.lua-lsp
 #    nodePackages_latest.pyright
