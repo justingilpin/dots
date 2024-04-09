@@ -4,10 +4,10 @@
   imports = [
     ./theme.nix
     ./settings.nix
-    #    ./keybindings.nix
+#    ./keybindings.nix
     #    ./filetype.nix
-    #    ./autocmd.nix
-    #    ./plugins/completion.nix
+    ./autocmd.nix
+    ./plugins/completion.nix
     ./plugins/lsp.nix
     #    ./plugins/misc.nix
     #    ./plugins/taboo.nix

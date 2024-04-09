@@ -1,65 +1,79 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [];
+{
 
-  programs.nixvim = {
-    plugins = {
-      nvim-cmp = {
-        enable = true;
-				completion = {
-					autocomplete = ["TextChanged"];
-					keywordLength = 1;
-				};
-        preselect = "None";
-        snippet.expand = "luasnip";
-        sources = [
-          {name = "nvim_lsp";}
-          {name = "luasnip";}
-          {name = "path";}
-          {name = "dictionary";}
-          {name = "buffer";}
-          {name = "nvim_lsp_signature_help";}
-          {name = "nvim_lua";}
-        ];
-        formatting = {fields = ["abbr" "kind" "menu"];};
-       # mappingPresets = ["insert" "cmdline"];
-       # mapping."<CR>".modes = ["i" "s" "c"];
-       # mapping."<CR>".action = ''
-       #   function(fallback)
-       #     if cmp.visible() and cmp.get_active_entry() then
-       #       cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-       #     else
-       #       fallback()
-       #     end
-       #   end
-       # '';
-		    mapping = {
-          "<tab>" = "cmp.mapping.select_next_item()";
-          "<s-tab>" = "cmp.mapping.select_prev_item()";
-          "<c-n>" = "cmp.mapping.select_next_item()";
-          "<c-p>" = "cmp.mapping.select_prev_item()";
+  programs.nixvim.plugins = {
+    nvim-cmp = {
+      enable = true;
+
+      snippet.expand = "luasnip";
+
+      mappingPresets = ["insert"];
+
+      sources = [
+        {
+          name = "copilot";
+          groupIndex = 1;
+          priority = 4;
+        }
+        {
+          name = "nvim_lsp";
+          groupIndex = 1;
+          priority = 3;
+        }
+        {
+          name = "luasnip";
+          option = {
+            show_autosnippets = true;
+          };
+          groupIndex = 1;
+          priority = 5;
+        }
+        {
+          name = "path";
+          groupIndex = 1;
+        }
+        {
+          name = "buffer";
+          groupIndex = 2;
+          priority = 2;
+        }
+      ];
+
+      mapping = {
+        "<C-Space>" = "cmp.mapping.complete()";
+        "<C-j>" = "cmp.mapping.scroll_docs(4)";
+        "<C-k>" = "cmp.mapping.scroll_docs(-4)";
+        "<C-l>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+        "<C-n>" = {
+          action = ''
+            function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif require("luasnip").expand_or_jumpable() then
+                require("luasnip").expand_or_jump()
+              else
+                fallback()
+              end
+            end
+          '';
+
+          modes = ["i" "s"];
         };
-      };
-      harpoon = {
-        enable = true;
-        keymaps.addFile = "<leader>a";
-      };
-      copilot-lua.enable = true;
+        "<C-p>" = {
+          action = ''
+            function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif require("luasnip").expand_or_jumpable() then
+                require("luasnip").expand_or_jump()
+              else
+                fallback()
+              end
+            end
+          '';
 
-      gitsigns = {
-        enable = true;
-        signs = {
-          add.text = "+";
-          change.text = "~";
+          modes = ["i" "s"];
         };
       };
     };
-
-    autoCmd = [
-      {
-        event = "FileType";
-        pattern = "nix";
-        command = "setlocal tabstop=2 shiftwidth=2";
-      }
-    ];
   };
 }

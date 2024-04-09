@@ -1,34 +1,34 @@
 {
   programs.nixvim.plugins.copilot-lua = {
     enable = true;
-#    panel = {
-#      enabled = false;
-#      autoRefresh = true;
-#      keymap = {
-#        jumpPrev = "[[";
-#        jumpNext = "]]";
-#        accept = "<CR>";
-#        refresh = "gr";
-#        open = "<M-CR>";
-#      };
-#      layout = {
-#        position = "bottom"; # | top | left | right
-#        ratio = 0.4;
-#      };
-#    };
-#    suggestion = {
-#      enabled = false;
- #     autoTrigger = true;
- #     debounce = 75;
- #     keymap = {
- #       accept = "<M-l>";
- #       acceptWord = false;
- #       acceptLine = false;
- #       next = "<M-]>";
- #       prev = "<M-[>";
- #       dismiss = "<C-]>";
- #     };
- #   };
+    panel = {
+      enabled = false; #false
+      autoRefresh = true;
+      keymap = {
+        jumpPrev = "[[";
+        jumpNext = "]]";
+        accept = "<CR>";
+        refresh = "gr";
+        open = "<leader>co"; # <M-CR>
+      };
+      layout = {
+       position = "bottom"; # | top | left | right
+        ratio = 0.4;
+      };
+    };
+    suggestion = {
+      enabled = false; #false
+      autoTrigger = true;
+      debounce = 75;
+      keymap = {
+        accept = "<M-l>"; # <M-l>	
+        acceptWord = false;
+        acceptLine = false;
+        next = "<M-]>";
+        prev = "<M-[>";
+        dismiss = "<C-]>";
+      };
+    };
     filetypes = {
       yaml = false;
       markdown = false;
