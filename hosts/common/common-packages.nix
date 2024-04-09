@@ -71,6 +71,7 @@
     tor
     tor-browser
 		element-desktop
+		flatpak
 
     #---------Media----------------#
     vlc
