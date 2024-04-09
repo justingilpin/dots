@@ -28,7 +28,6 @@
 #    drill
 #    entr # Modern Unix `watch`
     firefox
-		blueman
 #    esptool
 
 #    fd

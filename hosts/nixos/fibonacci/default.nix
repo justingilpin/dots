@@ -17,23 +17,6 @@
     nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-  # Fonts
-#  fonts.packages = with pkgs; [
-#    jetbrains-mono
-#    nerd-font-patcher
-#  ];
-
-#  nix = {
-#    package = pkgs.nixFlakes;
-#    extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
-#      "experimental-features = nix-command flakes";
-#  };
-  
-#  programs.nixvim = {
-#    enable = true;
-#    colorschemes.gruvbox.enable = true;
-#    plugins.lightline.enable = true;
-#  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -45,6 +28,11 @@
 
   # Fixes laptop error when rebuilding Nixos
   systemd.services.systemd-udevd.restartIfChanged = true;
+  
+  # Enable Bluetooth typically with blueman-applet
+  hardware.bluetooth.enable = true;
+	hardware.bluetooth.powerOnBoot = true;
+	services.blueman.enable = true;
 
   # Fixes Network error when rebuilding Nixos
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -79,6 +67,7 @@
 
       #------ Laptop Software ------#
       brightnessctl
+			blueman
 
 
     ];
