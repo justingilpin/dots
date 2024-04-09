@@ -10,15 +10,14 @@
       gr = "rename";
       "<leader>f" = "format";
     };
-    #			silent = true;
-    #			diagnostic = {
-    #				"<leader>k" = "goto_prev";
-    #				"<leader>j" = "goto_next:;
-    #			};
-    #		};
+#		silent = true;
+#		diagnostic = {
+#			"<leader>k" = "goto_prev";
+#			"<leader>j" = "goto_next:;
+#		};
+#		};
     servers = {
       lua-ls.enable = true;
-      #			pylyzer.enable = true;
       pyright.enable = true;
       nil_ls.enable = true;
       html.enable = true;

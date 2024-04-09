@@ -18,6 +18,7 @@
     ./plugins/none-ls.nix
     ./plugins/nvim-cmp.nix
     ./plugins/copilot.nix
+		./plugins/trouble.nix
     #   ./plugins/winshift.nix
     #    ./plugins/alpha2.nix
   ];
