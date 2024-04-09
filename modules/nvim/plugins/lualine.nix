@@ -13,8 +13,8 @@
       lualine_c = ["filename" "diff"];
 
       lualine_x = [
+			  # hope to stop the diagonistics line from always appearing
         "diagnostics"
-
         # Show active language server
         {
           name.__raw = ''
