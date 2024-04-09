@@ -12,12 +12,12 @@
         };
         diagnostics = {
           alex.enable = true;
-          cppcheck.enable = true;
+ #         cppcheck.enable = true;
 					deadnix.enable = true;
-	    	  gitlint.enable = true;
-					golangci_lint.enable = true;
-					hadolint.enable = true;
-					ktlint.enable = true;
+#	    	  gitlint.enable = true;
+#					golangci_lint.enable = true;
+#					hadolint.enable = true;
+#					ktlint.enable = true;
 					mypy.enable = true;
 					protolint.enable = true;
 					pylint.enable = true;
