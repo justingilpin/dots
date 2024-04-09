@@ -17,7 +17,8 @@
     nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
+  # Enable for lutris
+  hardware.opengl.driSupport32Bit = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

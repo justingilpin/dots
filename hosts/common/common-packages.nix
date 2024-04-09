@@ -29,7 +29,8 @@
 #    entr # Modern Unix `watch`
     firefox
 #    esptool
-
+    lutris
+		bottles-unwrapped
 #    fd
     #fzf # programs.fzf
     gh
