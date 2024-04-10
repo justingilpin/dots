@@ -101,9 +101,6 @@ alias nixgarbage="nix-collect-garbage -d"
 # Kitty / Enter root@whatever after alias to prevent xterm errors
 alias kssh='kitty +kitten ssh'
 
-# Wine Bottles for WM like hyprland
-alias bottles='flatpak run com.usebottles.bottles & disown'
-
 # Neovim
 alias -s txt=nvim
 alias -s nix=nvim
