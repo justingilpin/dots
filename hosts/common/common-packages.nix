@@ -14,6 +14,8 @@
     gccgo12 # requirement for neovim / treesitter
 		vim-full # for vimtutor
 		calibre
+		brave
+		librewolf-unwrapped
     ## stable
 #    luajitPackages.lua-lsp
 #    nodePackages_latest.pyright
