@@ -63,7 +63,7 @@
     #-------Favorite Software-------#
  #       gimp-with-plugins
     lf # file manager | ranger replacement
- #  sioyek # pdf viewer
+    sioyek # pdf viewer
     libreoffice-still
     unstablePkgs.obsidian
     unstablePkgs.vscode
