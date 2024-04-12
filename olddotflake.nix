@@ -24,12 +24,12 @@
    # };
   };
   outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, disko, vscode-server, nixvim, ... }: {
-    let
+   # let
    #   overlays = [
    #     inputs.neovim-nightly-overlay.overlay
    #    # (import ./overlays/weechat.nix)
    #   ];
-    in
+   # in
 
     # Laptop
     nixosConfigurations = {
