@@ -106,6 +106,9 @@
       gamemode
       gamescope
       protontricks
+			wine-wow-wayland # wine for wayland
+			winetricks
+#
       #      ckan # ksp mod manager
       mono5 #ckan requirement
       msbuild #ckan requirement
