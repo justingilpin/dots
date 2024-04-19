@@ -108,8 +108,9 @@
       protontricks
 			wineWowPackages.waylandFull # wine for wayland
 			winetricks
-			libpulseaudio # audo for lutris
-			sof-firmware
+			pulseaudioFull # Audio for lutris and 32bit wine
+#			libpulseaudio # audo for lutris
+#			sof-firmware
 #
       #      ckan # ksp mod manager
       mono5 #ckan requirement
