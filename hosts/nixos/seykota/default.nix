@@ -64,15 +64,18 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+ # hardware.pulseaudio = { 
+#		enable = true;
+#		support32Bit = true;
+#	};
   #  security.rtkit.enable = true;
-  #  services.pipewire = {
-  #    enable = true;
-  #    alsa.enable = true;
-  #    alsa.support32Bit = true;
-  #    pulse.enable = true;
+  services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
   #jack.enable = true;
-  #  };
+    };
 
   programs.steam = {
     enable = true;
@@ -108,7 +111,8 @@
       protontricks
 			wineWowPackages.waylandFull # wine for wayland
 			winetricks
-			pulseaudioFull # Audio for lutris and 32bit wine
+			dxvk # wine dependency for star citizen
+#			pulseaudioFull # Audio for lutris and 32bit wine
 #			libpulseaudio # audo for lutris
 #			sof-firmware
 #
@@ -130,7 +134,7 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
-
+ 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
