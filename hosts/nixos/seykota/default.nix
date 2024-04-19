@@ -106,7 +106,7 @@
       gamemode
       gamescope
       protontricks
-			wine-wow-wayland # wine for wayland
+			wineWowPackages.waylandFull # wine for wayland
 			winetricks
 #
       #      ckan # ksp mod manager
