@@ -76,6 +76,8 @@
       pulse.enable = true;
   #jack.enable = true;
     };
+  
+  zramSwap.enable = true; # Faster compression swap 
 
   programs.steam = {
     enable = true;
