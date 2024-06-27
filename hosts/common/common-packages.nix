@@ -1,13 +1,13 @@
-{ pkgs, unstablePkgs, config, lib, ... }:
+{ pkgs, config, lib, unstablePkgs, ... }:
 {
-
+#  nixpkgs.overlays = [unstable-packages];
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
   environment.systemPackages = with pkgs; [
     ## unstable
-#    unstablePkgs.yt-dlp
-#    unstablePkgs.get_iplayer
+    unstablePkgs.yt-dlp
+    unstablePkgs.get_iplayer
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
