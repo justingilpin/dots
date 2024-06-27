@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  unstablePkgs,
   inputs,
   lib,
   nixvim,

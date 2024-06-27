@@ -1,6 +1,6 @@
-{ pkgs, unstablePkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 let
-  inherit (inputs) nixpkgs nixpkgs-unstable;
+  inherit (inputs) nixpkgs;
 in
 {
   time.timeZone = "Asia/Manila";

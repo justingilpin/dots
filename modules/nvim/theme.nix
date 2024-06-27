@@ -1,4 +1,4 @@
-{pkgs, lib, unstablePkgs, config, ...}: 
+{pkgs, lib, config, ...}: 
 {
   programs.nixvim = {
 	  colorschemes.ayu.enable = false;
