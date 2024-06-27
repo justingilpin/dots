@@ -117,6 +117,7 @@
 #			pulseaudioFull # Audio for lutris and 32bit wine
 #			libpulseaudio # audo for lutris
 #			sof-firmware
+			xfce.thunar
 #
       #      ckan # ksp mod manager
       mono5 #ckan requirement
