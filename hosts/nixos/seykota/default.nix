@@ -104,6 +104,7 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
+		  google-chrome
       #---------Games--------------#
       lutris
       heroic
