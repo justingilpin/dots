@@ -64,15 +64,20 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+ # hardware.pulseaudio = { 
+#		enable = true;
+#		support32Bit = true;
+#	};
   #  security.rtkit.enable = true;
-  #  services.pipewire = {
-  #    enable = true;
-  #    alsa.enable = true;
-  #    alsa.support32Bit = true;
-  #    pulse.enable = true;
+  services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
   #jack.enable = true;
-  #  };
+    };
+  
+  zramSwap.enable = true; # Faster compression swap 
 
   programs.steam = {
     enable = true;
@@ -99,6 +104,9 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
+		  google-chrome
+			gimp
+			krita
       #---------Games--------------#
       lutris
       heroic
@@ -106,6 +114,14 @@
       gamemode
       gamescope
       protontricks
+			wineWowPackages.waylandFull # wine for wayland
+			winetricks
+			dxvk # wine dependency for star citizen
+#			pulseaudioFull # Audio for lutris and 32bit wine
+#			libpulseaudio # audo for lutris
+#			sof-firmware
+			xfce.thunar
+#
       #      ckan # ksp mod manager
       mono5 #ckan requirement
       msbuild #ckan requirement
@@ -124,12 +140,12 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
-
+ 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }
