@@ -106,6 +106,7 @@
     packages = with pkgs; [
 		  google-chrome
 			gimp
+			krita
       #---------Games--------------#
       lutris
       heroic
