@@ -54,6 +54,7 @@
     jellyfin-web
     jellyfin-ffmpeg
     ffmpeg-headless
+		ripgrip #required for nvim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
