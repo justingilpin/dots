@@ -105,6 +105,7 @@
     extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
 		  google-chrome
+			gimp
       #---------Games--------------#
       lutris
       heroic
