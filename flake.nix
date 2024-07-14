@@ -12,7 +12,7 @@
 
       nixvim.url = "github:nix-community/nixvim/nixos-23.11";
       nixvim.inputs.nixpkgs.follows = "nixpkgs";
-#      nixvim.inputs.home-manager.follows = "home-manager";
+      nixvim.inputs.home-manager.follows = "home-manager";
 
 #      firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 #      firefox-addons.inputs.nixpkgs.follows = "nixpkgs";

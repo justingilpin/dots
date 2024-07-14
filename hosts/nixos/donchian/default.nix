@@ -5,10 +5,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cifs.nix
-			./../../common/common-packages.nix
-      ./../../../modules/nextcloud
-      ./../../../modules/jellyfin
+#      ./cifs.nix
+#			./../../common/common-packages.nix
+#      ./../../../modules/nextcloud
+#      ./../../../modules/jellyfin
 #      ./../../../modules/code-server
 #      ./../../common/common-packages.nix
     ];
@@ -33,7 +33,7 @@
   # Also check that user has shell enabled
 
   # Enable Docker Containers
-  virtualisation.docker.enable = true;
+#  virtualisation.docker.enable = true;
 
   users.users.justin = {
     isNormalUser = true;
@@ -49,13 +49,13 @@
 #    docker
 #    sysstat
 #    clipboard-jh
-    go
-    traceroute
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
-    ffmpeg-headless
-		ripgrip #required for nvim
+#    go
+#    traceroute
+#    jellyfin
+#    jellyfin-web
+#    jellyfin-ffmpeg
+#    ffmpeg-headless
+#		ripgrip #required for nvim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

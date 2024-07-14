@@ -22,10 +22,10 @@
   #    plugins.lightline.enable = true;
   #  };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
+#  programs.direnv = {
+#    enable = true;
+#    nix-direnv.enable = true;
+#  };
 
   programs.fzf = {
     enable = true;
@@ -103,8 +103,8 @@
   };
 
   programs.home-manager.enable = true;
-  programs.nix-index.enable = true;
-  programs.zoxide.enable = true;
+#  programs.nix-index.enable = true;
+#  programs.zoxide.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
