@@ -1,6 +1,11 @@
 {
   pkgs,
-	unstablePkgs,
+	lib,
+	config,
+	inputs,
+	nixpkgs-unstable,
+	nixvim,
+	nixos-hardware,
   ...
 }: {
   imports = [
@@ -29,13 +34,15 @@
     wofi
     kitty
     hyprpaper
-    unstablePkgs.hyprlock # unstable only
-    unstablePkgs.hypridle # unstable only
-    wlr-protocols # hyprlock dependency
-    mesa # hyprlock dependency
-    unstablePkgs.hyprlang # hyprlock dependency
-    sdbus-cpp # hyprlock depenency
-    pipewire # wayland screen share dep
-    wireplumber # for pipewire
+		wlr-protocols # hyprlock dep
+		mesa # hyprlock dep
+		sdbus-cpp #hyprlock dep
+		pipewire #wayland screen share dep
+		wireplumber #for pipewire
+
+    #Unstable Packages example nixpkgs-unstable
+    hyprlock # unstable only
+    hypridle # unstable only
+    hyprlang # hyprlock dependency
   ];
 }

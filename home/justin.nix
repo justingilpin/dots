@@ -5,22 +5,23 @@
   lib,
   nixvim,
   outputs,
+  nixpkgs-unstable,
   ...
 }: {
   home.stateVersion = "23.11";
+#  home-manager.backupFileExtension = "backup";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-    ./../modules/nvim
+#    ./../modules/nvim
     ./../modules/alacritty
     #		./../modules/eww
   ];
-
-  #  programs.nixvim = {
-  #    enable = true;
+ # programs.nixvim = {
+ #   enable = true;
   #    colorschemes.gruvbox.enable = true;
   #    plugins.lightline.enable = true;
-  #  };
+ # };
 
   programs.direnv = {
     enable = true;

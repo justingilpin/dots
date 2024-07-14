@@ -53,7 +53,7 @@
         # apps specific for Hyprland
         wl-clipboard 
 #        libgnome-keyring
-	gnome.gnome-keyring
+	      gnome.gnome-keyring
         gsettings-qt
         amarena-theme # gtk theme amarena
 

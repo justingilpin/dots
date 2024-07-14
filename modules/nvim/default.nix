@@ -6,19 +6,19 @@
     ./settings.nix
 #    ./keybindings.nix
     #    ./filetype.nix
-    ./autocmd.nix
-    ./plugins/completion.nix
-    ./plugins/lsp.nix
-    #    ./plugins/misc.nix
-    #    ./plugins/taboo.nix
-    ./plugins/lualine.nix
-    ./plugins/telescope.nix
-    ./plugins/treesitter.nix
-    ./plugins/neo-tree.nix
-    ./plugins/none-ls.nix
-    ./plugins/nvim-cmp.nix
-    ./plugins/copilot.nix
-		./plugins/trouble.nix
+#    ./autocmd.nix
+##    ./plugins/completion.nix
+#    ./plugins/lsp.nix
+#    #    ./plugins/misc.nix
+#    #    ./plugins/taboo.nix
+#    ./plugins/lualine.nix
+#    ./plugins/telescope.nix
+#    ./plugins/treesitter.nix
+#    ./plugins/neo-tree.nix
+#    ./plugins/none-ls.nix
+#    ./plugins/nvim-cmp.nix
+#    ./plugins/copilot.nix
+#    ./plugins/trouble.nix
     #   ./plugins/winshift.nix
     #    ./plugins/alpha2.nix
   ];

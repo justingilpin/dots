@@ -1,13 +1,23 @@
-{ pkgs, config, lib, unstablePkgs, ... }:
+{ pkgs, config, lib, nixpkgs-unstable, ... }:
 {
 #  nixpkgs.overlays = [unstable-packages];
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
+
+  # Example of adding an unstable package
+#  environment.systemPackages = with pkgs; [
+#    # Existing stable packages...
+#    (nixpkgs-unstable.lib.getPackages pkgs).yt-dlp
+#		(nixpkgs-unstable.lib.getPackages pkgs).get_iplayer
+#  ];
+  nixpkgs.config.allowUnfree = true; 
   environment.systemPackages = with pkgs; [
     ## unstable
-    unstablePkgs.yt-dlp
-    unstablePkgs.get_iplayer
+#    (nixpkgs-unstable.lib.getPackages pkgs).yt-dlp
+#    (nixpkgs-unstable.lib.getPackages pkgs).get_iplayer
+    obsidian # usually on unstable
+    vscode
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
@@ -65,8 +75,8 @@
     lf # file manager | ranger replacement
     sioyek # pdf viewer
     libreoffice-still
-    unstablePkgs.obsidian
-    unstablePkgs.vscode
+#    unstablePkgs.obsidian
+#    unstablePkgs.vscode
     feh
     vivaldi
     tor

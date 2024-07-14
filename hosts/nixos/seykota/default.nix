@@ -3,7 +3,7 @@
   lib,
   pkgs,
   inputs,
-  unstablePkgs,
+  nixpkgs-unstable,
   nixos-hardware,
   nixvim,
   ...
@@ -57,8 +57,8 @@
   # Enable Printer Auto Discovery
   services.avahi = {
     enable = true;
-    nssmdns = true; # Renamed to nssmdns4 in Unstable
-  #  nssmdns4 = true; # Unstable only
+  #  nssmdns = true; # Renamed to nssmdns4 in Unstable
+    nssmdns4 = true; # Unstable and future versions
     openFirewall = true;
   };
 
@@ -128,24 +128,31 @@
       #------Desktop Software------#
 
       # unstable below this line
-      unstablePkgs.vscode
+   #   (nixpkgs-unstable.lib.getPackages pkgs).vscode
       #---------iPhone-------------#
       checkra1n
       ifuse
       libimobiledevice
     ];
+
+  # Example of adding an unstable package
+ # environment.systemPackages = with pkgs; [
+    # Existing stable packages...
+#    (nixpkgs-unstable.lib.getPackages pkgs).firefox  # Example of adding Firefox from unstable
+#  ];
+
     shell = pkgs.zsh;
     useDefaultShell = true;
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
- 
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "23.11";
 }
