@@ -23,7 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["ntfs"]; # allows NTFS support at boot
 
-  #  networking.hostName = "seykota"; # Define your hostname.
+  networking.hostName = "seykota"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Fixes Network error when rebuilding Nixos
