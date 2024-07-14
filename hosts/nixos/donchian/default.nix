@@ -6,6 +6,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./cifs.nix
+			./../../common/common-packages.nix
       ./../../../modules/nextcloud
       ./../../../modules/jellyfin
 #      ./../../../modules/code-server
@@ -43,11 +44,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    lego # used for Let's Encrypt
-    docker-compose
-    docker
+#    lego # used for Let's Encrypt
+#    docker-compose
+#    docker
 #    sysstat
-    clipboard-jh
+#    clipboard-jh
     go
     traceroute
     jellyfin
@@ -75,7 +76,7 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11"; 
+  system.stateVersion = "24.11"; 
 
 }
 

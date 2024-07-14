@@ -74,7 +74,7 @@
         fibonacci = nixosSystem "x86_64-linux" "fibonacci" "justin";
 
         # servers
-        donchian = nixosSystem "x86_64-linux" "donchian" "justin";
+        donchian = nixosSystem "x86_64-linux" "donchian" "server";
 
         # test system
         markowitz = nixosSystem "x86_64-linux" "markowits" "justin";
