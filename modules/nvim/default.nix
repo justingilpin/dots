@@ -12,7 +12,7 @@
     #    ./plugins/misc.nix
     #    ./plugins/taboo.nix
     ./plugins/lualine.nix
-#    ./plugins/telescope.nix
+    ./plugins/telescope.nix
     ./plugins/treesitter.nix
     ./plugins/neo-tree.nix
     ./plugins/none-ls.nix

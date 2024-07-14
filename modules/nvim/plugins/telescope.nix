@@ -8,7 +8,8 @@
     plugins = {
       telescope = {
         enable = true;
-        extraOptions = {
+#        extraOptions = { # old
+				settings = { # new
           defaults = {
             sorting_strategy = "ascending";
             layout_config.prompt_position = "top";
@@ -27,7 +28,8 @@
           #          ui-select.enable = true;
           fzf-native.enable = true;
           frecency.enable = true;
-          file_browser = {
+#          file_browser = { # old
+					file-browser.settings = { # new
             enable = true;
             hidden = true;
             depth = 9999999999;
