@@ -25,7 +25,7 @@
         #        extensionsConfig.ui-select = {};
 
         extensions = {
-          #          ui-select.enable = true;
+          ui-select.enable = true;
           fzf-native.enable = true;
           frecency.enable = true;
 #          file_browser = { # old
