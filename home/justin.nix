@@ -8,12 +8,12 @@
   nixpkgs-unstable,
   ...
 }: {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 #  home-manager.backupFileExtension = "backup";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-#    ./../modules/nvim
+    ./../modules/nvim
     ./../modules/alacritty
     #		./../modules/eww
   ];
@@ -89,7 +89,8 @@
 
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+#    enableAutosuggestions = true; # old
+    autosuggestion.enable = true; # new name change
     enableCompletion = true;
     initExtra = builtins.readFile ./files/zshrc;
     initExtraBeforeCompInit = ''

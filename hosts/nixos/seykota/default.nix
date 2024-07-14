@@ -57,7 +57,7 @@
   # Enable Printer Auto Discovery
   services.avahi = {
     enable = true;
-  #  nssmdns = true; # Renamed to nssmdns4 in Unstable
+#    nssmdns = true; # Renamed to nssmdns4 in Unstable
     nssmdns4 = true; # Unstable and future versions
     openFirewall = true;
   };
@@ -154,5 +154,5 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

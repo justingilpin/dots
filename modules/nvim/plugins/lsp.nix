@@ -19,7 +19,8 @@
     servers = {
       lua-ls.enable = true;
       pyright.enable = true;
-      nil_ls.enable = true;
+#      nil_ls.enable = true; #old
+			nil-ls.enable = true; #new
       html.enable = true;
       cssls.enable = true;
       jsonls.enable = true;

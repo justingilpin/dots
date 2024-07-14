@@ -2,7 +2,8 @@
   programs.nixvim = {
     plugins.trouble = {
     enable = true;
-    autoClose = true;
+#    autoClose = true; # old
+		settings.auto_close = true; # new
   };
   keymaps = [
     {

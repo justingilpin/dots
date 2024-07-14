@@ -4,21 +4,21 @@
   imports = [
     ./theme.nix
     ./settings.nix
-#    ./keybindings.nix
+    ./keybindings.nix
     #    ./filetype.nix
-#    ./autocmd.nix
-##    ./plugins/completion.nix
-#    ./plugins/lsp.nix
-#    #    ./plugins/misc.nix
-#    #    ./plugins/taboo.nix
-#    ./plugins/lualine.nix
+    ./autocmd.nix
+#    ./plugins/completion.nix
+    ./plugins/lsp.nix
+    #    ./plugins/misc.nix
+    #    ./plugins/taboo.nix
+    ./plugins/lualine.nix
 #    ./plugins/telescope.nix
-#    ./plugins/treesitter.nix
-#    ./plugins/neo-tree.nix
-#    ./plugins/none-ls.nix
+    ./plugins/treesitter.nix
+    ./plugins/neo-tree.nix
+    ./plugins/none-ls.nix
 #    ./plugins/nvim-cmp.nix
-#    ./plugins/copilot.nix
-#    ./plugins/trouble.nix
+    ./plugins/copilot.nix
+    ./plugins/trouble.nix
     #   ./plugins/winshift.nix
     #    ./plugins/alpha2.nix
   ];
@@ -43,7 +43,8 @@
       nvim-lightbulb.enable = true;
       oil = {
         enable = true;
-        viewOptions.showHidden = true;
+#        viewOptions.showHidden = true; # old
+				settings.view_options.show_hidden = true; # new
       };
     };
 
