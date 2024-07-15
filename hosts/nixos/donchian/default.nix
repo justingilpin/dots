@@ -6,9 +6,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 #      ./cifs.nix
-#			./../../common/common-packages.nix
-      ./../../../modules/nextcloud
-      ./../../../modules/jellyfin
+      ./../../common/nixos-common.nix
+#      ./../../../modules/nextcloud
+#      ./../../../modules/jellyfin
 #      ./../../../modules/code-server
       ./../../common/common-packages.nix
     ];
