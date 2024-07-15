@@ -14,6 +14,7 @@
     ./amd.nix
     ./mounts.nix
     ./../../common/common-packages.nix
+		./../../common/nixos-common.nix
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
   ];

@@ -10,7 +10,7 @@
 #      ./../../../modules/nextcloud
 #      ./../../../modules/jellyfin
 #      ./../../../modules/code-server
-      ./../../common/common-packages.nix
+#      ./../../common/common-packages.nix
     ];
 
   # Use the GRUB 2 boot loader.

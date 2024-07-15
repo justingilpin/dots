@@ -7,7 +7,7 @@ in
 
 #  time.timeZone = "Etc/GMT+0"; # Temperary fix to get correct time
 
-  services.flatpak.enable = true;
+#  services.flatpak.enable = true; # Additional pkgs required for server
   nix = {
     settings = {
         experimental-features = [ "nix-command" "flakes" ];

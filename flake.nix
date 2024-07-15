@@ -64,7 +64,7 @@
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
 	    home-manager.users.justin = { imports = [
-            ./hosts/server/home/server.nix
+            ./home/server.nix
             nixvim.homeManagerModules.nixvim
             ]; };
 	  }

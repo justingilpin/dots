@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./e14.nix # Original is e15
       ./../../common/common-packages.nix
+			./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
     ];
 

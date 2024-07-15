@@ -22,7 +22,6 @@
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
     gccgo12 # requirement for neovim / treesitter
-		starship # required for zsh
 		vim-full # for vimtutor
 		calibre
     ## stable
