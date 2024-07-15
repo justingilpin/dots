@@ -86,28 +86,29 @@
   #    '';
   #  };
 
-#  programs.zsh = {
-#    enable = true;
-#    enableAutosuggestions = true;
-#    enableCompletion = true;
-#    initExtra = builtins.readFile ./files/zshrc;
-#    initExtraBeforeCompInit = ''
-#      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
-#    '';
-#    oh-my-zsh = {
-#      enable = true;
+  programs.zsh = {
+    enable = true;
+#    enableAutosuggestions = true; # old
+		autosuggestion.enable = true; # new
+    enableCompletion = true;
+    initExtra = builtins.readFile ./files/zshrc;
+    initExtraBeforeCompInit = ''
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
+    '';
+    oh-my-zsh = {
+      enable = true;
       #   theme = "robbyrussell";
-#      plugins = ["python"];
-#    };
-#  };
+      plugins = ["python"];
+    };
+  };
 
   programs.home-manager.enable = true;
-#  programs.nix-index.enable = true;
-#  programs.zoxide.enable = true;
+  programs.nix-index.enable = true;
+  programs.zoxide.enable = true;
 
   # Nicely reload system units when changing configs
-#  systemd.user.startServices = "sd-switch";
+  systemd.user.startServices = "sd-switch";
 
   programs.ssh = {
     enable = true;
