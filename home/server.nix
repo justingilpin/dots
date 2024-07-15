@@ -7,11 +7,11 @@
   outputs,
   ...
 }: {
-  home.stateVersion = "24.11";
+  home.stateVersion = "24.05";
   # list of programs
   # https://mipmip.github.io/home-manager-option-search
   imports = [
-#    ./../modules/nvim
+    ./../modules/nvim
 #    ./../modules/alacritty
     #		./../modules/eww
   ];
@@ -27,26 +27,26 @@
 #    nix-direnv.enable = true;
 #  };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    tmux.enableShellIntegration = true;
-  };
+#  programs.fzf = {
+#    enable = true;
+#    enableZshIntegration = true;
+#    tmux.enableShellIntegration = true;
+#  };
 
-  programs.git = {
-    enable = true;
-    userName = "justin";
-    diff-so-fancy.enable = true;
-    lfs.enable = true;
-    extraConfig = {
-      init = {defaultBranch = "master";};
-      merge = {
-        conflictStyle = "diff3";
-        tool = "meld";
-      };
-      pull = {rebase = false;};
-    };
-  }; # end git
+#  programs.git = {
+#    enable = true;
+#    userName = "justin";
+#    diff-so-fancy.enable = true;
+#    lfs.enable = true;
+#    extraConfig = {
+#      init = {defaultBranch = "master";};
+#      merge = {
+#        conflictStyle = "diff3";
+#        tool = "meld";
+#      };
+#      pull = {rebase = false;};
+#    };
+#  }; # end git
 
   # Source Dot Files
   #		home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
@@ -86,28 +86,28 @@
   #    '';
   #  };
 
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
-    initExtra = builtins.readFile ./files/zshrc;
-    initExtraBeforeCompInit = ''
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
-    '';
-    oh-my-zsh = {
-      enable = true;
+#  programs.zsh = {
+#    enable = true;
+#    enableAutosuggestions = true;
+#    enableCompletion = true;
+#    initExtra = builtins.readFile ./files/zshrc;
+#    initExtraBeforeCompInit = ''
+#      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
+#    '';
+#    oh-my-zsh = {
+#      enable = true;
       #   theme = "robbyrussell";
-      plugins = ["python"];
-    };
-  };
+#      plugins = ["python"];
+#    };
+#  };
 
   programs.home-manager.enable = true;
 #  programs.nix-index.enable = true;
 #  programs.zoxide.enable = true;
 
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+#  systemd.user.startServices = "sd-switch";
 
   programs.ssh = {
     enable = true;

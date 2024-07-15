@@ -45,9 +45,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.justin = { imports = [
-						./home/justin.nix
-						nixvim.homeManagerModules.nixvim
-						]; };
+	    ./home/justin.nix
+	    nixvim.homeManagerModules.nixvim
+	    ]; };
           }
         ];
       };
@@ -56,14 +56,18 @@
     nixosConfigurations = {
       donchian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit nixpkgs-unstable; };
         modules = [
           ./hosts/nixos/donchian/default.nix
-#	  home-manager.nixosModules.home-manager
-#	  {
-#	    home-manager.useGlobalPkgs = true;
-#	    home-manager.useUserPackages = true;
-#	    home-manager.users.justin = import ./hosts/server/home/default.nix;
-#	  }
+	  home-manager.nixosModules.home-manager
+	  {
+	    home-manager.useGlobalPkgs = true;
+	    home-manager.useUserPackages = true;
+	    home-manager.users.justin = { imports = [
+            ./hosts/server/home/server.nix
+            nixvim.homeManagerModules.nixvim
+            ]; };
+	  }
         ];
       };
     };

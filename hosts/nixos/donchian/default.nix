@@ -1,5 +1,5 @@
 
-{ config, unstablePkgs, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -7,17 +7,17 @@
       ./hardware-configuration.nix
 #      ./cifs.nix
 #			./../../common/common-packages.nix
-#      ./../../../modules/nextcloud
-#      ./../../../modules/jellyfin
+      ./../../../modules/nextcloud
+      ./../../../modules/jellyfin
 #      ./../../../modules/code-server
-#      ./../../common/common-packages.nix
+      ./../../common/common-packages.nix
     ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-#  networking.hostName = "jim_simons"; # Define your hostname.
+  networking.hostName = "donchian"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
