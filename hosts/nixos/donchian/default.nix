@@ -33,7 +33,7 @@
   # Also check that user has shell enabled
 
   # Enable Docker Containers
-#  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   users.users.justin = {
     isNormalUser = true;
@@ -44,18 +44,18 @@
   };
 
   environment.systemPackages = with pkgs; [
-#    lego # used for Let's Encrypt
-#    docker-compose
-#    docker
-#    sysstat
-#    clipboard-jh
-#    go
-#    traceroute
-#    jellyfin
-#    jellyfin-web
-#    jellyfin-ffmpeg
-#    ffmpeg-headless
-#		ripgrip #required for nvim
+    lego # used for Let's Encrypt
+    docker-compose
+    docker
+    sysstat
+    clipboard-jh
+    go
+    traceroute
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+    ffmpeg-headless
+		ripgrip #required for nvim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
