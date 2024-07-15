@@ -44,8 +44,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.justin = import ./home/justin.nix;
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            home-manager.users.justin = { imports = [
+						./home/justin.nix
+						nixvim.homeManagerModules.nixvim
+						]; };
           }
         ];
       };
@@ -74,7 +76,7 @@
 		    specialArgs = { inherit nixpkgs-unstable; };
         modules = [
           ./hosts/nixos/seykota/default.nix
-          home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manag:er
           {
            # networking.hostName = seykota;
             home-manager.useGlobalPkgs = true;
