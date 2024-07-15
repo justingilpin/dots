@@ -80,7 +80,7 @@
 		    specialArgs = { inherit nixpkgs-unstable; };
         modules = [
           ./hosts/nixos/seykota/default.nix
-          home-manager.nixosModules.home-manag:er
+          home-manager.nixosModules.home-manager
           {
            # networking.hostName = seykota;
             home-manager.useGlobalPkgs = true;
