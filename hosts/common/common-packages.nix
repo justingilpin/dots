@@ -88,6 +88,7 @@
     vlc
     discord
     zoom-us
+		unzip
 
     vscode-extensions.ms-vscode-remote.remote-ssh
   ];
