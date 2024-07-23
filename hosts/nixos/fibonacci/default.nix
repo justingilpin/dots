@@ -66,6 +66,7 @@
       xclip
       xsel
       go
+			gimp
 
       #------ Laptop Software ------#
       brightnessctl
