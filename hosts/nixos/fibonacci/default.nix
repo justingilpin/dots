@@ -68,7 +68,9 @@
       go
 			gimp
       xfce.thunar
-
+			xfce.thunar-archive-plugin # enables right click compression
+			p7zip
+			zip
       #------ Laptop Software ------#
       brightnessctl
 			blueman
