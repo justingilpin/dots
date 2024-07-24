@@ -67,6 +67,7 @@
       xsel
       go
 			gimp
+      xfce.thunar
 
       #------ Laptop Software ------#
       brightnessctl
