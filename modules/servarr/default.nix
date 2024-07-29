@@ -6,6 +6,7 @@
 	nixpkgs-unstable,
 	nixos-hardware,
   nixvim,
+	nixarr,
 	...
 }: {
   nixarr = {

@@ -8,7 +8,8 @@
 #      ./cifs.nix
       ./../../common/nixos-common.nix
 #      ./../../../modules/nextcloud
-      ./../../../modules/jellyfin
+#      ./../../../modules/jellyfin
+			./../../../modules/servarr
 #      ./../../../modules/code-server
 #      ./../../common/common-packages.nix
     ];

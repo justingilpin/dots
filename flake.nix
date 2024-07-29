@@ -59,7 +59,7 @@
         specialArgs = { inherit nixpkgs-unstable; };
         modules = [
           ./hosts/nixos/donchian/default.nix
-				#	./modules/servarr/nixaar.nix
+					nixarr.nixosModules.default
 	  home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
