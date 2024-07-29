@@ -5,7 +5,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-#      ./cifs.nix
+      ./cifs.nix
       ./../../common/nixos-common.nix
 #      ./../../../modules/nextcloud
 #      ./../../../modules/jellyfin

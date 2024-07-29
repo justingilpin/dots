@@ -8,12 +8,22 @@
 , nixarr
 , ...
 }: {
+  hardware.opengl = {
+		enable = true;
+		extraPackages = with pkgs; [
+		  intel-media-driver
+			vaapiIntel
+			vaapiVdpau
+			libvdpau-va-gl
+			intel-compute-runtime
+		];
+	};
   nixarr = {
     enable = true;
     # These two values are also the default, but you can set them to whatever
     # else you want
     # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
-    mediaDir = "/mnt/";
+    mediaDir = "/mnt/media";
     stateDir = "/data/media/.state/nixarr";
 
     vpn = {
@@ -25,6 +35,7 @@
 
     jellyfin = {
       enable = true;
+			openFirewall = true; # not default test it more Justin
       # These options set up a nginx HTTPS reverse proxy, so you can access
       # Jellyfin on your domain with HTTPS
  #     expose.https = {
