@@ -1,13 +1,12 @@
-{
-	config,
-	lib,
-	pkgs,
-	inputs,
-	nixpkgs-unstable,
-	nixos-hardware,
-  nixvim,
-	nixarr,
-	...
+{ config
+, lib
+, pkgs
+, inputs
+, nixpkgs-unstable
+, nixos-hardware
+, nixvim
+, nixarr
+, ...
 }: {
   nixarr = {
     enable = true;
@@ -18,7 +17,7 @@
     stateDir = "/data/media/.state/nixarr";
 
     vpn = {
-      enable = true;
+      enable = false;
       # WARNING: This file must _not_ be in the config git directory
       # You can usually get this wireguard file from your VPN provider
       wgConf = "/data/.secret/wg.conf";
@@ -28,16 +27,16 @@
       enable = true;
       # These options set up a nginx HTTPS reverse proxy, so you can access
       # Jellyfin on your domain with HTTPS
-      expose.https = {
-        enable = true;
-        domainName = "your.domain.com";
-        acmeMail = "your@email.com"; # Required for ACME-bot
-      };
+ #     expose.https = {
+ #       enable = true;
+ #       domainName = "your.domain.com";
+ #       acmeMail = "your@email.com"; # Required for ACME-bot
+ #     };
     };
 
     transmission = {
       enable = true;
-      vpn.enable = true;
+      vpn.enable = false;
       peerPort = 50000; # Set this to the port forwarded by your VPN
     };
 
