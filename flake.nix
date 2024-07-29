@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05"; #/home-manager
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    nixarr.url = "github:rasmus-kirk/nixarr";
     nixvim.url = "github:nix-community/nixvim/nixos-24.05";
 #old    nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +24,7 @@
    #   url = "github:nix-community/neovim-nightly-overlay";
    # };
   };
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, disko, vscode-server, nixvim, ... }: {
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }: {
    # let
    #   overlays = [
    #     inputs.neovim-nightly-overlay.overlay
@@ -59,6 +59,7 @@
         specialArgs = { inherit nixpkgs-unstable; };
         modules = [
           ./hosts/nixos/donchian/default.nix
+					./modules/servarr/default.nix
 	  home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
