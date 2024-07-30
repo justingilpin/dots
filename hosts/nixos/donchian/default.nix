@@ -8,7 +8,6 @@
       ./cifs.nix
       ./../../common/nixos-common.nix
 #      ./../../../modules/nextcloud
-#      ./../../../modules/jellyfin
 			./../../../modules/servarr
 #      ./../../../modules/code-server
 #      ./../../common/common-packages.nix
@@ -56,9 +55,9 @@
     jellyfin-web
     jellyfin-ffmpeg
     ffmpeg-headless
+#		ombi
 	#	ripgrip #required for nvim
   ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -67,6 +66,10 @@
     enableSSHSupport = true;
   };
 
+  services.ombi = {
+		enable = true;
+		port = 3579;
+	};
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
