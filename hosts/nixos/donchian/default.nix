@@ -66,6 +66,11 @@
     enableSSHSupport = true;
   };
 
+	services.audiobookshelf = {
+		enable = true;
+		port = 13378;
+	};
+
   services.ombi = {
 		enable = true;
 		port = 3579;
