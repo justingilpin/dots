@@ -9,6 +9,7 @@
       ./../../common/nixos-common.nix
 #      ./../../../modules/nextcloud
 			./../../../modules/servarr
+#			./dashy.nix
 #      ./../../../modules/code-server
 #      ./../../common/common-packages.nix
     ];
@@ -43,6 +44,14 @@
     useDefaultShell = true;
   };
 
+  users.users.radarr = {
+	  extraGroups = [ "wheel" "users"];
+	};
+
+	users.users.sonarr = {
+	  extraGroups = [ "wheel" "users"];
+	};
+
   environment.systemPackages = with pkgs; [
     lego # used for Let's Encrypt
     docker-compose
@@ -55,6 +64,7 @@
     jellyfin-web
     jellyfin-ffmpeg
     ffmpeg-headless
+		recyclarr
 #		ombi
 	#	ripgrip #required for nvim
   ];
@@ -66,10 +76,35 @@
     enableSSHSupport = true;
   };
 
+	services.gitea = {
+		enable = true;
+		database.host = "192.168.88.62";
+	};
+
 	services.audiobookshelf = {
 		enable = true;
 		port = 13378;
+		host = "192.168.88.62";
 	};
+
+  services.prometheus = {
+		enable = true;
+		port = 9090;
+	};
+
+  services.uptime-kuma = {
+		enable = true;
+		settings = {
+			HOST = "192.168.88.62";
+      PORT = "3001";
+		};
+	};
+
+  # Waiting for 24.11
+#  services.immich = {
+#    enable = true;
+#    environment.IMMICH_MACHINE_LEARNING_URL = "http://192.168.88.62:3003";
+#  };
 
   services.ombi = {
 		enable = true;

@@ -45,7 +45,7 @@
       maxUploadSize = "16G";
       https = true;
       autoUpdateApps.enable = true;
-      extraOptions = {
+      settings = {
         trusted_domains = ["192.168.88.62" "ow0w.com"];
         default_phone_region = "US";
         overwriteprotocol = "https";

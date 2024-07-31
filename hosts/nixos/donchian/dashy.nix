@@ -5,7 +5,7 @@
 
     dashy = {
       image = "lissy93/dashy";
-      ports = [ "192.168.88.59:9090:80" ];
+      ports = [ "192.168.88.62:4000" ];
       volumes = [ "/home/user/.config/dashy/conf.yml:/app/public/conf.yml" ];
     };
     };
