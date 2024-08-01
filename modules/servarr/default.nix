@@ -1,13 +1,5 @@
-{ config
-, lib
-, pkgs
-, inputs
-, nixpkgs-unstable
-, nixos-hardware
-, nixvim
-, nixarr
-, ...
-}: {
+{ pkgs, ... }: {
+
   hardware.opengl = {
 		enable = true;
 		extraPackages = with pkgs; [
@@ -18,6 +10,7 @@
 			intel-compute-runtime
 		];
 	};
+
   nixarr = {
     enable = true;
     # These two values are also the default, but you can set them to whatever
@@ -48,7 +41,7 @@
     transmission = {
       enable = true;
       vpn.enable = false;
-      peerPort = 50000; # Set this to the port forwarded by your VPN
+      peerPort = 51820; # Set this to the port forwarded by your VPN
     };
 
     # It is possible for this module to run the *Arrs through a VPN, but it
