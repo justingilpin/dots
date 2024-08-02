@@ -51,6 +51,14 @@
 	users.users.sonarr = {
 	  extraGroups = [ "wheel" "users"];
 	};
+  
+	users.users.torrenter = {
+		extraGroups = [ "wheel" "users"];
+	};
+
+	users.users.bazarr = {
+		extraGroups = [ "wheel" "users"];
+	};
 
   environment.systemPackages = with pkgs; [
     lego # used for Let's Encrypt
