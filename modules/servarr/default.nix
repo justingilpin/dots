@@ -20,10 +20,13 @@
     stateDir = "/data/media/.state/nixarr";
 
     vpn = {
-      enable = false;
+      enable = true;
       # WARNING: This file must _not_ be in the config git directory
       # You can usually get this wireguard file from your VPN provider
       wgConf = "/data/.secret/wg.conf";
+      # vpnTestService.enable = true;
+      # vpnTestService.port = 1637;
+
     };
 
     jellyfin = {
@@ -41,7 +44,11 @@
     transmission = {
       enable = true;
       vpn.enable = false;
-      peerPort = 51820; # Set this to the port forwarded by your VPN
+      peerPort = 1637; # Set this to the port forwarded by your VPN
+      # Optional Below
+			openFirewall = true;
+			# flood.enable = true;
+			uiPort = 9091;
     };
 
     # It is possible for this module to run the *Arrs through a VPN, but it
