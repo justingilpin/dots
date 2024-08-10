@@ -24,13 +24,14 @@
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
   };
 
+
   # mount cifs downloads
     fileSystems."/mnt/downloads" = {
     device = "//192.168.88.156/Alliance/downloads";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=users";
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=torrenter,gid=users";
 
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
   };

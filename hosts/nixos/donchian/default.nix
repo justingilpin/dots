@@ -60,6 +60,14 @@
 		extraGroups = [ "wheel" "users"];
 	};
 
+	users.users.streamer = {
+		extraGroups = [ "wheel" "users"];
+	};
+
+	users.users.usenet = {
+		extraGroups = [ "wheel" "users"];
+	};
+
   environment.systemPackages = with pkgs; [
     lego # used for Let's Encrypt
     docker-compose

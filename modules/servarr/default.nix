@@ -24,9 +24,10 @@
       # WARNING: This file must _not_ be in the config git directory
       # You can usually get this wireguard file from your VPN provider
       wgConf = "/data/.secret/wg.conf";
-      # vpnTestService.enable = true;
-      # vpnTestService.port = 1637;
-
+			vpnTestService = {
+				enable = true;
+				port = 40904;
+			};
     };
 
     jellyfin = {
@@ -44,7 +45,7 @@
     transmission = {
       enable = true;
       vpn.enable = false;
-      peerPort = 1637; # Set this to the port forwarded by your VPN
+      peerPort = 40904; # Set this to the port forwarded by your VPN
       # Optional Below
 			openFirewall = true;
 			# flood.enable = true;
