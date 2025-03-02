@@ -4,7 +4,7 @@ let
 in
 {
 #  time.timeZone = "Asia/Manila";
-	time.timeZone = "America/Atlanta";
+	time.timeZone = "America/New_York";
 
 #  time.timeZone = "Etc/GMT+0"; # Temperary fix to get correct time
 

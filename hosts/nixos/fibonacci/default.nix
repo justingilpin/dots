@@ -66,6 +66,7 @@
       xclip
       xsel
       go
+			stremio
 			gimp
       xfce.thunar
 			xfce.thunar-archive-plugin # enables right click compression
