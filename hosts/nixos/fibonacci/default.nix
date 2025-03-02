@@ -67,7 +67,7 @@
       xsel
       go
 			stremio
-			spotify
+			spotifyd
 			gimp
       xfce.thunar
 			xfce.thunar-archive-plugin # enables right click compression
