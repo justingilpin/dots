@@ -73,7 +73,7 @@
 			xfce.thunar-archive-plugin # enables right click compression
 			p7zip
 			zip
-			code-cursor-fhs
+			code-cursor
       #------ Laptop Software ------#
       brightnessctl
 			blueman
