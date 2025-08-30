@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, nixpkgs-unstable, unstable, ... }:
 
 {
   imports =
@@ -56,6 +56,7 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.justin = {
     isNormalUser = true;
@@ -73,11 +74,9 @@
 			xfce.thunar-archive-plugin # enables right click compression
 			p7zip
 			zip
-			code-cursor
       #------ Laptop Software ------#
       brightnessctl
 			blueman
-
 
     ];
     shell = pkgs.zsh;
@@ -125,7 +124,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
 

@@ -37,7 +37,7 @@
       fibonacci = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
     #    inherit config overlays;
-        specialArgs = { inherit nixpkgs-unstable; };
+        specialArgs = { inherit nixpkgs-unstable; unstable=nixpkgs-unstable;};
         modules = [
           ./hosts/nixos/fibonacci/default.nix
           home-manager.nixosModules.home-manager
