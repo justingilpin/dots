@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, nixpkgs-unstable, unstable, ... }:
+{ config, lib, pkgs, nixpkgs-unstable, unstable, ... }:
 
 {
   imports =
@@ -74,6 +74,8 @@
 			xfce.thunar-archive-plugin # enables right click compression
 			p7zip
 			zip
+			unstable.code-cursor
+			nodejs_20 #required for some MCP's that run in code-cursor
       #------ Laptop Software ------#
       brightnessctl
 			blueman
