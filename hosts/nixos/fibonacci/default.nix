@@ -80,6 +80,8 @@
       brightnessctl
 			blueman
 			pamixer # volume control
+			grim # screenshots
+			slurp # area selection
 
     ];
     shell = pkgs.zsh;

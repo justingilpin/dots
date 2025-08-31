@@ -63,6 +63,8 @@
 #        bluez-alsa # Alsa backend
         brightnessctl
         pamixer  # Add this for volume control
+        grim     # Add this for screenshots
+        slurp    # Add this for area selection
         xdg-desktop-portal-hyprland
         libsForQt5.kdeconnect-kde # features for phone
         wayland-utils # useful?
