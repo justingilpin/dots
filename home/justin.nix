@@ -54,6 +54,9 @@
   home.file.".config/hypr/hypridle.conf".source = ./../modules/hyprland/hypridle.conf;
   home.file.".config/hypr/hyprlock.conf".source = ./../modules/hyprland/hyprlock.conf;
   home.file.".config/hypr/hyprpaper.conf".source = ./../modules/hyprland/hyprpaper.conf;
+  
+  # Test file to see if home-manager is working
+  home.file.".config/test-home-manager.txt".text = "Home manager is working!";
 
   #  programs.firefox = {
   #    enable = true;
