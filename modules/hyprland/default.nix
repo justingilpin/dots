@@ -62,6 +62,7 @@
 #        bluez # bluetooth support
 #        bluez-alsa # Alsa backend
         brightnessctl
+        pamixer  # Add this for volume control
         xdg-desktop-portal-hyprland
         libsForQt5.kdeconnect-kde # features for phone
         wayland-utils # useful?
