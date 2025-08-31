@@ -50,7 +50,10 @@
   }; # end git
 
   # Source Dot Files
-  #		home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
+  home.file.".config/hypr/hyprland.conf".source = ./../modules/hyprland/hyprland.conf;
+  home.file.".config/hypr/hypridle.conf".source = ./../modules/hyprland/hypridle.conf;
+  home.file.".config/hypr/hyprlock.conf".source = ./../modules/hyprland/hyprlock.conf;
+  home.file.".config/hypr/hyprpaper.conf".source = ./../modules/hyprland/hyprpaper.conf;
 
   #  programs.firefox = {
   #    enable = true;

@@ -79,6 +79,7 @@
       #------ Laptop Software ------#
       brightnessctl
 			blueman
+			pamixer # volume control
 
     ];
     shell = pkgs.zsh;
