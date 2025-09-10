@@ -68,7 +68,6 @@
       xsel
       go
 			stremio
-			falkon # Lightweight Browser
 			spotifywm
 			gimp
       xfce.thunar
