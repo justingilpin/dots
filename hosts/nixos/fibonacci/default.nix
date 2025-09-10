@@ -74,7 +74,7 @@
 			xfce.thunar-archive-plugin # enables right click compression
 			p7zip
 			zip
-			claude-code
+			unstable.claude-code
 			unstable.code-cursor
 			nodejs_20 #required for some MCP's that run in code-cursor
       #------ Laptop Software ------#
