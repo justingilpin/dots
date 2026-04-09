@@ -101,6 +101,86 @@ alias nixgarbage="nix-collect-garbage -d"
 # Kitty / Enter root@whatever after alias to prevent xterm errors
 alias kssh='kitty +kitten ssh'
 
+
+# NordVPN
+
+nord-on() {
+  local country="${1:-Philippines}"
+
+  echo "Disabling Tailscale DNS..."
+  sudo tailscale set --accept-dns=false || return 1
+
+  echo "Connecting NordVPN to ${country}..."
+  sudo wgnord c "$country" || return 1
+
+  echo "Testing DNS and public IP..."
+  ping -c 1 google.com || return 1
+  curl ifconfig.me || return 1
+  echo
+  echo "NordVPN connected. Tailscale is still up, DNS auto-accept is off."
+}
+
+nord-off() {
+  echo "Disconnecting NordVPN..."
+  sudo wgnord d || return 1
+
+  echo "Re-enabling Tailscale DNS..."
+  sudo tailscale set --accept-dns=true || return 1
+
+  echo "NordVPN disconnected. Tailscale DNS re-enabled."
+}
+
+nord-on() {
+  local country="${1:-Philippines}"
+
+  echo "Disabling Tailscale DNS..."
+  sudo tailscale set --accept-dns=false || return 1
+
+  echo "Connecting NordVPN to ${country}..."
+  sudo wgnord c "$country" || return 1
+
+  echo "Testing DNS resolution..."
+  getent hosts google.com || {
+    echo "DNS resolution failed."
+    return 1
+  }
+
+  echo "Testing public IP..."
+  curl -4 --silent --show-error ifconfig.me && echo || {
+    echo "Public IP check failed."
+    return 1
+  }
+
+  echo "NordVPN connected. Tailscale is still up, DNS auto-accept is off."
+}
+
+nord-off() {
+  echo "Disconnecting NordVPN..."
+  sudo wgnord d || return 1
+
+  echo "Re-enabling Tailscale DNS..."
+  sudo tailscale set --accept-dns=true || return 1
+
+  echo "NordVPN disconnected. Tailscale DNS re-enabled."
+}
+
+nord-status() {
+  echo "=== Tailscale DNS setting ==="
+  tailscale status 2>/dev/null | head -n 5
+  echo
+
+  echo "=== resolv.conf ==="
+  cat /etc/resolv.conf
+  echo
+
+  echo "=== DNS resolution ==="
+  getent hosts google.com || echo "DNS lookup failed"
+  echo
+
+  echo "=== Public IP ==="
+  curl -4 --silent --show-error ifconfig.me 2>/dev/null && echo || echo "Public IP lookup failed"
+}
+
 # Neovim
 alias -s txt=nvim
 alias -s nix=nvim

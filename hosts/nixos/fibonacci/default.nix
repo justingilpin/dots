@@ -76,7 +76,8 @@
 			zip
 			unstable.claude-code
 			unstable.code-cursor
-			nodejs_20 #required for some MCP's that run in code-cursor
+			nodejs_20 # required for some MCP's that run in code-cursor
+			wgnord # nord vpn helper with wireguard
       #------ Laptop Software ------#
       brightnessctl
 			blueman
@@ -113,6 +114,18 @@
 
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/wgnord 0755 root root -"
+    "d /etc/wireguard 0700 root root -"
+  ];
+
+  system.activationScripts.wgnord.text = ''
+    ln -sf ${../../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
+    ln -sf ${../../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
+    ln -sf ${../../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
+    chmod 700 /etc/wireguard
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
