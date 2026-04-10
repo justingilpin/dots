@@ -84,6 +84,7 @@
 			pamixer # volume control
 			grim # screenshots
 			slurp # area selection
+			speedtest-cli # simple terminal internet tester
 
     ];
     shell = pkgs.zsh;
