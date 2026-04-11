@@ -100,11 +100,13 @@
 #    enableAutosuggestions = true; # old
     autosuggestion.enable = true; # new name change
     enableCompletion = true;
-    initExtra = builtins.readFile ./files/zshrc;
-    initExtraBeforeCompInit = ''
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
+      '')
+      (builtins.readFile ./files/zshrc)
+    ];
     oh-my-zsh = {
       enable = true;
       #   theme = "robbyrussell";
