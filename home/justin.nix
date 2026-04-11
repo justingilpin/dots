@@ -123,7 +123,21 @@
 
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = true;
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      extraOptions = {
+        ForwardAgent = "no";
+        ServerAliveInterval = "0";
+        ServerAliveCountMax = "3";
+        Compression = "no";
+        AddKeysToAgent = "no";
+        HashKnownHosts = "no";
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+        ControlMaster = "no";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "no";
+      };
+    };
     #  extraConfig = ''
     #  Host *
     #    StrictHostKeyChecking no
