@@ -44,7 +44,7 @@
             home-manager.users.justin = { 
               imports = [
                 ./home/justin.nix
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ]; 
             };
           }
@@ -77,7 +77,7 @@
             home-manager.users.justin = { 
               imports = [
                 ./home/server.nix
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ]; 
             };
           }
@@ -109,7 +109,7 @@
             home-manager.users.justin = { 
               imports = [
                 ./home/justin.nix
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ]; 
             };
           }
@@ -141,7 +141,7 @@
             home-manager.users.justin = { 
               imports = [
                 ./home/justin.nix
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ]; 
             };
           }

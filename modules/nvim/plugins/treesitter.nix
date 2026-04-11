@@ -3,7 +3,7 @@
     treesitter = {
       enable = true;
 #      folding = true;
-      indent = true;
+      indent.enable = true;
     };
 #    rainbow-delimiters.enable = true;
 #    ts-context-commentstring.enable = true;
