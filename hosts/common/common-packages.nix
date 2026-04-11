@@ -104,6 +104,17 @@
     nerd-fonts.blex-mono
     nerd-fonts.mononoki
   ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    openssl
+    curl
+    expat
+    libuuid
+  ];
+
   system.activationScripts.wgnord.text = ''
   mkdir -p /var/lib/wgnord
   mkdir -p /etc/wireguard
