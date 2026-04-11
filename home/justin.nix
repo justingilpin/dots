@@ -37,7 +37,8 @@
     enable = true;
     lfs.enable = true;
     settings = {
-      user.name = "justin";
+      user.name = "Justin Gilpin";
+			user.email = "justin.lee.gilpin@gmail.com";
       init = {defaultBranch = "master";};
       merge = {
         conflictStyle = "diff3";
