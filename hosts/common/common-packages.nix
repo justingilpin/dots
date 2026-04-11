@@ -25,6 +25,7 @@
 		vim-full # for vimtutor
 		calibre
 		wgnord # nord vpn helper with wireguard
+		speedtest-cli # simple terminal internet tester
     ## stable
 #    luajitPackages.lua-lsp
 #    nodePackages_latest.pyright

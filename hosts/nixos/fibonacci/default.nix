@@ -77,14 +77,14 @@
 			unstable.claude-code
 			unstable.code-cursor
 			nodejs_20 # required for some MCP's that run in code-cursor
-			wgnord # nord vpn helper with wireguard
+#			wgnord # nord vpn helper with wireguard
       #------ Laptop Software ------#
       brightnessctl
 			blueman
 			pamixer # volume control
 			grim # screenshots
 			slurp # area selection
-			speedtest-cli # simple terminal internet tester
+#			speedtest-cli # simple terminal internet tester
 
     ];
     shell = pkgs.zsh;
