@@ -97,10 +97,13 @@
   fonts.packages = with pkgs; [
     fira-code
     fira-mono
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" "IBMPlexMono" "Mononoki" "Monofur"
-    ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.blex-mono
+    nerd-fonts.mononoki
   ];
-
   system.activationScripts.wgnord.text = ''
   mkdir -p /var/lib/wgnord
   mkdir -p /etc/wireguard
