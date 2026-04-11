@@ -95,19 +95,27 @@
     vscode-extensions.ms-vscode-remote.remote-ssh
   ];
 
-  system.activationScripts.wgnord.text = ''
-    ln -sf ${../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
-    ln -sf ${../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
-    ln -sf ${../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
-    chmod 700 /etc/wireguard
-  '';
-
-
-
   fonts.packages = with pkgs; [
     fira-code
     fira-mono
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" "JetBrainsMono" "IBMPlexMono" "Mononoki" "Monofur"
     ]; })
   ];
+
+  system.activationScripts.wgnord.text = ''
+  mkdir -p /var/lib/wgnord
+  mkdir -p /etc/wireguard
+
+  ln -sf ${../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
+  ln -sf ${../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
+  ln -sf ${../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
+
+  if [ ! -e /etc/wireguard/wgnord.conf ]; then
+    cp ${../../home/files/wgnord/template.conf} /etc/wireguard/wgnord.conf
+  fi
+
+  chmod 700 /var/lib/wgnord
+  chmod 700 /etc/wireguard
+  chmod 600 /etc/wireguard/wgnord.conf || true
+'';
 }
