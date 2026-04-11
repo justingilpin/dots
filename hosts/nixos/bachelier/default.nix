@@ -12,9 +12,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 #    ./amd.nix
+    ./nvidia.nix
 #    ./mounts.nix
     ./../../common/common-packages.nix
-		./../../common/nixos-common.nix
+    ./../../common/nixos-common.nix
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
   ];
@@ -95,8 +96,8 @@
 #  };
 
   # Enable OpenRGB
-  services.hardware.openrgb.enable = true;
-  services.hardware.openrgb.motherboard = "amd";
+  # services.hardware.openrgb.enable = true;
+  # services.hardware.openrgb.motherboard = "amd";
 
   # USB
   services.usbmuxd.enable = true;
@@ -105,9 +106,10 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
-		  google-chrome
-			gimp
-			krita
+     #  google-chrome
+     #  gimp
+      chromium
+      krita
       #---------Games--------------#
       lutris
       heroic
