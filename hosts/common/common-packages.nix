@@ -24,6 +24,7 @@
     gccgo12 # requirement for neovim / treesitter
 		vim-full # for vimtutor
 		calibre
+		wgnord # nord vpn helper with wireguard
     ## stable
 #    luajitPackages.lua-lsp
 #    nodePackages_latest.pyright
@@ -92,6 +93,15 @@
 
     vscode-extensions.ms-vscode-remote.remote-ssh
   ];
+
+  system.activationScripts.wgnord.text = ''
+    ln -sf ${../../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
+    ln -sf ${../../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
+    ln -sf ${../../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
+    chmod 700 /etc/wireguard
+  '';
+
+
 
   fonts.packages = with pkgs; [
     fira-code
