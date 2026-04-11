@@ -40,7 +40,8 @@
    #   rust-tools.enable = true;
       which-key.enable = true;
       noice.enable = true;
-      nvim-colorizer.enable = true;
+      colorizer.enable = true;
+      web-devicons.enable = true;
       nvim-autopairs.enable = true;
       nvim-lightbulb.enable = true;
       oil = {

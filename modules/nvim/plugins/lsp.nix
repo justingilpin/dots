@@ -17,16 +17,16 @@
 #		};
 #		};
     servers = {
-      lua-ls.enable = true;
+      lua_ls.enable = true;
       pyright.enable = true;
 #      nil_ls.enable = true; #old
-			nil-ls.enable = true; #new
+			nil_ls.enable = true; #new
       html.enable = true;
       cssls.enable = true;
       jsonls.enable = true;
       yamlls.enable = true;
       ccls.enable = true;
-      rust-analyzer = {
+      rust_analyzer = {
         enable = true;
         installCargo = true;
         installRustc = true;
