@@ -96,9 +96,9 @@
   ];
 
   system.activationScripts.wgnord.text = ''
-    ln -sf ${../../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
-    ln -sf ${../../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
-    ln -sf ${../../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
+    ln -sf ${../../home/files/wgnord/template.conf} /var/lib/wgnord/template.conf
+    ln -sf ${../../home/files/wgnord/countries.txt} /var/lib/wgnord/countries.txt
+    ln -sf ${../../home/files/wgnord/countries_iso31662.txt} /var/lib/wgnord/countries_iso31662.txt
     chmod 700 /etc/wireguard
   '';
 
