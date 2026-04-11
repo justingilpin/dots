@@ -1,7 +1,6 @@
 {
   programs.nixvim.plugins.lualine = {
     enable = true;
-    iconsEnabled = true;
 
     settings = {
       options = {
@@ -34,7 +33,9 @@
               end
             '';
             icon = "";
-            color.fg = "#ffffff";
+            color = {
+              fg = "#ffffff";
+            };
           }
           "encoding"
           {
@@ -48,7 +49,9 @@
                 end
               end
             '';
-            color.fg = "#ffffff";
+            color = {
+              fg = "#ffffff";
+            };
           }
           "filetype"
         ];
