@@ -115,6 +115,40 @@
           }
         ];
       };
+ 
+      # Desktop
+      bachelier = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { 
+          inherit nixpkgs-unstable;
+          unstable = import nixpkgs-unstable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
+        modules = [
+          ./hosts/nixos/bachelier/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              unstable = import nixpkgs-unstable {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+              };
+            };  
+            home-manager.users.justin = { 
+              imports = [
+                ./home/justin.nix
+                nixvim.homeManagerModules.nixvim
+              ]; 
+            };
+          }
+        ];
+      };
+
+
 
       # Test System
       markowitz = nixpkgs.lib.nixosSystem {
