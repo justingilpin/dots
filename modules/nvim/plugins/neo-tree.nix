@@ -3,61 +3,65 @@
     plugins = {
       neo-tree = {
         enable = true;
-				autoCleanAfterSessionRestore = true;
-				closeIfLastWindow = true;
-				defaultComponentConfigs = {
-          indent.padding = 0;
-          icon = {
-            folderClosed = "";
-            folderOpen = "";
-            folderEmpty = "";
-            folderEmptyOpen = "";
-            default = "󰈙";
-          };
-          modified = {symbol = "";};
-          gitStatus = {
-            symbols = {
-              added = "";
-              deleted = "";
-              modified = "";
-              renamed = "➜";
-              untracked = "★";
-              ignored = "◌";
-              unstaged = "✗";
-              staged = "✓";
-              conflict = "";
+        settings = {
+          auto_clean_after_session_restore = true;
+          close_if_last_window = true;
+
+          default_component_configs = {
+            indent = {
+              padding = 0;
+            };
+            icon = {
+              folder_closed = "";
+              folder_open = "";
+              folder_empty = "";
+              folder_empty_open = "";
+              default = "󰈙";
+            };
+            modified = {
+              symbol = "";
+            };
+            git_status = {
+              symbols = {
+                added = "";
+                deleted = "";
+                modified = "";
+                renamed = "➜";
+                untracked = "★";
+                ignored = "◌";
+                unstaged = "✗";
+                staged = "✓";
+                conflict = "";
+              };
             };
           };
-        };
-#        filesystem = {
-#          followCurrentFile = true;
-#          hijackNetrwBehavior = "open_current";
-#          useLibuvFileWatcher = true;
-#        };
-        sourceSelector = {
-          contentLayout = "start";
-          winbar = true;
-          sources = [
-            {
-              source = "filesystem";
-              displayName = " File";
-            }
-            {
-              source = "buffers";
-              displayName = "󰈙 Bufs";
-            }
-            {
-              source = "git_status";
-              displayName = "󰊢 Git";
-            }
-          ];
-        };
-        window = {
-          width = 30;
+
+          source_selector = {
+            content_layout = "start";
+            winbar = true;
+            sources = [
+              {
+                source = "filesystem";
+                display_name = " File";
+              }
+              {
+                source = "buffers";
+                display_name = "󰈙 Bufs";
+              }
+              {
+                source = "git_status";
+                display_name = "󰊢 Git";
+              }
+            ];
+          };
+
+          window = {
+            width = 30;
+          };
         };
       };
-#			};
     };
+
     keymaps = [
       {
         key = "<leader>n";
@@ -65,6 +69,5 @@
         options.desc = "Toggle Explorer";
       }
     ];
-  #  };
   };
 }
