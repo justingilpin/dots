@@ -2,8 +2,10 @@
   programs.nixvim.plugins.lualine = {
     enable = true;
 
-    globalstatus = true;
-
+    settings = {
+      options = {
+        globalstatus = true;
+      };
     # +-------------------------------------------------+
     # | A | B | C                             X | Y | Z |
     # +-------------------------------------------------+
