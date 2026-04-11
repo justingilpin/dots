@@ -123,6 +123,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = true;
     #  extraConfig = ''
     #  Host *
     #    StrictHostKeyChecking no
