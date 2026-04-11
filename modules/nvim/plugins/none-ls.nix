@@ -3,7 +3,7 @@
     # null-ls has been forked to none-ls after the original author archived the project.
     none-ls = {
       enable = true;
-      updateInInsert = true;
+      settings.updateInInsert = true;
       enableLspFormat = true;
       sources = {
         code_actions = {
