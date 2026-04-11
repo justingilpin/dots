@@ -18,8 +18,11 @@
     nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-  # Enable for lutris
-  hardware.opengl.driSupport32Bit = true;
+
+  # Graphics / 32-bit support / Enable for Lutris
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -52,10 +55,19 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # Enable sound. Old audio 24.05
+#  sound.enable = true;
+#  hardware.pulseaudio.enable = true;
 
+  # Audio
+  services.pulseaudio.enable = false;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.justin = {
