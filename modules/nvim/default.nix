@@ -35,7 +35,9 @@
       luasnip.enable = true;
       lsp-format.enable = true;
       #		neocord.enable = true;
-      rust-tools.enable = true;
+
+# rust tools got oudated when I updated
+   #   rust-tools.enable = true;
       which-key.enable = true;
       noice.enable = true;
       nvim-colorizer.enable = true;

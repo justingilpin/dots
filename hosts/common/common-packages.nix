@@ -21,7 +21,6 @@
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
-    gccgo12 # requirement for neovim / treesitter
 		vim-full # for vimtutor
 		calibre
 		wgnord # nord vpn helper with wireguard
