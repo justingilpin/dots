@@ -2,8 +2,7 @@
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
-#      folding = true;
-      indent.enable = true;
+#      folding.enable = true;
     };
 #    rainbow-delimiters.enable = true;
 #    ts-context-commentstring.enable = true;
