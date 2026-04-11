@@ -35,10 +35,9 @@
 
   programs.git = {
     enable = true;
-    userName = "justin";
-    diff-so-fancy.enable = true;
     lfs.enable = true;
-    extraConfig = {
+    settings = {
+      user.name = "justin";
       init = {defaultBranch = "master";};
       merge = {
         conflictStyle = "diff3";
@@ -47,6 +46,11 @@
       pull = {rebase = false;};
     };
   }; # end git
+
+  programs.diff-so-fancy = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
   # Source Dot Files
   home.file.".config/hypr/hyprland.conf".source = ./../modules/hyprland/hyprland.conf;
