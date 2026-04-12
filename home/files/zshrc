@@ -103,33 +103,7 @@ alias speedtest='speedtest-cli'
 # NordVPN
 
 nord-on() {
-  local country="${1:-Philippines}"
-
-  echo "Disabling Tailscale DNS..."
-  sudo tailscale set --accept-dns=false || return 1
-
-  echo "Connecting NordVPN to ${country}..."
-  sudo wgnord c "$country" || return 1
-
-  echo "Testing DNS and public IP..."
-  ping -c 1 google.com || return 1
-  curl ifconfig.me || return 1
-  echo
-  echo "NordVPN connected. Tailscale is still up, DNS auto-accept is off."
-}
-
-nord-off() {
-  echo "Disconnecting NordVPN..."
-  sudo wgnord d || return 1
-
-  echo "Re-enabling Tailscale DNS..."
-  sudo tailscale set --accept-dns=true || return 1
-
-  echo "NordVPN disconnected. Tailscale DNS re-enabled."
-}
-
-nord-on() {
-  local country="${1:-Philippines}"
+  local country="${*:-Philippines}"
 
   echo "Disabling Tailscale DNS..."
   sudo tailscale set --accept-dns=false || return 1
@@ -210,4 +184,3 @@ eval "$(starship init zsh)"
 # Load zsh-syntax-highlighting; should be last.
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 #
-

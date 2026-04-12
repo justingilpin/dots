@@ -13,8 +13,8 @@
 			./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
      # ./../../../modules/basic # basic, shell, or quickshell: choose one
-     # ./../../../modules/shell   # <--- Active
-      ./../../../modules/quickshell # illogical-impulse: https://github.com/end-4/dots-hyprland
+      ./../../../modules/shell   # <--- Active
+     # ./../../../modules/quickshell # illogical-impulse: https://github.com/end-4/dots-hyprland
                                     # NixOS reference only: https://github.com/soymou/illogical-flake
     ];
 
