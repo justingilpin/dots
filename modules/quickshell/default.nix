@@ -21,7 +21,11 @@ let
       lib.optional (builtins.hasAttr name set) (builtins.getAttr name set)
     ) names;
 
-  qt6Packages = if pkgs ? qt6Packages then pkgs.qt6Packages else {};
+  # Use unstable's Qt6 packages to match the Qt version Quickshell is built with
+  # (inputs.quickshell follows nixpkgs-unstable, so they must align).
+  qt6Packages = if unstable ? qt6Packages then unstable.qt6Packages
+                else if pkgs ? qt6Packages then pkgs.qt6Packages
+                else {};
   kdePackages = if pkgs ? kdePackages then pkgs.kdePackages else {};
   nerdFonts = if pkgs ? nerd-fonts then pkgs.nerd-fonts else {};
   pythonPackage = if pkgs ? python312 then pkgs.python312 else pkgs.python3;
@@ -138,8 +142,25 @@ let
 
   runtimePath = lib.makeBinPath runtimePackages;
 
+  # QML modules that Quickshell/illogical-impulse needs at runtime.
+  # Each entry is a store path that contains lib/qt-6/qml/.
+  qmlImportPaths = lib.filter (p: p != null) [
+    (if builtins.hasAttr "qt5compat" qt6Packages
+     then "${qt6Packages.qt5compat}/lib/qt-6/qml"
+     else null)
+    (if builtins.hasAttr "qtdeclarative" qt6Packages
+     then "${qt6Packages.qtdeclarative}/lib/qt-6/qml"
+     else null)
+    (if builtins.hasAttr "qtmultimedia" qt6Packages
+     then "${qt6Packages.qtmultimedia}/lib/qt-6/qml"
+     else null)
+  ];
+
+  qmlImportPathStr = lib.concatStringsSep ":" qmlImportPaths;
+
   illogicalImpulseLauncher = pkgs.writeShellScriptBin "illogical-impulse-quickshell" ''
     export PATH="${runtimePath}:$PATH"
+    export QML_IMPORT_PATH="${qmlImportPathStr}''${QML_IMPORT_PATH:+:$QML_IMPORT_PATH}"
     if command -v qs >/dev/null 2>&1; then
       exec qs -c ii
     fi
@@ -217,7 +238,10 @@ in
 
         Service = {
           ExecStart = "${illogicalImpulseLauncher}/bin/illogical-impulse-quickshell";
-          Environment = "PATH=${runtimePath}";
+          Environment = [
+            "PATH=${runtimePath}"
+            "QML_IMPORT_PATH=${qmlImportPathStr}"
+          ];
           Restart = "on-failure";
           RestartSec = "2s";
         };
