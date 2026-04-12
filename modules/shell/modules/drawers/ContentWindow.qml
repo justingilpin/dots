@@ -145,9 +145,11 @@ StyledWindow {
             anchors.margins: -50 // Make border thicker to smooth out bulge from closed drawers
             group: blobGroup
             radius: root.borderRounding
-            borderLeft: bar.implicitWidth - anchors.margins
+            // TOP BAR: bar border is now at the top; left gets the thin border strip
+            // (Original left-bar: borderLeft=bar, borderTop=border)
+            borderTop: bar.implicitHeight - anchors.margins
+            borderLeft: root.borderThickness - anchors.margins
             borderRight: root.borderThickness - anchors.margins
-            borderTop: root.borderThickness - anchors.margins
             borderBottom: root.borderThickness - anchors.margins
         }
 
@@ -170,7 +172,8 @@ StyledWindow {
 
             panel: panels.sessionWrapper
             deformAmount: 0.2
-            x: panels.sessionWrapper.x + panels.session.x + bar.implicitWidth
+            // TOP BAR: panels x-offset is now borderThickness (not bar width)
+            x: panels.sessionWrapper.x + panels.session.x + root.borderThickness
             implicitWidth: panels.session.width
         }
 
@@ -189,7 +192,7 @@ StyledWindow {
 
             panel: panels.osdWrapper
             deformAmount: 0.25
-            x: panels.osdWrapper.x + panels.osd.x + bar.implicitWidth
+            x: panels.osdWrapper.x + panels.osd.x + root.borderThickness
             implicitWidth: panels.osd.width
         }
 
@@ -216,7 +219,7 @@ StyledWindow {
 
             panel: panels.popoutsWrapper
             deformAmount: panels.popouts.isDetached ? 0.05 : panels.popouts.hasCurrent ? 0.15 : 0.1
-            x: panels.popoutsWrapper.x + panels.popouts.x + bar.implicitWidth - panels.popouts.width * extraWidth
+            x: panels.popoutsWrapper.x + panels.popouts.x + root.borderThickness - panels.popouts.width * extraWidth
             implicitWidth: panels.popouts.width * (1 + extraWidth)
 
             Behavior on extraWidth {
@@ -282,8 +285,10 @@ StyledWindow {
         BarWrapper {
             id: bar
 
+            // TOP BAR: anchored left+right across the top; no bottom anchor
             anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             screen: root.screen
             visibilities: visibilities
@@ -300,8 +305,10 @@ StyledWindow {
         property real deformAmount: 0.15
 
         group: blobGroup
-        x: panel.x + bar.implicitWidth
-        y: panel.y + root.borderThickness
+        // TOP BAR: panels are offset by borderThickness on x, bar height on y
+        // (Original left-bar: x offset = bar width, y offset = border thickness)
+        x: panel.x + root.borderThickness
+        y: panel.y + bar.implicitHeight
         implicitWidth: panel.width
         implicitHeight: panel.height
         radius: Config.border.rounding

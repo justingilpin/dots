@@ -36,7 +36,8 @@ Item {
 
     anchors.fill: parent
     anchors.margins: borderThickness
-    anchors.leftMargin: bar.implicitWidth
+    // TOP BAR: content area is inset from the top by the bar height instead of from the left
+    anchors.topMargin: bar.implicitHeight
 
     Item {
         id: osdWrapper

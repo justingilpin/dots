@@ -7,6 +7,17 @@ import qs.config
 import qs.utils
 import qs.modules.bar.popouts as BarPopouts
 
+// TOP BAR: This wrapper manages a horizontal bar anchored to the TOP of the screen.
+// It slides downward (grows implicitHeight) from the top edge when revealed.
+//
+// Ported from left-side vertical bar — key conceptual swaps:
+//   left  → top      (bar edge)
+//   width → height   (bar dimension)
+//   x     → y        (position axis)
+//   implicitWidth → implicitHeight  (animation property)
+//   clampedWidth  → clampedHeight   (referenced in Regions.qml + Interactions.qml)
+//   contentWidth  → contentHeight   (full expanded size)
+
 Item {
     id: root
 
@@ -17,10 +28,12 @@ Item {
 
     readonly property bool disabled: Strings.testRegexList(Config.bar.excludedScreens, screen.name)
 
-    readonly property int clampedWidth: Math.max(Config.border.minThickness, implicitWidth)
+    // clampedHeight replaces clampedWidth — used in Regions.qml and Interactions.qml
+    readonly property int clampedHeight: Math.max(Config.border.minThickness, implicitHeight)
     readonly property int padding: Math.max(Appearance.padding.smaller, Config.border.thickness)
-    readonly property int contentWidth: Config.bar.sizes.innerWidth + padding * 2
-    readonly property int exclusiveZone: !disabled && (Config.bar.persistent || visibilities.bar) ? contentWidth : Config.border.thickness
+    // contentHeight replaces contentWidth — full expanded height of the bar strip
+    readonly property int contentHeight: Config.bar.sizes.innerWidth + padding * 2
+    readonly property int exclusiveZone: !disabled && (Config.bar.persistent || visibilities.bar) ? contentHeight : Config.border.thickness
     readonly property bool shouldBeVisible: !fullscreen && !disabled && (Config.bar.persistent || visibilities.bar || isHovered)
     property bool isHovered
 
@@ -28,24 +41,27 @@ Item {
         (content.item as Bar)?.closeTray();
     }
 
-    function checkPopout(y: real): void {
-        (content.item as Bar)?.checkPopout(y);
+    // checkPopout takes x (horizontal cursor position) instead of y for horizontal bar
+    function checkPopout(x: real): void {
+        (content.item as Bar)?.checkPopout(x);
     }
 
-    function handleWheel(y: real, angleDelta: point): void {
-        (content.item as Bar)?.handleWheel(y, angleDelta);
+    // handleWheel takes x instead of y for position-based scroll zone detection
+    function handleWheel(x: real, angleDelta: point): void {
+        (content.item as Bar)?.handleWheel(x, angleDelta);
     }
 
     clip: true
-    visible: width > 0
-    implicitWidth: fullscreen ? 0 : Config.border.thickness
+    visible: height > 0
+    // Collapsed state: just the thin border strip height
+    implicitHeight: fullscreen ? 0 : Config.border.thickness
 
     states: State {
         name: "visible"
         when: root.shouldBeVisible
 
         PropertyChanges {
-            root.implicitWidth: root.contentWidth
+            root.implicitHeight: root.contentHeight
         }
     }
 
@@ -56,7 +72,7 @@ Item {
 
             Anim {
                 target: root
-                property: "implicitWidth"
+                property: "implicitHeight"
                 duration: Appearance.anim.durations.expressiveDefaultSpatial
                 easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
             }
@@ -67,7 +83,7 @@ Item {
 
             Anim {
                 target: root
-                property: "implicitWidth"
+                property: "implicitHeight"
                 easing.bezierCurve: Appearance.anim.curves.emphasized
             }
         }
@@ -76,14 +92,15 @@ Item {
     Loader {
         id: content
 
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        // Bar content sits at the bottom of the expanding wrapper so it slides into view
+        anchors.left: parent.left
         anchors.right: parent.right
+        anchors.bottom: parent.bottom
 
         active: root.shouldBeVisible || root.visible
 
         sourceComponent: Bar {
-            width: root.contentWidth
+            height: root.contentHeight
             screen: root.screen
             visibilities: root.visibilities
             popouts: root.popouts // qmllint disable incompatible-type

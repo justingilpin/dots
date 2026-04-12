@@ -12,10 +12,12 @@ Region {
     required property Panels panels
     required property var win
 
-    x: bar.clampedWidth + win.dragMaskPadding
-    y: Config.border.clampedThickness + win.dragMaskPadding
-    width: win.width - bar.clampedWidth - Config.border.clampedThickness - win.dragMaskPadding * 2
-    height: win.height - Config.border.clampedThickness * 2 - win.dragMaskPadding * 2
+    // TOP BAR: bar occupies the top edge, so x/width use borderThickness and y/height use bar height
+    // (Original left-bar: x/width used bar.clampedWidth, y/height used border thickness)
+    x: Config.border.clampedThickness + win.dragMaskPadding
+    y: bar.clampedHeight + win.dragMaskPadding
+    width: win.width - Config.border.clampedThickness * 2 - win.dragMaskPadding * 2
+    height: win.height - bar.clampedHeight - Config.border.clampedThickness - win.dragMaskPadding * 2
     intersection: Intersection.Xor
 
     R {
@@ -66,14 +68,17 @@ Region {
 
     R {
         panel: root.panels.popoutsWrapper
-        width: panel.width * (1 - root.panels.popoutsWrapper.offsetScale)
+        // TOP BAR: popouts clip vertically now (slide down), not horizontally
+        height: panel.height * (1 - root.panels.popoutsWrapper.offsetScale)
     }
 
     component R: Region {
         required property Item panel
 
-        x: panel.x + root.bar.implicitWidth
-        y: panel.y + Config.border.thickness
+        // TOP BAR: panels are offset by borderThickness on x, bar height on y
+        // (Original left-bar: x = panel.x + bar.implicitWidth, y = panel.y + border)
+        x: panel.x + Config.border.thickness
+        y: panel.y + root.bar.implicitHeight
         width: panel.width
         height: panel.height
         intersection: Intersection.Subtract

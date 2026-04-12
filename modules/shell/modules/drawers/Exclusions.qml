@@ -12,13 +12,15 @@ Scope {
     required property Bar.BarWrapper bar
     required property real borderThickness
 
+    // TOP BAR: bar exclusion zone is now at the top; left/right/bottom are thin border strips.
+    // (Original left-bar had: left=bar, top/right/bottom=border)
     ExclusionZone {
-        anchors.left: true
+        anchors.top: true
         exclusiveZone: root.bar.exclusiveZone
     }
 
     ExclusionZone {
-        anchors.top: true
+        anchors.left: true
     }
 
     ExclusionZone {
