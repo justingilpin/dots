@@ -46,7 +46,6 @@
     slurp
     pamixer
     brightnessctl
-    networkmanagerapplet
     kitty
   ];
 
@@ -70,8 +69,8 @@
           # hyprpaper is basic-only — shell manages wallpaper itself via its own daemon.
           # hypridle and dunst are basic-only — shell manages idle/notifications itself.
           # Both are appended via extraConfig from their respective module.
-          "nm-applet --indicator & disown"
-          "blueman-applet"
+          # nm-applet and blueman-applet are basic-only — shell has its own network/bluetooth widgets.
+          # Both are appended via extraConfig from modules/basic.
           # Export wayland env then activate session target so systemd services
           # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"

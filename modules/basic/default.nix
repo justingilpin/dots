@@ -9,9 +9,11 @@
   environment.systemPackages = with pkgs; [
     waybar
     dunst
-    libnotify   # dunst dep
+    libnotify          # dunst dep
     wofi
     hyprpaper
+    networkmanagerapplet
+    blueman
   ];
 
   # Inject basic-only autostart and launcher variable into the Nix-managed
@@ -22,6 +24,8 @@
     extraConfig = ''
       exec-once = hyprpaper & disown
       exec-once = hypridle & dunst & disown
+      exec-once = nm-applet --indicator & disown
+      exec-once = blueman-applet
 
       $menu = wofi --show drun --show-icons
       bind = $mainMod, R, exec, $menu
