@@ -10,6 +10,7 @@
 
 { pkgs, lib, ... }:
 
+
 {
   # ── i2c access for ddcutil (monitor brightness via DDC) ────────────────────
   hardware.i2c.enable = true;
@@ -85,7 +86,7 @@
     }; # end programs.caelestia
 
     # ── Disable waybar — shell provides its own bar ───────────────────────────
-    programs.waybar.enable = false;
+    programs.waybar.enable = lib.mkForce false;
 
     # ── Hyprland config additions for the shell ──────────────────────────────
     # The shell uses Hyprland global shortcuts (CustomShortcut in Quickshell)
