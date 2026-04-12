@@ -28,6 +28,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ]; # allows NTFS at boot
 
+
   networking.hostName = "fibonacci"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
