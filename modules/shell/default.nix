@@ -85,8 +85,10 @@
 
     }; # end programs.caelestia
 
-    # waybar is not enabled here — it lives in modules/basic which is not loaded
-    # when using the shell. No mkForce needed since justin.nix no longer sets it.
+    # ── Disable waybar — shell provides its own bar ───────────────────────────
+    programs.waybar.enable = lib.mkForce false;
+    systemd.user.services.waybar = lib.mkForce {};
+    systemd.user.targets.hyprland-session = lib.mkForce {};
 
 
     # ── Hyprland config additions for the shell ──────────────────────────────
