@@ -199,12 +199,6 @@ in
       home.file.".config/quickshell".source =
         outOfStore "${sourceRoot}/quickshell";
 
-      home.file.".config/hypr/hyprland".source =
-        outOfStore "${sourceRoot}/hypr/hyprland";
-
-      home.file.".config/hypr/custom/scripts".source =
-        outOfStore "${sourceRoot}/hypr/custom/scripts";
-
       home.file.".config/hypr/hyprlock".source =
         outOfStore "${sourceRoot}/hypr/hyprlock";
 
@@ -235,14 +229,9 @@ in
         # illogical-impulse Quickshell
         $qsConfig = ii
 
-        source = ~/.config/hypr/hyprland/env.conf
-        source = ~/.config/hypr/hyprland/variables.conf
-        source = ~/.config/hypr/hyprland/rules.conf
-        source = ~/.config/hypr/hyprland/keybinds.conf
+        env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
 
-        exec-once = ~/.config/hypr/hyprland/scripts/start_geoclue_agent.sh
         exec-once = systemctl --user restart illogical-impulse-quickshell.service
-        exec-once = ~/.config/hypr/custom/scripts/__restore_video_wallpaper.sh
         exec-once = gnome-keyring-daemon --start --components=secrets
         exec-once = hypridle
         exec-once = dbus-update-activation-environment --all
@@ -250,6 +239,18 @@ in
         exec-once = wl-paste --type text --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
         exec-once = wl-paste --type image --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
 
+        # Keep this module as a shell layer only: your base Hyprland config still
+        # owns monitors, window rules, workspaces, and normal app binds.
+        bind = $mainMod, R, global, quickshell:searchToggle
+        bind = $mainMod, Tab, global, quickshell:overviewWorkspacesToggle
+        bind = $mainMod, A, global, quickshell:sidebarLeftToggle
+        bind = $mainMod, N, global, quickshell:sidebarRightToggle
+        bind = $mainMod, Slash, global, quickshell:cheatsheetToggle
+        bind = $mainMod, J, global, quickshell:barToggle
+        bind = CTRL ALT, Delete, global, quickshell:sessionToggle
+        bind = CTRL $mainMod, T, global, quickshell:wallpaperSelectorToggle
+        bind = CTRL $mainMod ALT, T, global, quickshell:wallpaperSelectorRandom
+        bind = CTRL $mainMod, P, global, quickshell:panelFamilyCycle
         bind = Ctrl+Super, R, exec, systemctl --user restart illogical-impulse-quickshell.service
       '';
     };
