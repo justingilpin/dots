@@ -42,48 +42,36 @@
       # Include the CLI — needed for wallpaper switching, scheme changes, IPC
       cli.enable = true;
 
-      # Shell configuration (written to ~/.config/caelestia/shell.json)
-      settings = {
-
-        general.apps = {
-          terminal  = [ "kitty" ];
-          explorer  = [ "thunar" ];
-          audio     = [ "pavucontrol" ];
-        };
-
-        # Idle / lock managed by the shell — no separate hypridle exec-once needed
-        general.idle = {
-          lockBeforeSleep   = true;
-          inhibitWhenAudio  = true;
-          timeouts = [
-            { timeout = 180; idleAction = "lock"; }
-            { timeout = 300; idleAction = "dpms off"; returnAction = "dpms on"; }
-            { timeout = 600; idleAction = [ "systemctl" "suspend-then-hibernate" ]; }
-          ];
-        };
-
-        # Wallpapers — put yours in ~/Pictures/Wallpapers
-        paths.wallpaperDir = "~/Pictures/Wallpapers";
-
-        # Bar status icons
-        bar.status = {
-          showBattery   = true;
-          showNetwork   = true;
-          showWifi      = true;
-          showBluetooth = true;
-          showAudio     = false;
-        };
-
-        services = {
-          audioIncrement     = 0.05;
-          brightnessIncrement = 0.05;
-          maxVolume          = 1.0;
-          smartScheme        = true; # auto colour scheme from wallpaper
-        };
-
-      }; # end settings
-
     }; # end programs.caelestia
+
+    # ── Seed shell.json on first deploy only (GUI can freely overwrite after) ──
+    # home.activation runs before services start; the guard means subsequent
+    # rebuilds never clobber changes made via the settings GUI.
+    home.activation.caelestiaShellConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      SHELL_CFG="$HOME/.config/caelestia/shell.json"
+      if [ ! -f "$SHELL_CFG" ]; then
+        mkdir -p "$(dirname "$SHELL_CFG")"
+        cat > "$SHELL_CFG" << 'EOF'
+{
+  "general": {
+    "apps": { "terminal": ["kitty"], "explorer": ["thunar"], "audio": ["pavucontrol"] },
+    "idle": {
+      "lockBeforeSleep": true,
+      "inhibitWhenAudio": true,
+      "timeouts": [
+        { "timeout": 180, "idleAction": "lock" },
+        { "timeout": 300, "idleAction": "dpms off", "returnAction": "dpms on" },
+        { "timeout": 600, "idleAction": ["systemctl", "suspend-then-hibernate"] }
+      ]
+    }
+  },
+  "paths": { "wallpaperDir": "~/Pictures/Wallpapers" },
+  "bar": { "status": { "showBattery": true, "showNetwork": true, "showWifi": true, "showBluetooth": true, "showAudio": false } },
+  "services": { "audioIncrement": 0.05, "brightnessIncrement": 0.05, "maxVolume": 1.0, "smartScheme": true }
+}
+EOF
+      fi
+    '';
 
     # ── Disable waybar — shell provides its own bar ───────────────────────────
     programs.waybar.enable = lib.mkForce false;
