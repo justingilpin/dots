@@ -283,20 +283,21 @@ in
         exec-once = wl-paste --type text --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
         exec-once = wl-paste --type image --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
 
-        # illogical-impulse shell keybinds — using bindd so they appear in the cheatsheet
+        # illogical-impulse shell keybinds — bindd descriptions appear in the cheatsheet (Super+/)
+        # Keys deliberately avoided to not conflict with base hyprland config:
+        #   Super+M (exit), Super+V (togglefloating), Super+P (pseudo),
+        #   Super+J (movefocus d), Super+K (movefocus u), Super+F (fullscreen)
         $settingsApp = qs -p ~/.config/quickshell/$qsConfig/settings.qml
 
+        bindd = Super, R,          Open launcher,          global, quickshell:searchToggle
         bind  = Super, Tab,        global,  quickshell:overviewWorkspacesToggle
-        bindd = Super, V,          Clipboard history, global, quickshell:overviewClipboardToggle
-        bindd = Super, Period,     Emoji picker,      global, quickshell:overviewEmojiToggle
+        bindd = Super, Period,     Emoji picker,           global, quickshell:overviewEmojiToggle
         bind  = Super, A,          global,  quickshell:sidebarLeftToggle
         bindd = Super, N,          Toggle right sidebar,   global, quickshell:sidebarRightToggle
         bindd = Super, Slash,      Toggle cheatsheet,      global, quickshell:cheatsheetToggle
-        bindd = Super, K,          Toggle on-screen keyboard, global, quickshell:oskToggle
-        bindd = Super, M,          Toggle media controls,  global, quickshell:mediaControlsToggle
         bind  = Super, G,          global,  quickshell:overlayToggle
         bindd = Ctrl+Alt, Delete,  Toggle session menu,    global, quickshell:sessionToggle
-        bindd = Super, J,          Toggle bar,             global, quickshell:barToggle
+        bindd = Super, I,          Open settings,          exec, $settingsApp
         bindd = Ctrl+Super, T,     Toggle wallpaper selector, global, quickshell:wallpaperSelectorToggle
         bindd = Ctrl+Super+Alt, T, Random wallpaper,       global, quickshell:wallpaperSelectorRandom
         bind  = Ctrl+Super, P,     global,  quickshell:panelFamilyCycle
@@ -304,7 +305,6 @@ in
         bind  = Super+Shift, A,    global,  quickshell:regionSearch
         bind  = Super+Shift, X,    global,  quickshell:regionOcr
         bind  = Super+Shift, T,    global,  quickshell:screenTranslate
-        bindd = Super, I,          Open settings, exec, $settingsApp
         bind  = Ctrl+Super, R,     exec, killall ydotool qs quickshell; qs -c $qsConfig &
       '';
     };
