@@ -92,7 +92,7 @@
 
     # Stop and disable waybar during activation so the switch is clean.
     # || true prevents failure if the service isn't running.
-    home.activation.disableWaybar = lib.hm.dag.entryBefore [ "reloadSystemd" ] ''
+    home.activation.disableWaybar = lib.dag.entryBefore [ "reloadSystemd" ] ''
       $DRY_RUN_CMD systemctl --user stop waybar.service || true
       $DRY_RUN_CMD systemctl --user disable waybar.service || true
     '';
