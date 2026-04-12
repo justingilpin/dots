@@ -58,6 +58,25 @@
   home.file.".config/hypr/hypridle.conf".source = ./../modules/hyprland/hypridle.conf;
   home.file.".config/hypr/hyprlock.conf".source = ./../modules/hyprland/hyprlock.conf;
   home.file.".config/hypr/hyprpaper.conf".source = ./../modules/hyprland/hyprpaper.conf;
+  home.file.".config/waybar/config".source = ./../modules/waybar/config;
+  home.file.".config/waybar/style.css".source = ./../modules/waybar/style.css;
+
+  # Waybar as a systemd user service so it starts after D-Bus is ready
+  # (fixes 20-second tray module delay on Hyprland startup)
+  systemd.user.services.waybar = {
+    Unit = {
+      Description = "Waybar";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.waybar}/bin/waybar -c %h/.config/waybar/config -s %h/.config/waybar/style.css";
+      ExecReload = "${pkgs.util-linux}/bin/kill -SIGUSR2 $MAINPID";
+      Restart = "on-failure";
+      RestartSec = "1s";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
   # Test file to see if home-manager is working
   home.file.".config/test-home-manager.txt".text = "Home manager is working!";
 
