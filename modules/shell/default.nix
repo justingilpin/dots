@@ -84,6 +84,9 @@
 
     }; # end programs.caelestia
 
+    # ── Disable waybar — shell provides its own bar ───────────────────────────
+    programs.waybar.enable = false;
+
     # ── Hyprland config additions for the shell ──────────────────────────────
     # The shell uses Hyprland global shortcuts (CustomShortcut in Quickshell)
     # rather than exec commands. The format is: global, caelestia:<shortcut-name>
@@ -99,8 +102,6 @@
       bind = $mainMod SHIFT, E,     global, caelestia:session
       bind = CTRL, Space,           global, caelestia:controlCenter
 
-      # Interrupt launcher (e.g. Super+R held then another key — cancels launcher open)
-      bind = $mainMod, catchall,    global, caelestia:launcherInterrupt
     '';
 
   }; # end home-manager.users.justin
