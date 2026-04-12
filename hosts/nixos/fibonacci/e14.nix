@@ -23,4 +23,7 @@
 
   # UPower — battery info for wireplumber and other desktop services
   services.upower.enable = true;
+
+  # Zram swap — fixes systemd-oomd degraded memory pressure warning and improves OOM handling
+  zramSwap.enable = true;
 }
