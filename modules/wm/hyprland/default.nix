@@ -22,6 +22,7 @@
   # security.pam.services<yourDisplayManager>.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
+    adwaita-icon-theme  # provides Adwaita cursor theme for XCURSOR_THEME=Adwaita
     wl-clipboard
     waybar
     dunst
