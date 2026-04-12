@@ -87,9 +87,6 @@
 
     # ── Disable waybar — shell provides its own bar ───────────────────────────
     programs.waybar.enable = lib.mkForce false;
-    systemd.user.services.waybar = lib.mkForce {};
-    systemd.user.targets.hyprland-session = lib.mkForce {};
-
 
     # ── Hyprland config additions for the shell ──────────────────────────────
     # The shell uses Hyprland global shortcuts (CustomShortcut in Quickshell)
