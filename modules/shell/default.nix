@@ -27,7 +27,7 @@
   # ── Activate Caelestia shell for justin ────────────────────────────────────
   # programs.caelestia option is registered by caelestia-shell.homeManagerModules.default
   # which is imported in flake.nix — it is always available, just off by default.
-  home-manager.users.justin = {
+  home-manager.users.justin = { lib, ... }: {
 
     programs.caelestia = {
       enable = true;
