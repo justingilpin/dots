@@ -142,6 +142,9 @@
         source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.zsh
       '')
       (builtins.readFile ./files/zshrc)
+      ''
+        ${pkgs.figurine}/bin/figurine -f "3d.flf" $HOST
+      ''
     ];
     oh-my-zsh = {
       enable = true;

@@ -42,7 +42,6 @@ in
     coreutils
     bitwarden-cli
     go
-    figurine
 
     #-------------Encoders--------------#
     ffmpeg # possibly use ffmpeg-headless
