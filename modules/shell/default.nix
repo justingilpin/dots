@@ -87,6 +87,15 @@
 
     # ── Disable waybar — shell provides its own bar ───────────────────────────
     programs.waybar.enable = lib.mkForce false;
+    systemd.user.services.waybar = lib.mkForce {};
+    systemd.user.targets.hyprland-session = lib.mkForce {};
+
+    # Stop and disable waybar during activation so the switch is clean.
+    # || true prevents failure if the service isn't running.
+    home.activation.disableWaybar = lib.hm.dag.entryBefore [ "reloadSystemd" ] ''
+      $DRY_RUN_CMD systemctl --user stop waybar.service || true
+      $DRY_RUN_CMD systemctl --user disable waybar.service || true
+    '';
 
     # ── Hyprland config additions for the shell ──────────────────────────────
     # The shell uses Hyprland global shortcuts (CustomShortcut in Quickshell)
