@@ -12,8 +12,8 @@
       ./../../common/common-packages.nix
 			./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
-      # ./../../../modules/basic # basic or shell not both
-      ./../../../modules/shell   # <--- Active
+      ./../../../modules/basic # basic or shell not both
+    #  ./../../../modules/shell   # <--- Active
     ];
 
   # Quick fix for Obsidian to allow insecure install
