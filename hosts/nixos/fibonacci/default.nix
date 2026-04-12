@@ -12,8 +12,10 @@
       ./../../common/common-packages.nix
 			./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
-     # ./../../../modules/basic # basic or shell not both
-      ./../../../modules/shell   # <--- Active
+     # ./../../../modules/basic # basic, shell, or quickshell: choose one
+     # ./../../../modules/shell   # <--- Active
+      ./../../../modules/quickshell # illogical-impulse: https://github.com/end-4/dots-hyprland
+                                    # NixOS reference only: https://github.com/soymou/illogical-flake
     ];
 
   # Quick fix for Obsidian to allow insecure install
@@ -157,4 +159,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-

@@ -61,6 +61,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
+          inherit inputs;
           inherit nixpkgs-unstable;
           unstable = unstablePkgs;
         };
@@ -71,7 +72,7 @@
             home-manager.useGlobalPkgs        = true;
             home-manager.useUserPackages      = true;
             home-manager.backupFileExtension  = "backup";
-            home-manager.extraSpecialArgs     = { unstable = unstablePkgs; };
+            home-manager.extraSpecialArgs     = { inherit inputs; unstable = unstablePkgs; };
             home-manager.users.justin.imports = [
               home
               nixvim.homeModules.nixvim
