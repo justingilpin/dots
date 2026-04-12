@@ -16,202 +16,49 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }: {
-    # All systems in one nixosConfigurations attribute set
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }:
+  let
+    unstablePkgs = import nixpkgs-unstable {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
+
+    mkSystem = { host, home ? ./home/justin.nix, extraModules ? [] }:
+      nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit nixpkgs-unstable;
+          unstable = unstablePkgs;
+        };
+        modules = [
+          ./hosts/nixos/${host}/default.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.extraSpecialArgs = { unstable = unstablePkgs; };
+            home-manager.users.justin.imports = [ home nixvim.homeModules.nixvim ];
+          }
+        ] ++ extraModules;
+      };
+  in {
     nixosConfigurations = {
       # Laptop
-      fibonacci = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/nixos/fibonacci/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };
-            home-manager.users.justin = { 
-              imports = [
-                ./home/justin.nix
-                nixvim.homeModules.nixvim
-              ]; 
-            };
-          }
-        ];
-      };
+      fibonacci = mkSystem { host = "fibonacci"; };
 
       # Server
-      donchian = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/nixos/donchian/default.nix
-          nixarr.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };
-            home-manager.users.justin = { 
-              imports = [
-                ./home/server.nix
-                nixvim.homeModules.nixvim
-              ]; 
-            };
-          }
-        ];
+      donchian = mkSystem {
+        host = "donchian";
+        home = ./home/server.nix;
+        extraModules = [ nixarr.nixosModules.default ];
       };
 
       # Desktop
-      seykota = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/nixos/seykota/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };
-            home-manager.users.justin = { 
-              imports = [
-                ./home/justin.nix
-                nixvim.homeModules.nixvim
-              ]; 
-            };
-          }
-        ];
-      };
- 
+      seykota = mkSystem { host = "seykota"; };
+
       # Desktop
-      bachelier = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/nixos/bachelier/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };  
-            home-manager.users.justin = { 
-              imports = [
-                ./home/justin.nix
-                nixvim.homeModules.nixvim
-              ]; 
-            };
-          }
-        ];
-      };
-
-
-
-      # Test System
-      markowitz = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/nixos/markowitz/default.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };
-            home-manager.users.justin = { 
-              imports = [ ./home/justin.nix ]; 
-            };
-          }
-        ];
-      };
-
-      # Blank ISO + disko
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { 
-          inherit nixpkgs-unstable;
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        };
-        modules = [
-          ./hosts/desktop/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              unstable = import nixpkgs-unstable {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
-            };
-            home-manager.users.justin = { 
-              imports = [ ./home/default.nix ]; 
-            };
-          }
-        ];
-      };
+      bachelier = mkSystem { host = "bachelier"; };
     };
   };
 }
