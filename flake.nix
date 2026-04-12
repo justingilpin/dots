@@ -54,7 +54,7 @@
         extraModules = [ nixarr.nixosModules.default ];
       };
 
-      # Desktop
+      # Old Desktop
       seykota = mkSystem { host = "seykota"; };
 
       # Desktop
