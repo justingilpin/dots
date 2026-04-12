@@ -71,6 +71,18 @@
     };
   };
 
+  # Override waybar service to add restart delay and remove restart limit.
+  # Without this, rapid crash loops on startup lock the service into failed
+  # state permanently and it won't start on next Hyprland login.
+  systemd.user.services.waybar = {
+    Service = {
+      RestartSec = "3s";
+    };
+    Unit = {
+      StartLimitIntervalSec = 0;
+    };
+  };
+
   # hyprland-session.target: activated by exec-once in hyprland.conf
   # BindsTo graphical-session.target so dependent services get proper ordering
   systemd.user.targets.hyprland-session = {
