@@ -20,4 +20,7 @@
 
   # RTKit — realtime scheduling for pipewire (fixes RTKit DBus errors at boot)
   security.rtkit.enable = true;
+
+  # UPower — battery info for wireplumber and other desktop services
+  services.upower.enable = true;
 }
