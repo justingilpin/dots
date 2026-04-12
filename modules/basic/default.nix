@@ -7,19 +7,28 @@
 
 {
   environment.systemPackages = with pkgs; [
-
-    # Status bar
     waybar
-
-    # Notifications
     dunst
     libnotify   # dunst dep
-
-    # App launcher
     wofi
-
-    # Wallpaper
     hyprpaper
-
   ];
+
+  # Inject basic-only autostart and launcher variable into the Nix-managed
+  # hyprland config. These are absent when using modules/shell — the shell
+  # handles idle, notifications, and launching itself.
+  home-manager.users.justin.wayland.windowManager.hyprland = {
+
+    extraConfig = ''
+      exec-once = hyprpaper & disown
+      exec-once = hypridle & dunst & disown
+
+      $menu = wofi --show drun --show-icons
+      bind = $mainMod, R, exec, $menu
+
+      # Restart waybar (basic only — not relevant with shell)
+      bind = $mainMod SHIFT, Q, exec, systemctl --user restart waybar
+    '';
+
+  };
 }

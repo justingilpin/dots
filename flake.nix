@@ -14,9 +14,13 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    # caelestia shell — comment this input out when not using modules/shell
+    caelestia-shell.url = "github:caelestia-dots/shell";
+    caelestia-shell.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, caelestia-shell, ... }:
   let
     unstablePkgs = import nixpkgs-unstable {
       system = "x86_64-linux";
@@ -38,7 +42,11 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = { unstable = unstablePkgs; };
-            home-manager.users.justin.imports = [ home nixvim.homeModules.nixvim ];
+            home-manager.users.justin.imports = [
+              home
+              nixvim.homeModules.nixvim
+              caelestia-shell.homeManagerModules.default # registers programs.caelestia option (safe when shell is disabled)
+            ];
           }
         ] ++ extraModules;
       };
