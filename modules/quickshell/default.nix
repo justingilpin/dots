@@ -142,30 +142,41 @@ let
 
   runtimePath = lib.makeBinPath runtimePackages;
 
-  # QML modules that Quickshell/illogical-impulse needs at runtime.
-  # Each entry is a store path that contains lib/qt-6/qml/.
-  qmlImportPaths = lib.filter (p: p != null) [
-    (if builtins.hasAttr "qt5compat" qt6Packages
-     then "${qt6Packages.qt5compat}/lib/qt-6/qml"
-     else null)
-    (if builtins.hasAttr "qtdeclarative" qt6Packages
-     then "${qt6Packages.qtdeclarative}/lib/qt-6/qml"
-     else null)
-    (if builtins.hasAttr "qtmultimedia" qt6Packages
-     then "${qt6Packages.qtmultimedia}/lib/qt-6/qml"
-     else null)
-  ];
+  # Quickshell's own wrapper already sets NIXPKGS_QT6_QML_IMPORT_PATH for
+  # qtdeclarative and qtwayland.  We extend it with the extra QML packages
+  # that illogical-impulse needs but Quickshell doesn't bundle itself.
+  extraQmlPackages =
+    (map (name: qt6Packages.${name} or null)
+      [ "qt5compat" "qtpositioning" "qtmultimedia" "qtimageformats" ])
+    ++ (map (name: kdePackages.${name} or null)
+      [ "syntax-highlighting" ])
+    # kirigami-wrapped doesn't expose QML; use the unwrapped derivation directly
+    ++ (if kdePackages ? kirigami then
+          let unwrapped = kdePackages.kirigami.unwrapped or kdePackages.kirigami;
+          in [ unwrapped ]
+        else []);
 
-  qmlImportPathStr = lib.concatStringsSep ":" qmlImportPaths;
+  extraQmlPaths = lib.concatStringsSep ":" (lib.filter (p: p != "")
+    (map (pkg:
+      let qmlDir = if pkg != null then "${pkg}/lib/qt-6/qml" else "";
+      in if pkg != null && builtins.pathExists (pkg + "/lib/qt-6/qml")
+         then qmlDir else ""
+    ) extraQmlPackages));
 
-  illogicalImpulseLauncher = pkgs.writeShellScriptBin "illogical-impulse-quickshell" ''
-    export PATH="${runtimePath}:$PATH"
-    export QML_IMPORT_PATH="${qmlImportPathStr}''${QML_IMPORT_PATH:+:$QML_IMPORT_PATH}"
-    if command -v qs >/dev/null 2>&1; then
-      exec qs -c ii
-    fi
-    exec quickshell -c ii
-  '';
+  # Wrap the already-Qt-wrapped qs binary with extra QML paths and runtime PATH.
+  illogicalImpulseLauncher = pkgs.symlinkJoin {
+    name = "illogical-impulse-quickshell";
+    paths = [ quickshellPackage ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/qs \
+        --prefix NIXPKGS_QT6_QML_IMPORT_PATH : "${extraQmlPaths}" \
+        --prefix PATH : "${runtimePath}" \
+        --add-flags "-c ii" \
+        --set-default ILLOGICAL_IMPULSE_VIRTUAL_ENV "$HOME/.local/state/quickshell/.venv"
+      mv $out/bin/qs $out/bin/illogical-impulse-quickshell
+    '';
+  };
 
   illogicalImpulsePythonVenv = pkgs.writeShellScriptBin "illogical-impulse-python-venv" ''
     set -euo pipefail
@@ -199,6 +210,18 @@ in
   boot.kernelModules = [ "i2c-dev" "uinput" ];
   users.users.justin.extraGroups = [ "video" "i2c" "input" ];
 
+  # Cloudflare WARP — toggled from the right sidebar in ii.
+  # After rebuild: run `warp-cli registration new` once to register the device.
+  systemd.services.warp-svc = {
+    description = "Cloudflare WARP daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.cloudflare-warp}/bin/warp-svc";
+      Restart = "on-failure";
+    };
+  };
+
   fonts.packages = fontPackages;
 
   environment.systemPackages =
@@ -207,6 +230,7 @@ in
     ++ [
       illogicalImpulseLauncher
       illogicalImpulsePythonVenv
+      pkgs.cloudflare-warp
     ];
 
   home-manager.users.justin = { config, lib, ... }:
@@ -238,10 +262,6 @@ in
 
         Service = {
           ExecStart = "${illogicalImpulseLauncher}/bin/illogical-impulse-quickshell";
-          Environment = [
-            "PATH=${runtimePath}"
-            "QML_IMPORT_PATH=${qmlImportPathStr}"
-          ];
           Restart = "on-failure";
           RestartSec = "2s";
         };
@@ -263,19 +283,29 @@ in
         exec-once = wl-paste --type text --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
         exec-once = wl-paste --type image --watch bash -c 'cliphist store && qs -c $qsConfig ipc call cliphistService update'
 
-        # Keep this module as a shell layer only: your base Hyprland config still
-        # owns monitors, window rules, workspaces, and normal app binds.
-        bind = $mainMod, R, global, quickshell:searchToggle
-        bind = $mainMod, Tab, global, quickshell:overviewWorkspacesToggle
-        bind = $mainMod, A, global, quickshell:sidebarLeftToggle
-        bind = $mainMod, N, global, quickshell:sidebarRightToggle
-        bind = $mainMod, Slash, global, quickshell:cheatsheetToggle
-        bind = $mainMod, J, global, quickshell:barToggle
-        bind = CTRL ALT, Delete, global, quickshell:sessionToggle
-        bind = CTRL $mainMod, T, global, quickshell:wallpaperSelectorToggle
-        bind = CTRL $mainMod ALT, T, global, quickshell:wallpaperSelectorRandom
-        bind = CTRL $mainMod, P, global, quickshell:panelFamilyCycle
-        bind = Ctrl+Super, R, exec, systemctl --user restart illogical-impulse-quickshell.service
+        # illogical-impulse shell keybinds — using bindd so they appear in the cheatsheet
+        $settingsApp = qs -p ~/.config/quickshell/$qsConfig/settings.qml
+
+        bind  = Super, Tab,        global,  quickshell:overviewWorkspacesToggle
+        bindd = Super, V,          Clipboard history, global, quickshell:overviewClipboardToggle
+        bindd = Super, Period,     Emoji picker,      global, quickshell:overviewEmojiToggle
+        bind  = Super, A,          global,  quickshell:sidebarLeftToggle
+        bindd = Super, N,          Toggle right sidebar,   global, quickshell:sidebarRightToggle
+        bindd = Super, Slash,      Toggle cheatsheet,      global, quickshell:cheatsheetToggle
+        bindd = Super, K,          Toggle on-screen keyboard, global, quickshell:oskToggle
+        bindd = Super, M,          Toggle media controls,  global, quickshell:mediaControlsToggle
+        bind  = Super, G,          global,  quickshell:overlayToggle
+        bindd = Ctrl+Alt, Delete,  Toggle session menu,    global, quickshell:sessionToggle
+        bindd = Super, J,          Toggle bar,             global, quickshell:barToggle
+        bindd = Ctrl+Super, T,     Toggle wallpaper selector, global, quickshell:wallpaperSelectorToggle
+        bindd = Ctrl+Super+Alt, T, Random wallpaper,       global, quickshell:wallpaperSelectorRandom
+        bind  = Ctrl+Super, P,     global,  quickshell:panelFamilyCycle
+        bind  = Super+Shift, S,    global,  quickshell:regionScreenshot
+        bind  = Super+Shift, A,    global,  quickshell:regionSearch
+        bind  = Super+Shift, X,    global,  quickshell:regionOcr
+        bind  = Super+Shift, T,    global,  quickshell:screenTranslate
+        bindd = Super, I,          Open settings, exec, $settingsApp
+        bind  = Ctrl+Super, R,     exec, killall ydotool qs quickshell; qs -c $qsConfig &
       '';
     };
 }
