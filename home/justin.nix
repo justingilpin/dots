@@ -62,27 +62,6 @@
   home.file.".config/waybar/config".source = ./../modules/waybar/config;
   home.file.".config/waybar/style.css".source = ./../modules/waybar/style.css;
 
-  # Waybar — config symlinked from .dots above, systemd service handles startup
-  # ordering so the tray module doesn't block for 20 seconds waiting for D-Bus
-  programs.waybar = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
-    };
-  };
-
-  # Override waybar service to add restart delay and remove restart limit.
-  # Without this, rapid crash loops on startup lock the service into failed
-  # state permanently and it won't start on next Hyprland login.
-  systemd.user.services.waybar = {
-    Service = {
-      RestartSec = "3s";
-    };
-    Unit = {
-      StartLimitIntervalSec = 0;
-    };
-  };
 
   # hyprland-session.target: activated by exec-once in hyprland.conf
   # BindsTo graphical-session.target so dependent services get proper ordering
