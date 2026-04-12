@@ -15,6 +15,11 @@
   # Enable Hyprland
   programs.hyprland.enable = true;
 
+  # Mask xdg-desktop-portal-gtk for all users — running it alongside
+  # xdg-desktop-portal-hyprland causes a ~25s waybar tray startup delay
+  systemd.user.services.xdg-desktop-portal-gtk.wantedBy = lib.mkForce [];
+  xdg.portal.extraPortals = lib.mkForce [ pkgs.xdg-desktop-portal-hyprland ];
+
   # Enable Gnome Keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
