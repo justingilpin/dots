@@ -15,21 +15,51 @@
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    # caelestia shell — comment this input out when not using modules/shell
-    caelestia-shell.url = "github:caelestia-dots/shell";
-    caelestia-shell.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # Shell build dependencies — vendored source lives in modules/shell/
+    # quickshell and caelestia-cli are low-level deps we don't need to own.
+    quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    quickshell.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    caelestia-cli.url = "github:caelestia-dots/cli";
+    caelestia-cli.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    caelestia-cli.inputs.caelestia-shell.follows = "";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, caelestia-shell, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }:
   let
+    system = "x86_64-linux";
+
     unstablePkgs = import nixpkgs-unstable {
-      system = "x86_64-linux";
+      inherit system;
       config.allowUnfree = true;
+    };
+
+    # Build caelestia-shell directly from vendored source in modules/shell/nix/
+    # Edit modules/shell/ freely — this rebuilds from your local files every time.
+    caelestiaShell = unstablePkgs.callPackage ./modules/shell/nix {
+      rev          = "vendored";
+      stdenv       = unstablePkgs.clangStdenv;
+      quickshell   = inputs.quickshell.packages.${system}.default.override {
+        withX11 = false;
+        withI3  = false;
+      };
+      caelestia-cli = inputs.caelestia-cli.packages.${system}.default;
+      withCli      = true; # CLI always included — needed for wallpaper/scheme IPC
+    };
+
+    # Minimal self-like attrset the HM module expects from the caelestia flake.
+    # Replaces caelestia-shell.homeManagerModules.default.
+    caelestiaHmModule = import ./modules/shell/nix/hm-module.nix {
+      packages.${system} = {
+        default  = caelestiaShell;
+        with-cli = caelestiaShell;
+      };
+      inputs.caelestia-cli = inputs.caelestia-cli;
     };
 
     mkSystem = { host, home ? ./home/justin.nix, extraModules ? [] }:
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         specialArgs = {
           inherit nixpkgs-unstable;
           unstable = unstablePkgs;
@@ -38,14 +68,14 @@
           ./hosts/nixos/${host}/default.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = { unstable = unstablePkgs; };
+            home-manager.useGlobalPkgs        = true;
+            home-manager.useUserPackages      = true;
+            home-manager.backupFileExtension  = "backup";
+            home-manager.extraSpecialArgs     = { unstable = unstablePkgs; };
             home-manager.users.justin.imports = [
               home
               nixvim.homeModules.nixvim
-              caelestia-shell.homeManagerModules.default # registers programs.caelestia option (safe when shell is disabled)
+              caelestiaHmModule # registers programs.caelestia — safe when shell module is not loaded
             ];
           }
         ] ++ extraModules;

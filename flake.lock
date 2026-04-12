@@ -2,47 +2,22 @@
   "nodes": {
     "caelestia-cli": {
       "inputs": {
-        "caelestia-shell": [
-          "caelestia-shell"
-        ],
+        "caelestia-shell": [],
         "nixpkgs": [
-          "caelestia-shell",
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1772764582,
-        "narHash": "sha256-hSwjmpXHFqzSXrndVekA0IheKrbC7wi0IbfZTYwlmXw=",
+        "lastModified": 1775978924,
+        "narHash": "sha256-2m4qBhJflsWYTcNBJOwdqQsC174uSwmx5oksDs7sBVo=",
         "owner": "caelestia-dots",
         "repo": "cli",
-        "rev": "4bcd42f482d038b98145b0b03388244b68b7d35d",
+        "rev": "e1531f3c9e2b14ccf5155003f86a32ca0509eb73",
         "type": "github"
       },
       "original": {
         "owner": "caelestia-dots",
         "repo": "cli",
-        "type": "github"
-      }
-    },
-    "caelestia-shell": {
-      "inputs": {
-        "caelestia-cli": "caelestia-cli",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "quickshell": "quickshell"
-      },
-      "locked": {
-        "lastModified": 1775801889,
-        "narHash": "sha256-q1LGwhQbNOurIAClh5YwKVU2kJ5lTCxRYZf48bAb9IM=",
-        "owner": "caelestia-dots",
-        "repo": "shell",
-        "rev": "0e07176ff149d02391531c802b51c28e73185f30",
-        "type": "github"
-      },
-      "original": {
-        "owner": "caelestia-dots",
-        "repo": "shell",
         "type": "github"
       }
     },
@@ -304,16 +279,15 @@
     "quickshell": {
       "inputs": {
         "nixpkgs": [
-          "caelestia-shell",
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1772925576,
-        "narHash": "sha256-mMoiXABDtkSJxCYDrkhJ/TrrJf5M46oUfIlJvv2gkZ0=",
+        "lastModified": 1775720097,
+        "narHash": "sha256-p+vqkCuFfVNyQBo370wr6MebNUvz55RZiC0m8YKUhvQ=",
         "ref": "refs/heads/master",
-        "rev": "15a84097653593dd15fad59a56befc2b7bdc270d",
-        "revCount": 750,
+        "rev": "d4c92973b53d9fa34cc110d3b974eb6bde5b3027",
+        "revCount": 800,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       },
@@ -324,13 +298,14 @@
     },
     "root": {
       "inputs": {
-        "caelestia-shell": "caelestia-shell",
+        "caelestia-cli": "caelestia-cli",
         "disko": "disko",
         "home-manager": "home-manager",
         "nixarr": "nixarr",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
+        "quickshell": "quickshell",
         "vscode-server": "vscode-server"
       }
     },
