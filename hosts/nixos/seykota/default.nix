@@ -17,6 +17,8 @@
 		./../../common/nixos-common.nix
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
+    ./../../../modules/basic
+    # ./../../../modules/shell
   ];
 
   # Use the systemd-boot EFI boot loader.
