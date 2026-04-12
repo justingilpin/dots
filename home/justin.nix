@@ -67,7 +67,18 @@
     enable = true;
     systemd = {
       enable = true;
-      target = "graphical-session.target";
+      target = "hyprland-session.target";
+    };
+  };
+
+  # hyprland-session.target: activated by exec-once in hyprland.conf
+  # BindsTo graphical-session.target so dependent services get proper ordering
+  systemd.user.targets.hyprland-session = {
+    Unit = {
+      Description = "Hyprland compositor session";
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
     };
   };
   # Test file to see if home-manager is working
