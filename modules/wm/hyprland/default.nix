@@ -28,7 +28,6 @@
 
   # ── System packages ─────────────────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
-    wl-clipboard
     xdg-desktop-portal-hyprland
     adwaita-icon-theme
     gtkmm3

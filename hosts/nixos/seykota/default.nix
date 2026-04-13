@@ -13,8 +13,7 @@
     ./hardware-configuration.nix
     ./amd.nix
     ./mounts.nix
-    ./../../common/common-packages.nix
-		./../../common/nixos-common.nix
+    ./../../common
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
     ./../../../modules/basic

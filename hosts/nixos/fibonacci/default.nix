@@ -9,8 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./e14.nix # Original is e15
-      ./../../common/common-packages.nix
-			./../../common/nixos-common.nix
+      ./../../common
       ./../../../modules/wm/hyprland
      # ./../../../modules/basic # basic, shell, or quickshell: choose one
       ./../../../modules/shell   # <--- Active

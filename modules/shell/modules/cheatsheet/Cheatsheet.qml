@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.components
+import qs.components.misc
 import qs.config
 import qs.services
 
@@ -18,9 +19,7 @@ Scope {
     function open():   void { root.visible = true; }
     function close():  void { root.visible = false; }
 
-    // qmllint disable unresolved-type
     CustomShortcut {
-    // qmllint enable unresolved-type
         name: "cheatsheet"
         description: "Toggle keybind cheatsheet"
         onPressed: root.toggle()

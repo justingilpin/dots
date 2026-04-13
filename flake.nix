@@ -15,6 +15,12 @@
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url = "github:nix-community/stylix/release-25.11";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
     # Shell build dependencies — vendored source lives in modules/shell/
     # quickshell and caelestia-cli are low-level deps we don't need to own.
     quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
