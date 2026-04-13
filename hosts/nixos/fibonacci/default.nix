@@ -34,6 +34,10 @@
 
 
   networking.hostName = "fibonacci"; # Define your hostname.
+
+  # Dual-boot time fix — keep hardware clock in local time so Windows and NixOS agree
+  time.hardwareClockInLocalTime = true;
+  time.timeZone = "Asia/Manila";
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Fixes laptop error when rebuilding Nixos
