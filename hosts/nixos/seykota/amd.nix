@@ -1,22 +1,12 @@
 { config, lib, pkgs, ... }:
 {
 
-  # Enable Vulkan
-  hardware.opengl = {
+  # Enable Vulkan — hardware.opengl renamed to hardware.graphics in NixOS 25.11
+  hardware.graphics = {
     enable = true;
-#    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
+    # amdvlk removed in 25.11 (deprecated by AMD); RADV is the default Vulkan driver
   };
-
-
-  hardware.opengl.extraPackages = with pkgs; [
-#    rocmPackages.clr.icd # OpenCL
-    amdvlk
-  ];
-
-  hardware.opengl.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
   # AMD Kernel
   boot.initrd.kernelModules = [ "amdgpu" ];
   # XServer

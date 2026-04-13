@@ -65,8 +65,8 @@
   };
 
   # Enable sound.
-  sound.enable = true;
- # hardware.pulseaudio = { 
+  # sound.enable = true; # removed in NixOS 25.11 — pipewire handles this
+ # hardware.pulseaudio = {
 #		enable = true;
 #		support32Bit = true;
 #	};

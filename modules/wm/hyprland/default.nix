@@ -102,8 +102,7 @@
           gaps_in    = 5;
           gaps_out   = 15;
           border_size = 2;
-          "col.active_border"   = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          # col.active_border / col.inactive_border intentionally omitted — stylix sets these from the active theme
           layout = "dwindle";
         };
 
@@ -122,7 +121,7 @@
             enabled      = true;
             range        = 4;
             render_power = 3;
-            color        = "rgba(1a1a1aee)";
+            # color intentionally omitted — stylix sets this from the active theme
           };
         };
 

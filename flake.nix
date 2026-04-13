@@ -21,6 +21,11 @@
     stylix.url = "github:nix-community/stylix/release-25.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Noctalia shell — minimal Quickshell-based Wayland desktop shell
+    # Requires nixpkgs-unstable (depends on latest Quickshell)
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     # Shell build dependencies — vendored source lives in modules/shell/
     # quickshell and caelestia-cli are low-level deps we don't need to own.
     quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -29,9 +34,14 @@
     caelestia-cli.url = "github:caelestia-dots/cli";
     caelestia-cli.inputs.nixpkgs.follows = "nixpkgs-unstable";
     caelestia-cli.inputs.caelestia-shell.follows = "";
+
+    # DankMaterialShell — Material Design 3 Quickshell-based Wayland shell
+    # Requires nixpkgs-unstable (depends on latest Quickshell)
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
+    dms.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, noctalia, dms, ... }:
   let
     system = "x86_64-linux";
 
@@ -63,6 +73,27 @@
       inputs.caelestia-cli = inputs.caelestia-cli;
     };
 
+    # DankMaterialShell binary cache — skip local compilation of Quickshell/QML deps.
+    dmsCacheModule = {
+      nix.settings = {
+        extra-substituters = [ "https://dms.cachix.org" ];
+        extra-trusted-public-keys = [
+          "dms.cachix.org-1:vMDFpCXGgBH7wX7N84UQB11kTW3mOsNbp0gqWMiqiEg="
+        ];
+      };
+    };
+
+    # Noctalia binary cache — skip local compilation of Quickshell/QML deps.
+    # Add to /etc/nix/nix.conf or trusted-users if substituters are restricted.
+    noctaliaCacheModule = {
+      nix.settings = {
+        extra-substituters = [ "https://noctalia.cachix.org" ];
+        extra-trusted-public-keys = [
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+        ];
+      };
+    };
+
     mkSystem = { host, home ? ./home/justin.nix, extraModules ? [] }:
       nixpkgs.lib.nixosSystem {
         inherit system;
@@ -74,6 +105,8 @@
         modules = [
           ./hosts/nixos/${host}/default.nix
           home-manager.nixosModules.home-manager
+          noctaliaCacheModule
+          dmsCacheModule
           {
             home-manager.useGlobalPkgs        = true;
             home-manager.useUserPackages      = true;
@@ -83,6 +116,8 @@
               home
               nixvim.homeModules.nixvim
               caelestiaHmModule # registers programs.caelestia — safe when shell module is not loaded
+              noctalia.homeModules.default # registers programs.noctalia-shell — safe when inactive
+              dms.homeModules.dank-material-shell # registers programs.dank-material-shell — safe when inactive
             ];
           }
         ] ++ extraModules;
