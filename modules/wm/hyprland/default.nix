@@ -43,6 +43,7 @@
     wireplumber
     grim
     slurp
+    wl-clipboard
     pamixer
     brightnessctl
     kitty
