@@ -86,6 +86,7 @@
       xsel
       go
 #			stremio
+			spotify
 #			spotifywm
 			gimp
       xfce.thunar
