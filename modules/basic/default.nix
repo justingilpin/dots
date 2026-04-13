@@ -32,6 +32,9 @@
 
       # Restart waybar (basic only — not relevant with shell)
       bind = $mainMod SHIFT, Q, exec, systemctl --user restart waybar
+
+      # Restart Quickshell (basic — mirrors shell module shortcut)
+      bind = $mainMod SHIFT, S, exec, systemctl --user restart quickshell
     '';
 
   };

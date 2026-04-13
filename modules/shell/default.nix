@@ -92,6 +92,9 @@ EOF
       bind = $mainMod SHIFT, E,     global, caelestia:session
       bind = CTRL, Space,           global, caelestia:controlCenter
 
+      # Restart Quickshell
+      bind = $mainMod SHIFT, S,     exec,   systemctl --user restart quickshell
+
     '';
 
   }; # end home-manager.users.justin
