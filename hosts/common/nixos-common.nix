@@ -3,10 +3,7 @@ let
   inherit (inputs) nixpkgs;
 in
 {
-#  time.timeZone = "Asia/Manila";
-	time.timeZone = "America/New_York";
-
-#  time.timeZone = "Etc/GMT+0"; # Temperary fix to get correct time
+  time.timeZone = "Asia/Manila";
 
 #  services.flatpak.enable = true; # Additional pkgs required for server
   nix = {
