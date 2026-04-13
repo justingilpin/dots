@@ -60,7 +60,8 @@
 
     # Keep your hand-tuned terminal/editor themes for now; Stylix can take them
     # over later once we decide how much of the desktop palette it should own.
-    stylix.targets.alacritty.enable = false;
-    stylix.targets.nixvim.enable = false;
+    stylix.targets.alacritty.enable = lib.mkForce false;
+    stylix.targets.hyprpaper.enable = lib.mkForce false;
+    stylix.targets.nixvim.enable = lib.mkForce false;
   };
 }
