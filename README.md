@@ -51,3 +51,8 @@ nix flake update
 - [nixvim](https://github.com/nix-community/nixvim)
 - [nixarr](https://github.com/rasmus-kirk/nixarr)
 - [disko](https://github.com/nix-community/disko)
+
+## Credits
+
+- [caelestia-shell](https://github.com/caelestia-dots/shell) by **soramane** — desktop shell used on Hyprland hosts
+- [Quickshell](https://quickshell.org) by **outfoxxed** — Qt-based shell toolkit powering caelestia-shell

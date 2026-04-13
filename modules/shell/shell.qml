@@ -6,6 +6,7 @@ import "modules"
 import "modules/drawers"
 import "modules/background"
 import "modules/areapicker"
+import "modules/cheatsheet"
 import "modules/lock"
 import Quickshell
 
@@ -20,6 +21,7 @@ ShellRoot {
     }
 
     Shortcuts {}
+    Cheatsheet {}
     BatteryMonitor {}
     IdleMonitors {
         lock: lock

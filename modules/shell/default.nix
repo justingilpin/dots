@@ -93,7 +93,8 @@ EOF
       bind = CTRL, Space,           global, caelestia:controlCenter
 
       # Restart Quickshell
-      bind = $mainMod SHIFT, S,     exec,   systemctl --user restart quickshell
+      bind = $mainMod SHIFT, Q,     exec,   systemctl --user restart quickshell
+      bind = $mainMod, slash,       global, caelestia:cheatsheet
 
     '';
 
