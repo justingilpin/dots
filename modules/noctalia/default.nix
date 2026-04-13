@@ -87,7 +87,7 @@
       bind = $mainMod, D,           exec, noctalia-shell ipc call controlCenter toggle
       bind = $mainMod SHIFT, E,     exec, noctalia-shell ipc call sessionMenu toggle
       bind = $mainMod, comma,       exec, noctalia-shell ipc call settings toggle
-      bind = $mainMod, Print,       exec, noctalia-shell ipc call launcher clipboard
+      bind = $mainMod SHIFT, V,     exec, noctalia-shell ipc call launcher clipboard
 
       # Restart Noctalia shell
       bind = $mainMod SHIFT, Q,     exec, systemctl --user restart noctalia-shell
