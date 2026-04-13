@@ -31,12 +31,8 @@
 
   # ── Noctalia for justin ───────────────────────────────────────────────────
   home-manager.users.justin = { lib, ... }: {
-
-    # Pull in the Noctalia home-manager module from the flake input.
-    # This registers the programs.noctalia-shell option.
-    imports = [
-      inputs.noctalia.homeModules.default
-    ];
+    # Note: inputs.noctalia.homeModules.default is already imported globally in flake.nix
+    # — no need to re-import here.
 
     programs.noctalia-shell = {
       enable = true;

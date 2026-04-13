@@ -23,12 +23,8 @@
 
   # ── DankMaterialShell for justin ──────────────────────────────────────────
   home-manager.users.justin = { lib, ... }: {
-
-    # Pull in the DMS home-manager module from the flake input.
-    # This registers the programs.dank-material-shell option.
-    imports = [
-      inputs.dms.homeModules.dank-material-shell
-    ];
+    # Note: inputs.dms.homeModules.dank-material-shell is already imported globally in flake.nix
+    # — no need to re-import here.
 
     programs.dank-material-shell = {
       enable = true;

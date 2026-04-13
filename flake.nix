@@ -73,16 +73,6 @@
       inputs.caelestia-cli = inputs.caelestia-cli;
     };
 
-    # DankMaterialShell binary cache — skip local compilation of Quickshell/QML deps.
-    dmsCacheModule = {
-      nix.settings = {
-        extra-substituters = [ "https://dms.cachix.org" ];
-        extra-trusted-public-keys = [
-          "dms.cachix.org-1:vMDFpCXGgBH7wX7N84UQB11kTW3mOsNbp0gqWMiqiEg="
-        ];
-      };
-    };
-
     # Noctalia binary cache — skip local compilation of Quickshell/QML deps.
     # Add to /etc/nix/nix.conf or trusted-users if substituters are restricted.
     noctaliaCacheModule = {
@@ -106,7 +96,6 @@
           ./hosts/nixos/${host}/default.nix
           home-manager.nixosModules.home-manager
           noctaliaCacheModule
-          dmsCacheModule
           {
             home-manager.useGlobalPkgs        = true;
             home-manager.useUserPackages      = true;
