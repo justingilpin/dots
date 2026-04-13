@@ -19,8 +19,9 @@
     ];
 
   # Quick fix for Obsidian to allow insecure install
-    nixpkgs.config.permittedInsecurePackages = [
+  nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+    "qtwebengine-5.15.19"
   ];
 
   # Graphics / 32-bit support / Enable for Lutris
