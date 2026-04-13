@@ -59,16 +59,9 @@
   home.file.".config/hypr/hypridle.conf".source = ./../modules/hyprland/hypridle.conf;
   home.file.".config/hypr/hyprlock.conf".source = ./../modules/hyprland/hyprlock.conf;
   home.file.".config/hypr/hyprpaper.conf".source = ./../modules/hyprland/hyprpaper.conf;
-  # Waybar — style and config managed here; systemd service handles startup
-  # ordering so the tray module doesn't block for 20 seconds waiting for D-Bus
-  programs.waybar = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
-    };
-    style = builtins.readFile ./../modules/waybar/style.css;
-  };
+  # Waybar style — enable/systemd settings live in modules/basic/default.nix
+  # so waybar is only active when the basic module is loaded.
+  programs.waybar.style = builtins.readFile ./../modules/waybar/style.css;
   home.file.".config/waybar/config".source = ./../modules/waybar/config;
 
   # Override waybar service to add restart delay and remove restart limit.

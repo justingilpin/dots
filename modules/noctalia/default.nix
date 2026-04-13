@@ -76,15 +76,13 @@
       # };
     };
 
-    # ── Disable waybar — Noctalia provides its own bar ───────────────────
-    programs.waybar.enable = lib.mkForce false;
-
-    # ── Hyprland keybinds for Noctalia IPC ──────────────────────────────
+    # ── Hyprland integration for Noctalia ───────────────────────────────
     wayland.windowManager.hyprland.extraConfig = ''
-      # Launch Noctalia on Hyprland start (not via systemd — deprecated by upstream)
+      # Launch Noctalia and hypridle on Hyprland start
       exec-once = noctalia-shell
+      exec-once = hypridle & disown
 
-      # Noctalia IPC keybinds
+      # ── Noctalia IPC keybinds ────────────────────────────────────────
       bind = $mainMod, R,           exec, noctalia-shell ipc call launcher toggle
       bind = $mainMod, D,           exec, noctalia-shell ipc call controlCenter toggle
       bind = $mainMod SHIFT, E,     exec, noctalia-shell ipc call sessionMenu toggle
@@ -92,6 +90,9 @@
       bind = $mainMod, F2,          exec, noctalia-shell ipc call settings toggle
       bind = $mainMod, F3,          exec, noctalia-shell ipc call launcher clipboard
       bind = $mainMod, F4,          exec, noctalia-shell ipc call sessionMenu toggle
+
+      # Restart Noctalia shell
+      bind = $mainMod SHIFT, Q,     exec, systemctl --user restart noctalia-shell
     '';
 
   }; # end home-manager.users.justin
