@@ -21,8 +21,9 @@ Region {
     intersection: Intersection.Xor
 
     R {
+        // TOP BAR: dashboard is now at the bottom of the screen
         panel: root.panels.dashboard
-        y: 0
+        y: root.win.height - height
         height: panel.height * (1 - root.panels.dashboard.offsetScale) + Config.border.thickness
     }
 

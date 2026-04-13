@@ -112,8 +112,9 @@ Item {
 
         visibilities: root.visibilities
 
+        // TOP BAR: dashboard opens from the bottom (was top when bar was on the left)
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
+        anchors.bottom: parent.bottom
     }
 
     BarPopouts.ClipWrapper {

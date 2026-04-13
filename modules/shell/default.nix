@@ -67,6 +67,7 @@
   },
   "paths": { "wallpaperDir": "~/Pictures/Wallpapers" },
   "bar": { "status": { "showBattery": true, "showNetwork": true, "showWifi": true, "showBluetooth": true, "showAudio": false } },
+  "launcher": { "enabled": true },
   "services": { "audioIncrement": 0.05, "brightnessIncrement": 0.05, "maxVolume": 1.0, "smartScheme": true }
 }
 EOF

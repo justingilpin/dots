@@ -150,7 +150,9 @@ StyledWindow {
             borderTop: bar.implicitHeight - anchors.margins
             borderLeft: root.borderThickness - anchors.margins
             borderRight: root.borderThickness - anchors.margins
-            borderBottom: root.borderThickness - anchors.margins
+            // Set bottom border equal to the overhang margin so the visible portion is 0 —
+            // this eliminates the bottom corners and their rounding entirely.
+            borderBottom: -anchors.margins
         }
 
         PanelBg {
