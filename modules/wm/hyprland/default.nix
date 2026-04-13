@@ -234,7 +234,7 @@
           ",XF86AudioPrev, exec, mpc -q prev"
 
           # Screenshots
-          "CTRL, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
+          "$mainMod, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
           ",    Print, exec, grim - | wl-copy"
         ];
 
