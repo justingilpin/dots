@@ -12,10 +12,10 @@
       ./../../common/common-packages.nix
       ./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
-     # ./../../../modules/basic # basic, shell, or quickshell: choose one
-      ./../../../modules/shell   # <--- Active
-     # ./../../../modules/quickshell # illogical-impulse: https://github.com/end-4/dots-hyprland
-                                    # NixOS reference only: https://github.com/soymou/illogical-flake
+     # ./../../../modules/basic          # basic, shell, noctalia, or DankMaterialShell: choose one
+      ./../../../modules/shell           # <--- Active
+     # ./../../../modules/noctalia
+     # ./../../../modules/DankMaterialShell
     ];
 
   # Quick fix for Obsidian to allow insecure install
