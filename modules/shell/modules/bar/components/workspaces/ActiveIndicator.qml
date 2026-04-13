@@ -4,6 +4,10 @@ import qs.components.effects
 import qs.services
 import qs.config
 
+// TOP BAR: horizontal active workspace indicator — slides left/right (x-axis).
+// Previously slid up/down (y-axis) for the left-side vertical bar.
+// leading/trailing/offset/size all track x instead of y.
+
 StyledRect {
     id: root
 
@@ -19,15 +23,16 @@ StyledRect {
         return i % Config.bar.workspaces.shown;
     }
 
-    property real leading: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.y ?? 0 : 0
-    property real trailing: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.y ?? 0 : 0
+    // Track x positions instead of y for horizontal layout
+    property real leading: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.x ?? 0 : 0
+    property real trailing: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.x ?? 0 : 0
     property real currentSize: workspaces.count > 0 ? (workspaces.itemAt(currentWsIdx) as Workspace)?.size ?? 0 : 0
     property real offset: Math.min(leading, trailing)
     property real size: {
         const s = Math.abs(leading - trailing) + currentSize;
         if (Config.bar.workspaces.activeTrail && lastWs > currentWsIdx) {
             const ws = workspaces.itemAt(lastWs) as Workspace;
-            return ws ? Math.min(ws.y + ws.size - offset, s) : 0;
+            return ws ? Math.min(ws.x + ws.size - offset, s) : 0;
         }
         return s;
     }
@@ -41,9 +46,10 @@ StyledRect {
     }
 
     clip: true
-    y: offset + mask.y
-    implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
-    implicitHeight: size
+    // x-based positioning for horizontal slide
+    x: offset + mask.x
+    implicitHeight: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+    implicitWidth: size
     radius: Appearance.rounding.full
     color: Colours.palette.m3primary
 
@@ -52,43 +58,37 @@ StyledRect {
         sourceColor: Colours.palette.m3onSurface
         colorizationColor: Colours.palette.m3onPrimary
 
-        x: 0
-        y: -parent.offset
+        // Offset colouriser horizontally to track the indicator position
+        x: -parent.offset
+        y: 0
         implicitWidth: root.mask.implicitWidth
         implicitHeight: root.mask.implicitHeight
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     Behavior on leading {
         enabled: Config.bar.workspaces.activeTrail
-
         EAnim {}
     }
 
     Behavior on trailing {
         enabled: Config.bar.workspaces.activeTrail
-
-        EAnim {
-            duration: Appearance.anim.durations.normal * 2
-        }
+        EAnim { duration: Appearance.anim.durations.normal * 2 }
     }
 
     Behavior on currentSize {
         enabled: Config.bar.workspaces.activeTrail
-
         EAnim {}
     }
 
     Behavior on offset {
         enabled: !Config.bar.workspaces.activeTrail
-
         EAnim {}
     }
 
     Behavior on size {
         enabled: !Config.bar.workspaces.activeTrail
-
         EAnim {}
     }
 

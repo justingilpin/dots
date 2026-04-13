@@ -8,6 +8,10 @@ import qs.components
 import qs.services
 import qs.config
 
+// TOP BAR: horizontal workspaces pill — fixed height, dynamic width.
+// Previously fixed width / dynamic height for the left-side vertical bar.
+// ColumnLayout → RowLayout; implicitWidth ↔ implicitHeight swapped.
+
 StyledClippingRect {
     id: root
 
@@ -27,8 +31,9 @@ StyledClippingRect {
 
     property real blur: onSpecial ? 1 : 0
 
-    implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: layout.implicitHeight + Appearance.padding.small * 2
+    // Fixed height = bar inner size; width follows content
+    implicitHeight: Config.bar.sizes.innerWidth
+    implicitWidth: layout.implicitWidth + Appearance.padding.small * 2
 
     color: Colours.tPalette.m3surfaceContainer
     radius: Appearance.rounding.full
@@ -60,7 +65,7 @@ StyledClippingRect {
             }
         }
 
-        ColumnLayout {
+        RowLayout {
             id: layout
 
             anchors.centerIn: parent
@@ -81,7 +86,7 @@ StyledClippingRect {
 
         Loader {
             asynchronous: true
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             active: Config.bar.workspaces.activeIndicator
 
             sourceComponent: ActiveIndicator {
@@ -103,13 +108,8 @@ StyledClippingRect {
             }
         }
 
-        Behavior on scale {
-            Anim {}
-        }
-
-        Behavior on opacity {
-            Anim {}
-        }
+        Behavior on scale { Anim {} }
+        Behavior on opacity { Anim {} }
     }
 
     Loader {
@@ -129,18 +129,11 @@ StyledClippingRect {
             screen: root.screen
         }
 
-        Behavior on scale {
-            Anim {}
-        }
-
-        Behavior on opacity {
-            Anim {}
-        }
+        Behavior on scale { Anim {} }
+        Behavior on opacity { Anim {} }
     }
 
     Behavior on blur {
-        Anim {
-            duration: Appearance.anim.durations.small
-        }
+        Anim { duration: Appearance.anim.durations.small }
     }
 }

@@ -6,6 +6,11 @@ import qs.services
 import qs.config
 import qs.utils
 
+// TOP BAR: horizontal active window indicator — icon left, title text right.
+// Previously a vertical layout with 90°-rotated text for the left-side bar.
+// maxHeight → maxWidth; vPadding → hPadding; rotation transform removed.
+// currentCenter is now the x-centre of this item mapped to the bar.
+
 Item {
     id: root
 
@@ -18,7 +23,6 @@ Item {
         if (!title)
             return qsTr("Desktop");
         if (Config.bar.activeWindow.compact) {
-            // " - " (standard hyphen), " — " (em dash), " – " (en dash)
             const parts = title.split(/\s+[\-\u2013\u2014]\s+/);
             if (parts.length > 1)
                 return parts[parts.length - 1].trim();
@@ -26,17 +30,17 @@ Item {
         return title;
     }
 
-    readonly property int maxHeight: {
+    // Available width = bar width minus other modules' widths and spacing
+    readonly property int maxWidth: {
         const otherModules = bar.children.filter(c => c.id && c.item !== this && c.id !== "spacer");
-        const otherHeight = otherModules.reduce((acc, curr) => acc + (curr.item.nonAnimHeight ?? curr.height), 0);
-        // Length - 2 cause repeater counts as a child
-        return bar.height - otherHeight - bar.spacing * (bar.children.length - 1) - bar.vPadding * 2;
+        const otherWidth = otherModules.reduce((acc, curr) => acc + (curr.item.nonAnimWidth ?? curr.width), 0);
+        return bar.width - otherWidth - bar.spacing * (bar.children.length - 1) - bar.hPadding * 2;
     }
     property Title current: text1
 
     clip: true
-    implicitWidth: Math.max(icon.implicitWidth, current.implicitHeight)
-    implicitHeight: icon.implicitHeight + current.implicitWidth + current.anchors.topMargin
+    implicitHeight: Math.max(icon.implicitHeight, current.implicitHeight)
+    implicitWidth: icon.implicitWidth + current.implicitWidth + Appearance.spacing.small
 
     Loader {
         asynchronous: true
@@ -57,7 +61,8 @@ Item {
                     popouts.hasCurrent = false;
                 } else {
                     popouts.currentName = "activewindow";
-                    popouts.currentCenter = root.mapToItem(root.bar, 0, root.implicitHeight / 2).y;
+                    // currentCenter is now the x-centre of this item in bar coordinates
+                    popouts.currentCenter = root.mapToItem(root.bar, root.implicitWidth / 2, 0).x;
                     popouts.hasCurrent = true;
                 }
             }
@@ -67,20 +72,15 @@ Item {
     MaterialIcon {
         id: icon
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
         animate: true
         text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
         color: root.colour
     }
 
-    Title {
-        id: text1
-    }
-
-    Title {
-        id: text2
-    }
+    Title { id: text1 }
+    Title { id: text2 }
 
     TextMetrics {
         id: metrics
@@ -89,7 +89,8 @@ Item {
         font.pointSize: Appearance.font.size.smaller
         font.family: Appearance.font.family.mono
         elide: Qt.ElideRight
-        elideWidth: root.maxHeight - icon.height
+        // Elide to available width after the icon
+        elideWidth: root.maxWidth - icon.width - Appearance.spacing.small
 
         onTextChanged: {
             const next = root.current === text1 ? text2 : text1;
@@ -99,41 +100,26 @@ Item {
         onElideWidthChanged: root.current.text = elidedText
     }
 
-    Behavior on implicitHeight {
+    Behavior on implicitWidth {
         Anim {
             duration: Appearance.anim.durations.expressiveDefaultSpatial
             easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
         }
     }
 
+    // Title: horizontal text to the right of the icon, no rotation needed
     component Title: StyledText {
         id: text
 
-        anchors.horizontalCenter: icon.horizontalCenter
-        anchors.top: icon.bottom
-        anchors.topMargin: Appearance.spacing.small
+        anchors.verticalCenter: icon.verticalCenter
+        anchors.left: icon.right
+        anchors.leftMargin: Appearance.spacing.small
 
         font.pointSize: metrics.font.pointSize
         font.family: metrics.font.family
         color: root.colour
         opacity: root.current === this ? 1 : 0
 
-        transform: [
-            Translate {
-                x: Config.bar.activeWindow.inverted ? -text.implicitWidth + text.implicitHeight : 0
-            },
-            Rotation {
-                angle: Config.bar.activeWindow.inverted ? 270 : 90
-                origin.x: text.implicitHeight / 2
-                origin.y: text.implicitHeight / 2
-            }
-        ]
-
-        width: implicitHeight
-        height: implicitWidth
-
-        Behavior on opacity {
-            Anim {}
-        }
+        Behavior on opacity { Anim {} }
     }
 }

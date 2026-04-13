@@ -5,19 +5,23 @@ import qs.components
 import qs.services
 import qs.config
 
+// TOP BAR: horizontal clock pill — fixed height, dynamic width.
+// Previously fixed width / dynamic height for the left-side bar.
+// Column → Row; time shown on a single line instead of stacked lines.
+
 StyledRect {
     id: root
 
     readonly property color colour: Colours.palette.m3tertiary
     readonly property int padding: Config.bar.clock.background ? Appearance.padding.normal : Appearance.padding.small
 
-    implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: layout.implicitHeight + root.padding * 2
+    implicitHeight: Config.bar.sizes.innerWidth
+    implicitWidth: layout.implicitWidth + root.padding * 2
 
     color: Qt.alpha(Colours.tPalette.m3surfaceContainer, Config.bar.clock.background ? Colours.tPalette.m3surfaceContainer.a : 0)
     radius: Appearance.rounding.full
 
-    Column {
+    Row {
         id: layout
 
         anchors.centerIn: parent
@@ -25,7 +29,7 @@ StyledRect {
 
         Loader {
             asynchronous: true
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
             active: Config.bar.clock.showIcon
             visible: active
@@ -37,32 +41,31 @@ StyledRect {
         }
 
         StyledText {
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
             visible: Config.bar.clock.showDate
 
-            horizontalAlignment: StyledText.AlignHCenter
-            text: Time.format("ddd\nd")
+            // Date on a single line: "Mon 7"
+            text: Time.format("ddd d")
             font.pointSize: Appearance.font.size.smaller
             font.family: Appearance.font.family.sans
             color: root.colour
         }
 
         Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             visible: Config.bar.clock.showDate
-            height: visible ? 1 : 0
-
-            width: parent.width * 0.8
+            width: visible ? 1 : 0
+            height: parent.height * 0.6
             color: root.colour
             opacity: 0.2
         }
 
         StyledText {
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
-            horizontalAlignment: StyledText.AlignHCenter
-            text: Time.format(Config.services.useTwelveHourClock ? "hh\nmm\nA" : "hh\nmm")
+            // Time on a single line: "14:30" or "02:30 PM"
+            text: Time.format(Config.services.useTwelveHourClock ? "hh:mm A" : "hh:mm")
             font.pointSize: Appearance.font.size.smaller
             font.family: Appearance.font.family.mono
             color: root.colour

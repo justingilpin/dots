@@ -7,6 +7,10 @@ import qs.components
 import qs.services
 import qs.config
 
+// TOP BAR: horizontal tray — fixed height, dynamic width.
+// Previously vertical for the left-side bar.
+// Column → Row; expand icon moves from bottom → right; implicitHeight ↔ implicitWidth.
+
 StyledRect {
     id: root
 
@@ -19,64 +23,48 @@ StyledRect {
 
     property bool expanded
 
-    readonly property real nonAnimHeight: {
+    readonly property real nonAnimWidth: {
         if (!Config.bar.tray.compact)
-            return layout.implicitHeight + padding * 2;
-        return (expanded ? expandIcon.implicitHeight + layout.implicitHeight + spacing : expandIcon.implicitHeight) + padding * 2;
+            return layout.implicitWidth + padding * 2;
+        return (expanded ? expandIcon.implicitWidth + layout.implicitWidth + spacing : expandIcon.implicitWidth) + padding * 2;
     }
 
     clip: true
-    visible: height > 0
+    visible: width > 0
 
-    implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: nonAnimHeight
+    implicitHeight: Config.bar.sizes.innerWidth
+    implicitWidth: nonAnimWidth
 
     color: Qt.alpha(Colours.tPalette.m3surfaceContainer, (Config.bar.tray.background && items.count > 0) ? Colours.tPalette.m3surfaceContainer.a : 0)
     radius: Appearance.rounding.full
 
-    Column {
+    Row {
         id: layout
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: root.padding
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: root.padding
         spacing: Appearance.spacing.small
 
         opacity: root.expanded || !Config.bar.tray.compact ? 1 : 0
 
         add: Transition {
-            Anim {
-                properties: "scale"
-                from: 0
-                to: 1
-                easing.bezierCurve: Appearance.anim.curves.standardDecel
-            }
+            Anim { properties: "scale"; from: 0; to: 1; easing.bezierCurve: Appearance.anim.curves.standardDecel }
         }
-
         move: Transition {
-            Anim {
-                properties: "scale"
-                to: 1
-                easing.bezierCurve: Appearance.anim.curves.standardDecel
-            }
-            Anim {
-                properties: "x,y"
-            }
+            Anim { properties: "scale"; to: 1; easing.bezierCurve: Appearance.anim.curves.standardDecel }
+            Anim { properties: "x,y" }
         }
 
         Repeater {
             id: items
-
             model: ScriptModel {
                 values: SystemTray.items.values.filter(i => !Config.bar.tray.hiddenIcons.includes(i.id))
             }
-
             TrayItem {}
         }
 
-        Behavior on opacity {
-            Anim {}
-        }
+        Behavior on opacity { Anim {} }
     }
 
     Loader {
@@ -84,37 +72,33 @@ StyledRect {
 
         asynchronous: true
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
 
         active: Config.bar.tray.compact && items.count > 0
 
         sourceComponent: Item {
-            implicitWidth: expandIconInner.implicitWidth
-            implicitHeight: expandIconInner.implicitHeight - Appearance.padding.small * 2
+            implicitHeight: expandIconInner.implicitHeight
+            implicitWidth: expandIconInner.implicitWidth - Appearance.padding.small * 2
 
             MaterialIcon {
                 id: expandIconInner
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: Config.bar.tray.background ? Appearance.padding.small : -Appearance.padding.small
-                text: "expand_less"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: Config.bar.tray.background ? Appearance.padding.small : -Appearance.padding.small
+                text: "chevron_right"
                 font.pointSize: Appearance.font.size.large
+                // Flipped when expanded (points left to collapse)
                 rotation: root.expanded ? 180 : 0
 
-                Behavior on rotation {
-                    Anim {}
-                }
-
-                Behavior on anchors.bottomMargin {
-                    Anim {}
-                }
+                Behavior on rotation { Anim {} }
+                Behavior on anchors.rightMargin { Anim {} }
             }
         }
     }
 
-    Behavior on implicitHeight {
+    Behavior on implicitWidth {
         Anim {
             duration: Appearance.anim.durations.expressiveDefaultSpatial
             easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
