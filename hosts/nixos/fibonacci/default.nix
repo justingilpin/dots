@@ -12,9 +12,11 @@
       ./../../common/common-packages.nix
       ./../../common/nixos-common.nix
       ./../../../modules/wm/hyprland
-     # ./../../../modules/basic          # basic, shell, noctalia, or DankMaterialShell: choose one
-      ./../../../modules/shell           # <--- Active
-     # ./../../../modules/noctalia
+
+     # Pick One Shell or Bar
+     # ./../../../modules/basic
+     # ./../../../modules/shell      
+      ./../../../modules/noctalia
      # ./../../../modules/DankMaterialShell
     ];
 
