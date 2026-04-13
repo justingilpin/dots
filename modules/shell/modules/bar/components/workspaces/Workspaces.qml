@@ -31,9 +31,13 @@ StyledClippingRect {
 
     property real blur: onSpecial ? 1 : 0
 
-    // Fixed height = bar inner size; width follows content
+    // Fixed height = bar inner size; width computed from workspace count directly
+    // (Avoids a circular dependency: layout is anchors.centerIn parent which fills StyledClippingRect
+    //  whose width would depend on layout.implicitWidth — use explicit calculation instead.)
     implicitHeight: Config.bar.sizes.innerWidth
-    implicitWidth: layout.implicitWidth + Appearance.padding.small * 2
+    implicitWidth: Config.bar.workspaces.shown * (Config.bar.sizes.innerWidth - Appearance.padding.small * 2)
+                   + (Config.bar.workspaces.shown - 1) * Math.floor(Appearance.spacing.small / 2)
+                   + Appearance.padding.small * 2
 
     color: Colours.tPalette.m3surfaceContainer
     radius: Appearance.rounding.full
