@@ -113,6 +113,16 @@
     (pkgs.writeShellScriptBin "discord" ''exec vesktop "$@"'')
   ];
 
+  # Desktop entry: searching "Discord" in the launcher opens Vesktop with Discord's icon
+  xdg.desktopEntries.discord = {
+    name = "Discord";
+    exec = "vesktop %U";
+    icon = "discord";
+    comment = "All-in-one voice and text chat (via Vesktop)";
+    categories = [ "Network" "InstantMessaging" ];
+    mimeType = [ "x-scheme-handler/discord" ];
+  };
+
   # Pywalfox — native messenger for Firefox theming via Noctalia
   # The extension must be installed in Firefox manually (search "Pywalfox" in add-ons)
   programs.firefox = {
