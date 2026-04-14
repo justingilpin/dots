@@ -14,6 +14,8 @@
   "telemetry.telemetryLevel": "off",
 
   // ── Claude Code ──────────────────────────────────────────────────────────
-  // Skip the permissions prompt — always run in dangerously skip mode.
-  "claude.allowDangerouslySkipPermissions": true
+  // Always start in bypass permissions mode and allow dangerous skip.
+  // claudeCode.initialPermissionMode sets the default for every new conversation.
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
 }
