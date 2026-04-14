@@ -590,6 +590,7 @@
             { id = "btop";      enabled = true; }
             { id = "hyprland";  enabled = true; }
             { id = "discord";   enabled = true; }
+            { id = "pywalfox"; enabled = true; }
           ];
         };
 

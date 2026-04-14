@@ -108,6 +108,10 @@
     settings.show_program_path = true;
   };
 
+  # Pywalfox — native messenger for Firefox theming via Noctalia
+  # The extension must be installed in Firefox manually (search "Pywalfox" in add-ons)
+  programs.firefox.nativeMessagingHosts = [ pkgs.pywalfox-native ];
+
   # Kitty — theme comes from Noctalia's template engine
   # (writes ~/.config/kitty/themes/noctalia.conf on color scheme changes)
   programs.kitty = {
