@@ -123,7 +123,6 @@
     git-crypt
     alacritty
     kitty
-    firefox
     cifs-utils # needed for mounting samba shares
   ];
 

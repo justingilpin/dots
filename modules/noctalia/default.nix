@@ -566,16 +566,17 @@
         };
 
         hooks = {
-          enabled                  = false;
-          wallpaperChange          = "";
-          darkModeChange           = "";
-          screenLock               = "";
-          screenUnlock             = "";
-          performanceModeEnabled   = "";
-          performanceModeDisabled  = "";
-          startup                  = "";
-          session                  = "";
-          colorGeneration          = "";
+          enabled         = true;
+          wallpaperChange = "";
+          darkModeChange  = "";
+          screenLock      = "";
+          screenUnlock    = "";
+          performanceModeEnabled  = "";
+          performanceModeDisabled = "";
+          startup         = "";
+          session         = "";
+          # Regenerate Obsidian CSS snippet on every color scheme change
+          colorGeneration = "python3 ${./noctalia-to-obsidian.py}";
         };
 
         # ── Templates (apply color scheme to external apps) ──────────────────
