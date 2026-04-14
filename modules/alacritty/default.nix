@@ -1,11 +1,14 @@
 {...}: {
   imports = [
-    ./nord.nix
+    # ./nord.nix          # replaced by Noctalia dynamic theming
     #		./catppuccin-mocha.nix
   ];
   programs.alacritty = {
     enable = true;
     settings = {
+      # Colors come from ~/.config/alacritty/themes/noctalia.toml,
+      # written by Noctalia's template engine on each color scheme change.
+      general.import = [ "~/.config/alacritty/themes/noctalia.toml" ];
       #      window = {
       #        opacity = 1;
       #        dynamic_title = true;

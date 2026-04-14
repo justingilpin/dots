@@ -108,6 +108,23 @@
     settings.show_program_path = true;
   };
 
+  # Kitty — theme comes from Noctalia's template engine
+  # (writes ~/.config/kitty/themes/noctalia.conf on color scheme changes)
+  programs.kitty = {
+    enable = true;
+    extraConfig = ''
+      include themes/noctalia.conf
+    '';
+  };
+
+  # btop — use the theme written by Noctalia's template engine
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "noctalia";
+    };
+  };
+
   programs.lf.enable = true;
 
   #  programs.tmux = {

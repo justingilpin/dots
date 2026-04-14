@@ -583,7 +583,14 @@
         # Install once with: code --install-extension noctalia.noctaliatheme
         templates = {
           enableUserTheming = true;
-          activeTemplates   = [ { id = "code"; enabled = true; } ];
+          activeTemplates   = [
+            { id = "code";      enabled = true; }
+            { id = "alacritty"; enabled = true; }
+            { id = "kitty";     enabled = true; }
+            { id = "btop";      enabled = true; }
+            { id = "hyprland";  enabled = true; }
+            { id = "discord";   enabled = true; }
+          ];
         };
 
         plugins = {
@@ -610,6 +617,10 @@
     # NOTE: hypridle is intentionally NOT launched here — Noctalia manages
     #       idle/lock/suspend natively via its own idle daemon (idle.enabled = true).
     wayland.windowManager.hyprland.extraConfig = ''
+      # Noctalia dynamic border/group colors — written by the hyprland template
+      # on every color scheme change. File is created on first Noctalia launch.
+      source = ~/.config/hypr/noctalia/noctalia-colors.conf
+
       # Launch Noctalia on Hyprland start
       exec-once = noctalia-shell
 
