@@ -195,7 +195,7 @@
   # VSCode extensions — declared here so they survive a fresh machine rebuild.
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       # ── Nixpkgs-managed (auto-installed on rebuild) ──────────────────────
       github.copilot
       github.copilot-chat
