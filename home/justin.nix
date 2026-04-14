@@ -192,6 +192,28 @@
     };
   };
 
+  # VSCode extensions — declared here so they survive a fresh machine rebuild.
+  # Extensions not in nixpkgs (claude-code, chatgpt, noctalia, debugpy) must be
+  # installed manually once: code --install-extension <id>
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+      github.copilot
+      github.copilot-chat
+      golang.go
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-toolsai.jupyter
+      ms-toolsai.jupyter-keymap
+      ms-toolsai.jupyter-renderers
+      ms-toolsai.vscode-jupyter-cell-tags
+      ms-toolsai.vscode-jupyter-slideshow
+      vscodevim.vim
+      yzhang.markdown-all-in-one
+    ];
+  };
+
   # Default applications
   xdg.mimeApps = {
     enable = true;
