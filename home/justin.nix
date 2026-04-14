@@ -113,11 +113,15 @@
     (pkgs.writeShellScriptBin "discord" ''exec vesktop "$@"'')
   ];
 
+  # Discord icon — copied from the discord package so it persists without discord installed
+  home.file.".local/share/icons/discord.png".source =
+    "${pkgs.discord}/share/icons/hicolor/256x256/apps/discord.png";
+
   # Desktop entry: searching "Discord" in the launcher opens Vesktop with Discord's icon
   xdg.desktopEntries.discord = {
     name = "Discord";
     exec = "vesktop %U";
-    icon = "discord";
+    icon = "/home/justin/.local/share/icons/discord.png";
     comment = "All-in-one voice and text chat (via Vesktop)";
     categories = [ "Network" "InstantMessaging" ];
     mimeType = [ "x-scheme-handler/discord" ];

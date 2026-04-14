@@ -442,7 +442,7 @@
 
         colorSchemes = {
           useWallpaperColors = false;
-          predefinedScheme   = "Nord";
+          predefinedScheme   = "Gruvbox";
           darkMode           = true;
           schedulingMode     = "off";
           manualSunrise      = "06:30";
