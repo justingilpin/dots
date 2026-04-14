@@ -1,0 +1,19 @@
+{
+  // ── Theme ────────────────────────────────────────────────────────────────
+  // Noctalia VSCode extension — auto-installed via activation script.
+  // Colors are written dynamically by Noctalia's template engine.
+  "workbench.colorTheme": "NoctaliaTheme",
+
+  // ── NixOS: disable update nags ───────────────────────────────────────────
+  // VSCode is managed by Nix — in-app updates don't work.
+  "update.mode": "none",
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+
+  // ── Telemetry off ────────────────────────────────────────────────────────
+  "telemetry.telemetryLevel": "off",
+
+  // ── Claude Code ──────────────────────────────────────────────────────────
+  // Skip the permissions prompt — always run in dangerously skip mode.
+  "claude.allowDangerouslySkipPermissions": true
+}

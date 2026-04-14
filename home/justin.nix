@@ -219,22 +219,6 @@
   # VSCode extensions — declared here so they survive a fresh machine rebuild.
   programs.vscode = {
     enable = true;
-    profiles.default.userSettings = {
-      # ── Theme ────────────────────────────────────────────────────────────
-      # Noctalia VSCode extension — auto-installed via activation script.
-      # Colors are written dynamically by Noctalia's template engine.
-      "workbench.colorTheme"                 = "NoctaliaTheme";
-
-      # ── NixOS: disable update nags ───────────────────────────────────────
-      # VSCode is managed by Nix — in-app updates don't work and the prompts
-      # are noise. "none" suppresses the download notification entirely.
-      "update.mode"                          = "none";
-      "extensions.autoUpdate"                = false;
-      "extensions.autoCheckUpdates"          = false;
-
-      # ── Telemetry off ────────────────────────────────────────────────────
-      "telemetry.telemetryLevel"             = "off";
-    };
     profiles.default.extensions = with pkgs.vscode-extensions; [
       # ── Nixpkgs-managed (auto-installed on rebuild) ──────────────────────
       github.copilot
@@ -272,6 +256,20 @@
       mv "$HOME/.vscode/argv.json.new" "$HOME/.vscode/argv.json"
     else
       rm "$HOME/.vscode/argv.json.new"
+    fi
+  '';
+
+  # Seed VS Code settings.json — writable copy so VS Code and extensions can
+  # write to it freely. Seeded from dotfiles on rebuild; only overwrites if the
+  # seed differs so GUI changes survive between rebuilds.
+  home.activation.seedVscodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    SETTINGS_DIR="$HOME/.config/Code/User"
+    mkdir -p "$SETTINGS_DIR"
+    cp --no-preserve=mode ${./files/vscode/settings.json} "$SETTINGS_DIR/settings.json.new"
+    if ! diff -q "$SETTINGS_DIR/settings.json.new" "$SETTINGS_DIR/settings.json" &>/dev/null; then
+      mv "$SETTINGS_DIR/settings.json.new" "$SETTINGS_DIR/settings.json"
+    else
+      rm "$SETTINGS_DIR/settings.json.new"
     fi
   '';
 
