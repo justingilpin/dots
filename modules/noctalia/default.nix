@@ -632,7 +632,7 @@
       bind = $mainMod SHIFT, V,     exec, noctalia-shell ipc call launcher clipboard
 
       # Restart Noctalia shell
-      bind = $mainMod SHIFT, Q,     exec, systemctl --user restart noctalia-shell
+      bind = $mainMod SHIFT, Q,     exec, pkill -x noctalia-shell; noctalia-shell
     '';
 
   }; # end home-manager.users.justin
