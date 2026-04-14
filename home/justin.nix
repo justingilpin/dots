@@ -113,8 +113,11 @@
     (pkgs.writeShellScriptBin "discord" ''exec vesktop "$@"'')
   ];
 
-  # Discord icon — copied from the discord package so it persists without discord installed
+  # Discord icon — used by the desktop entry and as a vesktop icon override
+  # Overriding hicolor/vesktop.png makes the tray show Discord's logo instead of Vesktop's
   home.file.".local/share/icons/discord.png".source =
+    "${pkgs.discord}/share/icons/hicolor/256x256/apps/discord.png";
+  home.file.".local/share/icons/hicolor/256x256/apps/vesktop.png".source =
     "${pkgs.discord}/share/icons/hicolor/256x256/apps/discord.png";
 
   # Desktop entry: searching "Discord" in the launcher opens Vesktop with Discord's icon
