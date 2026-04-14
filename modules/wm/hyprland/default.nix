@@ -78,7 +78,7 @@
 
         # ── Variables ─────────────────────────────────────────────────────────
         "$terminal"   = "kitty";
-        "$fileManager" = "thunar";
+        "$fileManager" = "dolphin";
         "$browser"    = "firefox";
         # $menu is set in basic/default.nix (wofi) — shell provides its own launcher
 

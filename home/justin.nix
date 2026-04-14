@@ -156,7 +156,15 @@
     };
   };
 
-  programs.lf.enable = true;
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      preview = {
+        image_protocol = "kitty";
+      };
+    };
+  };
 
   #  programs.tmux = {
   #    enable = true;

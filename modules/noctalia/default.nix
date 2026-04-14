@@ -99,7 +99,7 @@
           weatherShowEffects      = true;
           weatherTaliaMascotAlways = false;
           useFahrenheit           = true;
-          use12hourFormat         = false;
+          use12hourFormat         = true;
           showWeekNumberInCalendar = false;
           showCalendarEvents      = true;
           showCalendarWeather     = true;
@@ -160,9 +160,9 @@
               }
               {
                 id                   = "Clock";
-                formatHorizontal     = "HH:mm ddd, MMM dd";
-                formatVertical       = "HH mm - dd MM";
-                tooltipFormat        = "HH:mm ddd, MMM dd";
+                formatHorizontal     = "hh:mm AP ddd, MMM dd";
+                formatVertical       = "hh mm AP - dd MM";
+                tooltipFormat        = "hh:mm AP ddd, MMM dd";
                 clockColor           = "none";
                 customFont           = "";
                 useCustomFont        = false;

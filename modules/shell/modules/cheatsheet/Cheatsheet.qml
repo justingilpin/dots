@@ -123,7 +123,7 @@ Scope {
                                 binds: [
                                     { keys: "Super + Return",     action: "Terminal (alacritty)" },
                                     { keys: "Super + B",          action: "Browser (firefox)" },
-                                    { keys: "Super + E",          action: "File manager (thunar)" },
+                                    { keys: "Super + E",          action: "File manager (dolphin)" },
                                     { keys: "Super + R",          action: "Launcher" },
                                 ]
                             }

@@ -54,7 +54,7 @@
         cat > "$SHELL_CFG" << 'EOF'
 {
   "general": {
-    "apps": { "terminal": ["kitty"], "explorer": ["thunar"], "audio": ["pavucontrol"] },
+    "apps": { "terminal": ["kitty"], "explorer": ["dolphin"], "audio": ["pavucontrol"] },
     "idle": {
       "lockBeforeSleep": true,
       "inhibitWhenAudio": true,

@@ -93,8 +93,6 @@
       go
 			spotify
 			gimp
-      xfce.thunar
-			xfce.thunar-archive-plugin # enables right click compression
 			p7zip
 			zip
 			unstable.claude-code

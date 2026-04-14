@@ -5,6 +5,18 @@ in
 {
   time.timeZone = "Asia/Manila";
 
+  # ── Display manager: greetd + tuigreet ─────────────────────────────────────
+  # Replaces TTY manual login. Unlocks GNOME keyring via PAM so VSCode and
+  # other apps don't prompt for the keyring password separately.
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+      user = "greeter";
+    };
+  };
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
 #  services.flatpak.enable = true; # Additional pkgs required for server
   nix = {
     settings = {
