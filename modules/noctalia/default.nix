@@ -578,6 +578,14 @@
           colorGeneration          = "";
         };
 
+        # ── Templates (apply color scheme to external apps) ──────────────────
+        # Requires the noctalia.noctaliatheme VSCode extension to be installed.
+        # Install once with: code --install-extension noctalia.noctaliatheme
+        templates = {
+          enableUserTheming = true;
+          activeTemplates   = [ { id = "code"; enabled = true; } ];
+        };
+
         plugins = {
           autoUpdate     = false;
           notifyUpdates  = true;
