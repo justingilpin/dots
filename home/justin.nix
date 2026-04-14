@@ -13,7 +13,6 @@
   # https://mipmip.github.io/home-manager-option-search
   imports = [
     ./../modules/nvim
-    ./../modules/alacritty
     #		./../modules/eww
   ];
  # programs.nixvim = {
@@ -139,11 +138,26 @@
     nativeMessagingHosts = [ pkgs.pywalfox-native ];
   };
 
-  # Kitty — theme comes from Noctalia's template engine
-  # (writes ~/.config/kitty/themes/noctalia.conf on color scheme changes)
+  # Kitty — primary terminal, replaces alacritty.
+  # Theme comes from Noctalia's template engine
+  # (writes ~/.config/kitty/themes/noctalia.conf on color scheme changes).
   programs.kitty = {
     enable = true;
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 12;
+    };
+    settings = {
+      scrollback_lines        = 10000;
+      wheel_scroll_multiplier = 3;
+      cursor_shape            = "block";
+      hide_mouse_when_typing  = true;
+      # Tabs
+      tab_bar_style           = "powerline";
+      tab_powerline_style     = "slanted";
+    };
     extraConfig = ''
+      # Colors — written by Noctalia's template engine on each palette change
       include themes/noctalia.conf
     '';
   };

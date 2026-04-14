@@ -29,6 +29,15 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
 
+  # ── Qt/KDE theming for Dolphin ────────────────────────────────────────────
+  # plasma-integration provides the "kde" Qt platform theme plugin, which makes
+  # Qt apps (like Dolphin) read their colors from ~/.config/kdeglobals instead
+  # of using a hard-coded fallback theme.
+  # noctalia-to-kdeglobals.py writes kdeglobals from the active Noctalia palette
+  # on startup and on every color scheme change.
+  environment.systemPackages = [ pkgs.kdePackages.plasma-integration ];
+  environment.sessionVariables.QT_QPA_PLATFORMTHEME = "kde";
+
   # ── Noctalia for justin ───────────────────────────────────────────────────
   home-manager.users.justin = { lib, ... }: {
     # Note: inputs.noctalia.homeModules.default is already imported globally in flake.nix
@@ -575,8 +584,9 @@
           performanceModeDisabled = "";
           startup         = "";
           session         = "";
-          # Regenerate Obsidian CSS snippet on every color scheme change
-          colorGeneration = "python3 ${./noctalia-to-obsidian.py}";
+          # Regenerate Obsidian CSS snippet and Dolphin/KDE color scheme on every
+          # palette change. Both scripts read colors.json and write their targets.
+          colorGeneration = "python3 ${./noctalia-to-obsidian.py}; python3 ${./noctalia-to-kdeglobals.py}";
         };
 
         # ── Templates (apply color scheme to external apps) ──────────────────
@@ -586,7 +596,6 @@
           enableUserTheming = true;
           activeTemplates   = [
             { id = "code";      enabled = true; }
-            { id = "alacritty"; enabled = true; }
             { id = "kitty";     enabled = true; }
             { id = "btop";      enabled = true; }
             { id = "hyprland";  enabled = true; }
@@ -622,6 +631,10 @@
       # Noctalia dynamic border/group colors — written by the hyprland template
       # on every color scheme change. File is created on first Noctalia launch.
       source = ~/.config/hypr/noctalia/noctalia-colors.conf
+
+      # Generate kdeglobals (Dolphin/KDE colors) from the current Noctalia palette
+      # at session start — ensures colors are applied even before the first palette change.
+      exec-once = python3 ${./noctalia-to-kdeglobals.py}
 
       # Launch Noctalia on Hyprland start
       exec-once = noctalia-shell

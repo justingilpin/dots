@@ -120,8 +120,6 @@
     wget
     git
     git-crypt
-    alacritty
-    kitty
     cifs-utils # needed for mounting samba shares
   ];
 

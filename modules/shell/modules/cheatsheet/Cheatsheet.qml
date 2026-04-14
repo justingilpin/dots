@@ -121,7 +121,7 @@ Scope {
                             KeySection {
                                 title: "Apps"
                                 binds: [
-                                    { keys: "Super + Return",     action: "Terminal (alacritty)" },
+                                    { keys: "Super + Return",     action: "Terminal (kitty)" },
                                     { keys: "Super + B",          action: "Browser (firefox)" },
                                     { keys: "Super + E",          action: "File manager (dolphin)" },
                                     { keys: "Super + R",          action: "Launcher" },
