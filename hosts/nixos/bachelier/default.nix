@@ -16,8 +16,11 @@
     ./../../common
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
-    ./../../../modules/basic
-    # ./../../../modules/shell
+
+# Choose One Shell or Bar
+   # ./../../../modules/basic
+    ./../../../modules/noctalia
+  #  ./../../../modules/shell
   ];
 
   # Use the systemd-boot EFI boot loader.
