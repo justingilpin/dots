@@ -11,6 +11,7 @@
       ./e14.nix # Original is e15
       ./../../common/common-packages.nix
       ./../../common/nixos-common.nix
+      ./../../common/pc/laptop
       ./../../../modules/wm/hyprland
 
      # Pick One Shell or Bar

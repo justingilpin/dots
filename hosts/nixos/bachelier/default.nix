@@ -14,6 +14,7 @@
     ./nvidia.nix
 #    ./mounts.nix
     ./../../common
+    ./../../common/pc/desktop.nix
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
 
