@@ -83,6 +83,7 @@
     #-------Favorite Software-------#
  #       gimp-with-plugins
     lf # file manager | ranger replacement
+    yazi # modern terminal file manager
     sioyek # pdf viewer
     libreoffice-still
 #    unstablePkgs.obsidian
