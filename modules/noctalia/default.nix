@@ -246,7 +246,7 @@
                 blacklist      = [];
                 chevronColor   = "none";
                 colorizeIcons  = false;
-                drawerEnabled  = false;
+                drawerEnabled  = true;
                 hidePassive    = false;
                 pinned         = [];
               }
