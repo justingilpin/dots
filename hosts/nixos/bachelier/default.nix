@@ -44,6 +44,10 @@
   ## or
   ## xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];  ## for KDE based desktops
 
+  # Keyring — fixes VS Code "OS keyring couldn't be identified" dialog on Hyprland
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
   # Shell
   programs.zsh.enable = true; # configured in /modules/shell
   environment.shells = with pkgs; [zsh]; # Many programs look if user is a 'normal' user
