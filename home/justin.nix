@@ -220,6 +220,11 @@
   programs.vscode = {
     enable = true;
     profiles.default.userSettings = {
+      # ── Theme ────────────────────────────────────────────────────────────
+      # Noctalia VSCode extension — auto-installed via activation script.
+      # Colors are written dynamically by Noctalia's template engine.
+      "workbench.colorTheme"                 = "NoctaliaTheme";
+
       # ── NixOS: disable update nags ───────────────────────────────────────
       # VSCode is managed by Nix — in-app updates don't work and the prompts
       # are noise. "none" suppresses the download notification entirely.
