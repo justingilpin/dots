@@ -15,11 +15,7 @@
   };
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
-    xwayland = {
-      enable = true;
-      hidpi = false;
-    };
+    xwayland.enable = true;
   };
 
 #  services.xserver.windowManager.i3.extraSessionCommands = ''
