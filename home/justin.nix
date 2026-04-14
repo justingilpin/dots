@@ -225,6 +225,30 @@
     splashBackground = "rgb(40, 40, 40)";
   };
 
+  # Seed VS Code argv.json — writable copy so VS Code can update it,
+  # but seeded from dotfiles on every rebuild. Only written if missing or outdated.
+  home.activation.seedVscodeArgv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.vscode"
+    cp --no-preserve=mode ${./files/vscode/argv.json} "$HOME/.vscode/argv.json.new"
+    if ! diff -q "$HOME/.vscode/argv.json.new" "$HOME/.vscode/argv.json" &>/dev/null; then
+      mv "$HOME/.vscode/argv.json.new" "$HOME/.vscode/argv.json"
+    else
+      rm "$HOME/.vscode/argv.json.new"
+    fi
+  '';
+
+  # Seed Claude Code settings.json — writable copy so Claude can update it,
+  # but seeded from dotfiles on every rebuild. Only written if missing or outdated.
+  home.activation.seedClaudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.claude"
+    cp --no-preserve=mode ${./files/claude/settings.json} "$HOME/.claude/settings.json.new"
+    if ! diff -q "$HOME/.claude/settings.json.new" "$HOME/.claude/settings.json" &>/dev/null; then
+      mv "$HOME/.claude/settings.json.new" "$HOME/.claude/settings.json"
+    else
+      rm "$HOME/.claude/settings.json.new"
+    fi
+  '';
+
   # Register pywalfox native messaging host for Firefox.
   # home-manager's nativeMessagingHosts doesn't place the manifest correctly,
   # so we write it manually via activation.

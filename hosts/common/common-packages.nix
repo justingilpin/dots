@@ -22,7 +22,16 @@
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
 		vim-full # for vimtutor
-		calibre
+    python3 # required by Noctalia's VS Code theme helper script
+		(pkgs.symlinkJoin {
+      name = "calibre";
+      paths = [ pkgs.calibre ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/calibre \
+          --set LD_LIBRARY_PATH "${pkgs.openssl.out}/lib"
+      '';
+    })
 		wgnord # nord vpn helper with wireguard
 		speedtest-cli # simple terminal internet tester
     ## stable
