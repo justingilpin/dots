@@ -213,6 +213,16 @@
     ];
   };
 
+  # Vesktop settings — trayIcon must be explicitly enabled for the tray icon to appear
+  home.file.".config/vesktop/settings.json".text = builtins.toJSON {
+    discordBranch    = "stable";
+    minimizeToTray   = true;
+    trayIcon         = true;
+    arRPC            = true;
+    splashColor      = "rgb(235, 219, 178)";
+    splashBackground = "rgb(40, 40, 40)";
+  };
+
   # Register pywalfox native messaging host for Firefox.
   # home-manager's nativeMessagingHosts doesn't place the manifest correctly,
   # so we write it manually via activation.
