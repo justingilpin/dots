@@ -108,6 +108,11 @@
     settings.show_program_path = true;
   };
 
+  # Make "discord" command and any Discord desktop launcher open Vesktop instead
+  home.packages = with pkgs; [
+    (pkgs.writeShellScriptBin "discord" ''exec vesktop "$@"'')
+  ];
+
   # Pywalfox — native messenger for Firefox theming via Noctalia
   # The extension must be installed in Firefox manually (search "Pywalfox" in add-ons)
   programs.firefox.nativeMessagingHosts = [ pkgs.pywalfox-native ];

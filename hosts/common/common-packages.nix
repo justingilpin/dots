@@ -87,7 +87,7 @@
 
     #---------Media----------------#
     vlc
-    discord
+    vesktop
     zoom-us
 		unzip
 
