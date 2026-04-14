@@ -213,9 +213,6 @@
       # ── NOT in nixpkgs — auto-installed via activation script below ─────
       # anthropic.claude-code, openai.chatgpt, noctalia.noctaliatheme, ms-python.debugpy
     ];
-    profiles.default.userSettings = {
-      "workbench.colorTheme" = "Noctalia";
-    };
   };
 
   # Vesktop settings — trayIcon must be explicitly enabled for the tray icon to appear
