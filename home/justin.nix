@@ -208,13 +208,24 @@
       ms-toolsai.vscode-jupyter-slideshow
       vscodevim.vim
 
-      # ── NOT in nixpkgs — must be installed manually on a fresh machine ───
-      # code --install-extension anthropic.claude-code
-      # code --install-extension openai.chatgpt
-      # code --install-extension noctalia.noctaliatheme
-      # code --install-extension ms-python.debugpy
+      # ── NOT in nixpkgs — auto-installed via activation script below ─────
+      # anthropic.claude-code, openai.chatgpt, noctalia.noctaliatheme, ms-python.debugpy
     ];
   };
+
+  # Auto-install VSCode extensions not available in nixpkgs.
+  # Skips silently if already installed so rebuilds are fast.
+  home.activation.installVscodeExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if command -v code &>/dev/null; then
+      for ext in \
+        anthropic.claude-code \
+        openai.chatgpt \
+        noctalia.noctaliatheme \
+        ms-python.debugpy; do
+        code --install-extension "$ext" --force 2>/dev/null || true
+      done
+    fi
+  '';
 
   # Default applications
   xdg.mimeApps = {
