@@ -584,9 +584,27 @@
           performanceModeDisabled = "";
           startup         = "";
           session         = "";
-          # Regenerate Obsidian CSS snippet and Dolphin/KDE color scheme on every
-          # palette change. Both scripts read colors.json and write their targets.
-          colorGeneration = "python3 ${./noctalia-to-obsidian.py}; python3 ${./noctalia-to-kdeglobals.py}";
+
+          # ── Auto-theming scripts ─────────────────────────────────────────
+          # Each script reads ~/.config/noctalia/colors.json and writes a
+          # color config for its target app. They run on every palette change
+          # so all apps stay in sync automatically.
+          #
+          #   noctalia-to-obsidian.py   → ~/.obsidian/.obsidian/snippets/noctalia.css
+          #     Obsidian CSS snippet mapping Noctalia tokens to Obsidian variables.
+          #
+          #   noctalia-to-kdeglobals.py → ~/.config/kdeglobals
+          #     KDE color scheme consumed by Qt/KDE apps (Dolphin etc.) via
+          #     QT_QPA_PLATFORMTHEME=kde + plasma-integration.
+          #
+          #   noctalia-to-libreoffice.py → ~/.config/libreoffice/4/user/registrymodifications.xcu
+          #     LibreOffice XML registry overrides for document-area colors
+          #     (background, text, field shading). Toolbar/menubar colors come
+          #     from the GTK theme via colorSchemes.syncGsettings = true.
+          #
+          # Scripts live in modules/noctalia/ and are referenced by nix store
+          # path so they survive rebuilds and machine migrations automatically.
+          colorGeneration = "python3 ${./noctalia-to-obsidian.py}; python3 ${./noctalia-to-kdeglobals.py}; python3 ${./noctalia-to-libreoffice.py}";
         };
 
         # ── Templates (apply color scheme to external apps) ──────────────────
@@ -632,9 +650,9 @@
       # on every color scheme change. File is created on first Noctalia launch.
       source = ~/.config/hypr/noctalia/noctalia-colors.conf
 
-      # Generate kdeglobals (Dolphin/KDE colors) from the current Noctalia palette
-      # at session start — ensures colors are applied even before the first palette change.
-      exec-once = python3 ${./noctalia-to-kdeglobals.py}
+      # Generate kdeglobals (Dolphin/KDE colors) and LibreOffice color scheme
+      # from the current Noctalia palette at session start.
+      exec-once = python3 ${./noctalia-to-kdeglobals.py}; python3 ${./noctalia-to-libreoffice.py}
 
       # Launch Noctalia on Hyprland start
       exec-once = noctalia-shell

@@ -21,7 +21,6 @@
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
-		vim-full # for vimtutor
     python3 # required by Noctalia's VS Code theme helper script
 		(pkgs.symlinkJoin {
       name = "calibre";
@@ -89,9 +88,7 @@
 #    unstablePkgs.obsidian
 #    unstablePkgs.vscode
     feh
-    vivaldi
     tor
-    tor-browser
 		element-desktop
 		flatpak
 

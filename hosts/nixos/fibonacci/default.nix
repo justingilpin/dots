@@ -86,7 +86,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      zoom-us
       tailscale
       xclip
       xsel

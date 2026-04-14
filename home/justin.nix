@@ -104,10 +104,6 @@
   #    };
   #  };
 
-  programs.htop = {
-    enable = true;
-    settings.show_program_path = true;
-  };
 
   # Make "discord" command and any Discord desktop launcher open Vesktop instead
   home.packages = with pkgs; [

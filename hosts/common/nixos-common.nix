@@ -46,7 +46,6 @@ in
     cifs-utils
     neofetch
     ntfs3g
-    htop
     btop
     coreutils
     bitwarden-cli
