@@ -219,6 +219,17 @@
   # VSCode extensions — declared here so they survive a fresh machine rebuild.
   programs.vscode = {
     enable = true;
+    profiles.default.userSettings = {
+      # ── NixOS: disable update nags ───────────────────────────────────────
+      # VSCode is managed by Nix — in-app updates don't work and the prompts
+      # are noise. "none" suppresses the download notification entirely.
+      "update.mode"                          = "none";
+      "extensions.autoUpdate"                = false;
+      "extensions.autoCheckUpdates"          = false;
+
+      # ── Telemetry off ────────────────────────────────────────────────────
+      "telemetry.telemetryLevel"             = "off";
+    };
     profiles.default.extensions = with pkgs.vscode-extensions; [
       # ── Nixpkgs-managed (auto-installed on rebuild) ──────────────────────
       github.copilot
