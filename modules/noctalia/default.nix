@@ -625,6 +625,7 @@
 
       # Launch Noctalia on Hyprland start
       exec-once = noctalia-shell
+      exec-once = vesktop --start-minimized
 
       # ── Noctalia IPC keybinds ────────────────────────────────────────
       bind = $mainMod, R,           exec, noctalia-shell ipc call launcher toggle
