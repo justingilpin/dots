@@ -246,7 +246,7 @@
                 blacklist      = [];
                 chevronColor   = "none";
                 colorizeIcons  = false;
-                drawerEnabled  = true;
+                drawerEnabled  = false;
                 hidePassive    = false;
                 pinned         = [];
               }
@@ -336,7 +336,7 @@
           position                     = "center";
           pinnedApps                   = [];
           sortByMostUsed               = true;
-          terminalCommand              = "alacritty -e";
+          terminalCommand              = "kitty";
           customLaunchPrefixEnabled    = false;
           customLaunchPrefix           = "";
           viewMode                     = "list";
@@ -634,7 +634,7 @@
       bind = $mainMod SHIFT, V,     exec, noctalia-shell ipc call launcher clipboard
 
       # Restart Noctalia shell
-      bind = $mainMod SHIFT, Q,     exec, pkill -x quickshell && noctalia-shell
+      bind = $mainMod SHIFT, Q,     exec, sh -c "pkill -x quickshell; sleep 0.5; noctalia-shell &"
     '';
 
   }; # end home-manager.users.justin
