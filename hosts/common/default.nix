@@ -5,7 +5,6 @@
     ./common-packages.nix
     ./nixos-common.nix
     inputs.agenix.nixosModules.default
-    inputs.stylix.nixosModules.stylix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -16,27 +15,6 @@
   ] ++ [
     inputs.agenix.packages.${pkgs.system}.default
   ];
-
-  stylix = {
-    enable = true;
-    image = ../../home/images/wheatfield.png;
-    polarity = "dark";
-
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
-      };
-      sansSerif = {
-        package = pkgs.rubik;
-        name = "Rubik";
-      };
-      serif = {
-        package = pkgs.fira;
-        name = "Fira Sans";
-      };
-    };
-  };
 
   home-manager.users.justin = {
     programs.zsh.initContent = lib.mkOrder 1500 ''
@@ -58,10 +36,5 @@
       fi
     '';
 
-    # Keep your hand-tuned terminal/editor themes for now; Stylix can take them
-    # over later once we decide how much of the desktop palette it should own.
-    stylix.targets.alacritty.enable = lib.mkForce false;
-    stylix.targets.hyprpaper.enable = lib.mkForce false;
-    stylix.targets.nixvim.enable = lib.mkForce false;
   };
 }

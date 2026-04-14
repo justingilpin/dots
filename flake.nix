@@ -18,9 +18,6 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:nix-community/stylix/release-25.11";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-
     # Noctalia shell — minimal Quickshell-based Wayland desktop shell
     # Requires nixpkgs-unstable (depends on latest Quickshell)
     noctalia.url = "github:noctalia-dev/noctalia-shell";

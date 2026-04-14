@@ -103,7 +103,7 @@
           gaps_in    = 5;
           gaps_out   = 15;
           border_size = 2;
-          # col.active_border / col.inactive_border intentionally omitted — stylix sets these from the active theme
+          # col.active_border / col.inactive_border intentionally omitted — set by the active shell theme
           layout = "dwindle";
         };
 
@@ -122,7 +122,7 @@
             enabled      = true;
             range        = 4;
             render_power = 3;
-            # color intentionally omitted — stylix sets this from the active theme
+            # color intentionally omitted — set by the active shell theme
           };
         };
 
