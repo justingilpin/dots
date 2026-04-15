@@ -154,26 +154,28 @@
   environment.systemPackages = with pkgs; [
     xorg.xorgserver   # Xorg server for the teleprompter X11 session
     xorg.xinit        # startx / xinit
+    xorg.xdpyinfo     # used by teleprompter-launch to wait for X to be ready
 
     # teleprompter-launch: start X11 on the evdi display and open QPrompt
     (pkgs.writeShellScriptBin "teleprompter-launch" ''
       # Kill any existing teleprompter X session
-      pkill -f "Xorg :1" 2>/dev/null
+      sudo pkill -f "Xorg :1" 2>/dev/null
       sleep 0.5
 
-      # Start X server on display :1 using the evdi card, VT4
-      Xorg :1 -config /etc/X11/teleprompter.conf vt4 -nolisten tcp &
-      XORG_PID=$!
-      echo $XORG_PID > /tmp/teleprompter-xorg.pid
+      # Must run as root to open a virtual console from within a Wayland session
+      sudo ${pkgs.xorg.xorgserver}/bin/Xorg :1 \
+        -config /etc/X11/teleprompter.conf \
+        vt5 -nolisten tcp -noreset &
+      echo $! > /tmp/teleprompter-xorg.pid
 
-      # Wait for X to be ready
+      # Wait for X to be ready (up to 10s)
       for i in $(seq 1 20); do
-        DISPLAY=:1 xdpyinfo &>/dev/null && break
+        DISPLAY=:1 ${pkgs.xorg.xdpyinfo}/bin/xdpyinfo &>/dev/null && break
         sleep 0.5
       done
 
-      # Launch QPrompt on the teleprompter display
-      DISPLAY=:1 flatpak run com.cuperino.qprompt &
+      # Unset WAYLAND_DISPLAY so Qt uses X11 instead of Wayland
+      DISPLAY=:1 WAYLAND_DISPLAY="" flatpak run com.cuperino.qprompt &
     '')
 
     (pkgs.writeShellScriptBin "teleprompter-stop" ''
@@ -189,6 +191,15 @@
 
   # USB
   services.usbmuxd.enable = true;
+
+  # Allow justin to start/stop the Xorg teleprompter session without a password prompt
+  security.sudo.extraRules = [{
+    users = [ "justin" ];
+    commands = [
+      { command = "${pkgs.xorg.xorgserver}/bin/Xorg"; options = [ "NOPASSWD" ]; }
+      { command = "/run/current-system/sw/bin/pkill"; options = [ "NOPASSWD" ]; }
+    ];
+  }];
 
   # Stream Deck udev rules — allows justin to access the device without root.
   # streamdeck-ui reads/writes the HID device directly.
