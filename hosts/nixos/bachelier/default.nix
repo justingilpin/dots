@@ -29,6 +29,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["ntfs" "exfat"]; # allows NTFS and exFAT support at boot
 
+  # AMD Ryzen 7800X3D — use amd-pstate active mode for optimal boost clock management.
+  # "active" lets the CPU firmware (CPPC) self-manage clocks rather than the kernel,
+  # which gives better single-core boost critical for gaming on 3D V-Cache CPUs.
+  boot.kernelParams = [ "amd_pstate=active" ];
+  powerManagement.cpuFreqGovernor = "performance";
+
   networking.hostName = "bachelier"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
@@ -90,10 +96,19 @@
 
   programs.steam = {
     enable = true;
-#		gamescopeSession.enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    # Proton-GE: install into compatibilitytools.d so Steam lists it as a Proton version.
+    # Select it per-game in Steam → game properties → Compatibility.
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
+    # NVIDIA + Wayland: use NVK/EGL for better Wayland compatibility
+    extraEnv = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/justin/.steam/root/compatibilitytools.d";
+    };
   };
+
+  # Gamemode — lets games request CPU/GPU performance boost while running
+  programs.gamemode.enable = true;
 
 #  programs.nixvim = {
 #    enable = true;
