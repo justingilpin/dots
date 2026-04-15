@@ -43,7 +43,6 @@
     wireplumber
     grim
     slurp
-    grimblast  # Hyprland-aware screenshot tool, handles NVIDIA/Wayland correctly
     wl-clipboard
     pamixer
     brightnessctl
@@ -271,9 +270,9 @@
           ",XF86AudioNext, exec, mpc -q next"
           ",XF86AudioPrev, exec, mpc -q prev"
 
-          # Screenshots — grimblast handles NVIDIA/Wayland correctly unlike plain grim
-          "$mainMod, Print, exec, grimblast --notify copy area"
-          ",    Print, exec, grimblast --notify copy screen"
+          # Screenshots
+          "$mainMod, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
+          ",    Print, exec, grim - | wl-copy"
 
           # Whisper push-to-talk — hold Super+Ctrl to record, release to transcribe+type
           "$mainMod, Control_L, exec, whisper-dictate start"
