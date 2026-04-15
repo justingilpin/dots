@@ -67,7 +67,8 @@
         start)
           # Kill any leftover recording before starting a new one
           [ -f "$PIDFILE" ] && kill -INT "$(cat "$PIDFILE")" 2>/dev/null
-          parec --device=alsa_input.usb-Focusrite_Scarlett_2i2_4th_Gen_S2YJXF0469ED22-00.HiFi__Mic1__source --rate=16000 --channels=1 --format=s16le | ffmpeg -nostdin -y -f s16le -ar 16000 -ac 1 -i - "$WAVFILE" >/dev/null 2>&1 &
+          parec -d alsa_input.usb-Focusrite_Scarlett_2i2_4th_Gen_S2YJXF0469ED22-00.HiFi__Mic1__source --format=s16le --channels=1 \
+            | ffmpeg -nostdin -y -f s16le -ar 48000 -ac 1 -i - -ar 16000 "$WAVFILE" >/dev/null 2>&1 &
           echo $! > "$PIDFILE"
           ;;
         stop)

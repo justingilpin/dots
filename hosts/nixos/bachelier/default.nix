@@ -80,6 +80,11 @@
     openFirewall = true;
   };
 
+  # Scarlett 4th Gen — enable enhanced kernel driver with full mixer/routing support
+  boot.extraModprobeConfig = ''
+    options snd_usb_audio vid=0x1235 pid=0x8215 device_setup=1
+  '';
+
   # Enable sound.
  # hardware.pulseaudio = { 
 #		enable = true;
@@ -156,6 +161,7 @@
       #---------Elgato / Streaming--------------#
       streamdeck-ui             # Stream Deck MK.2 button configuration GUI
       alsa-scarlett-gui         # Hardware mixer/gain control for Focusrite Scarlett 2i2
+      scarlett2                 # Firmware management for Scarlett 4th Gen (enables PCM routing)
       # Teleprompter: install QPrompt via Flatpak after rebuild:
       #   flatpak install flathub com.cuperino.qprompt
       # QPrompt has voice-following scroll via built-in speech recognition.
