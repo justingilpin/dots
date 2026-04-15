@@ -82,7 +82,7 @@
 
   # Scarlett 4th Gen — enable enhanced kernel driver with full mixer/routing support
   boot.extraModprobeConfig = ''
-    options snd_usb_audio vid=0x1235 pid=0x8215 device_setup=1
+    options snd_usb_audio vid=0x1235 pid=0x8219 device_setup=1
   '';
 
   # Enable sound.
