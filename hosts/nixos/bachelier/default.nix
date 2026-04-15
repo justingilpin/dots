@@ -113,6 +113,11 @@
 #    defaultPackage = pkgs.vimPlugins.base16-vim;
 #  };
 
+  # DisplayLink — required for Elgato Teleprompter USB display (17e9:ff1a)
+  # evdi is the kernel module DisplayLink uses to create virtual display adapters.
+  services.displaylink.enable = true;
+  boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
+
   # Enable OpenRGB
   # services.hardware.openrgb.enable = true;
   # services.hardware.openrgb.motherboard = "amd";
@@ -120,14 +125,37 @@
   # USB
   services.usbmuxd.enable = true;
 
+  # Stream Deck udev rules — allows justin to access the device without root.
+  # streamdeck-ui reads/writes the HID device directly.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+  '';
+  users.groups.plugdev = {};
+
+  # OBS Studio with useful plugins for streaming/recording with Cam Link 4K
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs                    # Wayland screen capture
+      obs-pipewire-audio-capture # PipeWire audio capture
+      obs-backgroundremoval     # background removal (useful with Cam Link)
+      obs-vkcapture             # Vulkan/game capture
+    ];
+  };
+
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "docker"];
+    extraGroups = ["wheel" "networkmanager" "docker" "plugdev" "video"];
     packages = with pkgs; [
      #  google-chrome
      #  gimp
       chromium
       krita
+      #---------Elgato / Streaming--------------#
+      streamdeck-ui             # Stream Deck MK.2 button configuration GUI
+      # Teleprompter: install QPrompt via Flatpak after rebuild:
+      #   flatpak install flathub com.cuperino.qprompt
+      # QPrompt has voice-following scroll via built-in speech recognition.
       #---------Games--------------#
       lutris
       heroic
