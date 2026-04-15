@@ -59,7 +59,7 @@
   #   desktop → hosts/common/pc/desktop.nix
   #   laptop  → hosts/common/pc/laptop/default.nix
   home.file."Pictures/Wallpapers" = {
-    source = ./../wallpapers;
+    source = ./files/wallpapers;
     recursive = true;
   };
 
