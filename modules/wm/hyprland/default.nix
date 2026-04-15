@@ -47,6 +47,40 @@
     pamixer
     brightnessctl
     kitty
+
+    # ── Whisper dictation ────────────────────────────────────────────────────
+    # Hold Super+Ctrl to record, release to transcribe and type the result.
+    # whisper-cpp-vulkan uses the GPU (Vulkan) for fast inference on any machine.
+    whisper-cpp-vulkan
+    wtype        # types transcribed text into the focused window
+    alsa-utils   # provides arecord for microphone capture
+
+    # whisper-dictate: hold=record, release=transcribe+type
+    (pkgs.writeShellScriptBin "whisper-dictate" ''
+      PIDFILE="/tmp/whisper-record.pid"
+      WAVFILE="/tmp/whisper-input.wav"
+      MODEL="$HOME/.local/share/whisper-cpp/ggml-large-v3-turbo.bin"
+
+      case "$1" in
+        start)
+          # Kill any leftover recording before starting a new one
+          [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+          arecord -f S16_LE -r 16000 -c 1 -q "$WAVFILE" &
+          echo $! > "$PIDFILE"
+          ;;
+        stop)
+          if [ -f "$PIDFILE" ]; then
+            kill "$(cat "$PIDFILE")" 2>/dev/null
+            rm -f "$PIDFILE"
+            sleep 0.1
+            # Transcribe — strip timestamps and leading/trailing whitespace
+            OUTPUT=$(whisper-cpp -m "$MODEL" -f "$WAVFILE" -nt 2>/dev/null \
+              | grep -v '^\[' | tr -d '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            [ -n "$OUTPUT" ] && wtype "$OUTPUT"
+          fi
+          ;;
+      esac
+    '')
   ];
 
   # ── Hyprland config (home-manager side) ────────────────────────────────────
@@ -243,9 +277,30 @@
           "$mainMod, mouse:273, resizewindow"
         ];
 
+        # ── Whisper push-to-talk ─────────────────────────────────────────────
+        # Hold Super+Ctrl → mic records. Release Ctrl → transcribes and types.
+        bind  = [ "$mainMod, Control_L, exec, whisper-dictate start" ];
+        bindl = [ "$mainMod, Control_L, exec, whisper-dictate stop"  ];
+
       }; # end settings
 
     }; # end wayland.windowManager.hyprland
+
+    # ── Whisper model setup ────────────────────────────────────────────────
+    # Downloads large-v3-turbo on first login if not already present.
+    # large-v3-turbo is ~1.6 GB — near large-v3 accuracy, optimized for speed.
+    # Runs fast on the RTX 4070 Ti via Vulkan; usable on laptop integrated GPU.
+    home.activation.downloadWhisperModel = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      MODEL_DIR="$HOME/.local/share/whisper-cpp"
+      MODEL="$MODEL_DIR/ggml-large-v3-turbo.bin"
+      if [ ! -f "$MODEL" ]; then
+        mkdir -p "$MODEL_DIR"
+        echo "Downloading Whisper large-v3-turbo model (~1.6 GB)..."
+        ${pkgs.curl}/bin/curl -L --progress-bar \
+          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin" \
+          -o "$MODEL" || rm -f "$MODEL"
+      fi
+    '';
 
   }; # end home-manager.users.justin
 

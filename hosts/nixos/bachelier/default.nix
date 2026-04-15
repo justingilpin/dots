@@ -153,6 +153,7 @@
       krita
       #---------Elgato / Streaming--------------#
       streamdeck-ui             # Stream Deck MK.2 button configuration GUI
+      alsa-scarlett-gui         # Hardware mixer/gain control for Focusrite Scarlett 2i2
       # Teleprompter: install QPrompt via Flatpak after rebuild:
       #   flatpak install flathub com.cuperino.qprompt
       # QPrompt has voice-following scroll via built-in speech recognition.
