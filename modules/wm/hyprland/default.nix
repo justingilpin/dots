@@ -74,7 +74,7 @@
             rm -f "$PIDFILE"
             sleep 0.1
             # Transcribe — strip timestamps and leading/trailing whitespace
-            OUTPUT=$(whisper-cpp -m "$MODEL" -f "$WAVFILE" -nt 2>/dev/null \
+            OUTPUT=$(whisper-cli -m "$MODEL" -f "$WAVFILE" -nt 2>/dev/null \
               | grep -v '^\[' | tr -d '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
             [ -n "$OUTPUT" ] && wtype "$OUTPUT"
           fi
