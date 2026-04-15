@@ -54,28 +54,32 @@
     whisper-cpp-vulkan
     wtype        # types transcribed text into the focused window
     alsa-utils   # provides arecord for microphone capture
+    curl         # sends audio to whisper-server for transcription
 
     # whisper-dictate: hold=record, release=transcribe+type
+    # Uses whisper-server (model stays loaded in VRAM) for fast response.
+    # whisper-server starts automatically via exec-once on login.
     (pkgs.writeShellScriptBin "whisper-dictate" ''
       PIDFILE="/tmp/whisper-record.pid"
       WAVFILE="/tmp/whisper-input.wav"
-      MODEL="$HOME/.local/share/whisper-cpp/ggml-large-v3-turbo.bin"
 
       case "$1" in
         start)
           # Kill any leftover recording before starting a new one
-          [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
-          arecord -D plughw:1,0 -f S16_LE -r 16000 -c 1 -q "$WAVFILE" &
+          [ -f "$PIDFILE" ] && kill -INT "$(cat "$PIDFILE")" 2>/dev/null
+          ffmpeg -nostdin -y -f alsa -i plughw:1,0 -ar 16000 -ac 1 "$WAVFILE" >/dev/null 2>&1 &
           echo $! > "$PIDFILE"
           ;;
         stop)
           if [ -f "$PIDFILE" ]; then
             kill -INT "$(cat "$PIDFILE")" 2>/dev/null
             rm -f "$PIDFILE"
-            sleep 0.1
-            # Transcribe — strip timestamps and leading/trailing whitespace
-            OUTPUT=$(whisper-cli -m "$MODEL" -f "$WAVFILE" -nt 2>/dev/null \
-              | grep -v '^\[' | tr -d '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            sleep 0.3
+            # Send to whisper-server (model already loaded in VRAM — fast response)
+            OUTPUT=$(curl -s http://127.0.0.1:8178/inference \
+              -F file="@$WAVFILE" \
+              -F temperature=0 \
+              -F response_format=text 2>/dev/null | tr -d '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
             [ -n "$OUTPUT" ] && wtype "$OUTPUT"
           fi
           ;;
@@ -111,6 +115,8 @@
           # Export wayland env then activate session target so systemd services
           # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"
+          # Whisper server — keeps model loaded in VRAM for instant dictation response
+          "whisper-server -m $HOME/.local/share/whisper-cpp/ggml-large-v3-turbo.bin --port 8178 --host 127.0.0.1 -l en --no-gpu false"
         ];
 
         # ── Variables ─────────────────────────────────────────────────────────
