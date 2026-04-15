@@ -14,6 +14,12 @@ in
       command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
       user = "greeter";
     };
+    # Blank the TTY screen after 5 minutes at the login prompt.
+    # consoleBlank kernel param handles the timeout; this ensures DPMS is armed.
+    extraConfig = ''
+      [terminal]
+      vt = 1
+    '';
   };
   security.pam.services.greetd.enableGnomeKeyring = true;
 

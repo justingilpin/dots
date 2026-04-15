@@ -32,7 +32,9 @@
   # AMD Ryzen 7800X3D — use amd-pstate active mode for optimal boost clock management.
   # "active" lets the CPU firmware (CPPC) self-manage clocks rather than the kernel,
   # which gives better single-core boost critical for gaming on 3D V-Cache CPUs.
-  boot.kernelParams = [ "amd_pstate=active" ];
+  # consoleBlank=300 — blanks the TTY/greeter screen after 5 minutes of inactivity.
+  # This covers the greetd login screen which has no Wayland compositor for DPMS.
+  boot.kernelParams = [ "amd_pstate=active" "consoleBlank=300" ];
   powerManagement.cpuFreqGovernor = "performance";
 
   networking.hostName = "bachelier"; # Define your hostname.

@@ -6,7 +6,7 @@
   fileSystems."/mnt/ssdstorage" = {
     device = "/dev/disk/by-uuid/887C874A7C8731CC";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
   };
 
 # Note: ran the following command to fix an error which preventing mounting
@@ -15,28 +15,28 @@
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/34E2AD0DE2ACD480";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
   };
 
 # The options prevented the system from crashing at boot from a failed drive
 
   fileSystems."/mnt/windows" =
-    { device = "/dev/disk/by-uuid/8644AF8B44AF7C95"; #8644AF8B44AF7C95
+    { device = "/dev/disk/by-uuid/8644AF8B44AF7C95";
       fsType = "ntfs3";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
     };
 
   fileSystems."/mnt/m2storage" = {
     device = "/dev/disk/by-uuid/58BE882EBE88072A";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
   };
 
   # Shared M.2 data drive (exFAT, dual-boot with Windows), label: Data
   fileSystems."/mnt/Storage" = {
     device = "/dev/disk/by-uuid/6E1D-743C";
     fsType = "exfat";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=1000" "gid=100" "umask=022" ];
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=1000" "gid=100" "umask=022" "x-systemd.device-timeout=5s" ];
   };
 
 
