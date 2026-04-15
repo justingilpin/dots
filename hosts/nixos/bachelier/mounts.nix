@@ -33,7 +33,7 @@
   };
 
   # Shared M.2 data drive (exFAT, dual-boot with Windows), label: Data
-  fileSystems."/mnt/data" = {
+  fileSystems."/mnt/Storage" = {
     device = "/dev/disk/by-uuid/6E1D-743C";
     fsType = "exfat";
     options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=1000" "gid=100" "umask=022" ];
