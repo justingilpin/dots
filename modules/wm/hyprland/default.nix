@@ -96,7 +96,7 @@
 
         monitor = [
           ",highres,auto,1"
-          "DVI-I-1,1024x600@60,1920x0,1"
+          "DVI-I-1,disabled"
         ];
 
         # ── Autostart ─────────────────────────────────────────────────────────
@@ -235,17 +235,17 @@
           "$mainMod, 9, workspace, 9"
           "$mainMod, 0, workspace, 10"
 
-          # Move to workspace
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod SHIFT, 6, movetoworkspace, 6"
-          "$mainMod SHIFT, 7, movetoworkspace, 7"
-          "$mainMod SHIFT, 8, movetoworkspace, 8"
-          "$mainMod SHIFT, 9, movetoworkspace, 9"
-          "$mainMod SHIFT, 0, movetoworkspace, 10"
+          # Move to workspace (silent — keeps focus on current workspace)
+          "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
+          "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
+          "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
+          "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
+          "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
+          "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
+          "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
+          "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
+          "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
+          "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
 
           # Scratchpad
           "$mainMod, S,       togglespecialworkspace, magic"
