@@ -12,7 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nvidia.nix
-#    ./mounts.nix
+    ./mounts.nix
     ./../../common
     ./../../common/pc/desktop.nix
 #    ./../../../modules/wm/plasma5
@@ -27,7 +27,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = ["ntfs"]; # allows NTFS support at boot
+  boot.supportedFilesystems = ["ntfs" "exfat"]; # allows NTFS and exFAT support at boot
 
   networking.hostName = "bachelier"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
