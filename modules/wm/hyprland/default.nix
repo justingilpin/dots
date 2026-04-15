@@ -270,17 +270,18 @@
           # Screenshots
           "$mainMod, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
           ",    Print, exec, grim - | wl-copy"
+
+          # Whisper push-to-talk — hold Super+Ctrl to record, release to transcribe+type
+          "$mainMod, Control_L, exec, whisper-dictate start"
         ];
+
+        # Whisper release — stop recording and transcribe
+        bindl = [ "$mainMod, Control_L, exec, whisper-dictate stop" ];
 
         bindm = [
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
         ];
-
-        # ── Whisper push-to-talk ─────────────────────────────────────────────
-        # Hold Super+Ctrl → mic records. Release Ctrl → transcribes and types.
-        bind  = [ "$mainMod, Control_L, exec, whisper-dictate start" ];
-        bindl = [ "$mainMod, Control_L, exec, whisper-dictate stop"  ];
 
       }; # end settings
 
