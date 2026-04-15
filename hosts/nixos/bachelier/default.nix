@@ -113,10 +113,12 @@
 #    defaultPackage = pkgs.vimPlugins.base16-vim;
 #  };
 
-  # DisplayLink — required for Elgato Teleprompter USB display (17e9:ff1a)
-  # evdi is the kernel module DisplayLink uses to create virtual display adapters.
-  services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
+  # DisplayLink (Elgato Teleprompter USB display) requires manually downloading
+  # the installer from Synaptics due to EULA — skipped for now.
+  # To enable later: download from https://www.synaptics.com/products/displaylink-usb-graphics-software-ubuntu-62
+  # then follow the nix-prefetch-url instructions and uncomment:
+  # services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
 
   # Enable OpenRGB
   # services.hardware.openrgb.enable = true;
