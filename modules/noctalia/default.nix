@@ -451,7 +451,7 @@
 
         colorSchemes = {
           useWallpaperColors = false;
-          predefinedScheme   = "Gruvbox";
+          predefinedScheme   = "GruvboxAlt";
           darkMode           = true;
           schedulingMode     = "off";
           manualSunrise      = "06:30";
@@ -604,7 +604,7 @@
           #
           # Scripts live in modules/noctalia/ and are referenced by nix store
           # path so they survive rebuilds and machine migrations automatically.
-          colorGeneration = "python3 ${./noctalia-to-obsidian.py}; python3 ${./noctalia-to-kdeglobals.py}; python3 ${./noctalia-to-libreoffice.py}";
+          colorGeneration = "python3 ${./noctalia-to-obsidian.py}; python3 ${./noctalia-to-kdeglobals.py}; python3 ${./noctalia-to-libreoffice.py}; mkdir -p ~/.config/nvim/themes";
         };
 
         # ── Templates (apply color scheme to external apps) ──────────────────
@@ -641,6 +641,21 @@
       #   ];
       # };
     };
+
+    # ── Noctalia user templates ──────────────────────────────────────────
+    # Seeded on rebuild; Noctalia may append to this file so it's writable.
+    home.activation.seedNoctaliaUserTemplates = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p "$HOME/.config/noctalia"
+      cat > "$HOME/.config/noctalia/user-templates.toml" <<'TOML'
+[config]
+
+[templates]
+
+[templates.neovim]
+input_path  = "${./noctalia-to-nvim.lua}"
+output_path = "~/.config/nvim/themes/noctalia.lua"
+TOML
+    '';
 
     # ── Hyprland integration for Noctalia ───────────────────────────────
     # NOTE: hypridle is intentionally NOT launched here — Noctalia manages

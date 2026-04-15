@@ -58,6 +58,11 @@
   # hypridle.conf is set per machine type:
   #   desktop → hosts/common/pc/desktop.nix
   #   laptop  → hosts/common/pc/laptop/default.nix
+  home.file."Pictures/Wallpapers" = {
+    source = ./../wallpapers;
+    recursive = true;
+  };
+
   home.file.".config/hypr/hyprlock.conf".source = ./../modules/hyprland/hyprlock.conf;
   home.file.".config/hypr/hyprpaper.conf".source = ./../modules/hyprland/hyprpaper.conf;
   # Waybar style — enable/systemd settings live in modules/basic/default.nix
