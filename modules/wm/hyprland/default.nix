@@ -86,7 +86,7 @@
   # ── Hyprland config (home-manager side) ────────────────────────────────────
   # Generates ~/.config/hypr/hyprland.conf — replaces the static file symlink.
   # basic/default.nix and shell/default.nix append to extraConfig as needed.
-  home-manager.users.justin = {
+  home-manager.users.justin = { lib, ... }: {
 
     wayland.windowManager.hyprland = {
       enable   = true;
@@ -306,3 +306,4 @@
   }; # end home-manager.users.justin
 
 }
+
