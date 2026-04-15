@@ -115,12 +115,11 @@
 #    defaultPackage = pkgs.vimPlugins.base16-vim;
 #  };
 
-  # DisplayLink (Elgato Teleprompter USB display) requires manually downloading
-  # the installer from Synaptics due to EULA — skipped for now.
-  # To enable later: download from https://www.synaptics.com/products/displaylink-usb-graphics-software-ubuntu-62
-  # then follow the nix-prefetch-url instructions and uncomment:
-  # services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
-  # boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
+  # DisplayLink — Elgato Teleprompter USB display (17e9:ff1a)
+  # Requires the installer to be pre-fetched via:
+  #   nix-prefetch-url --name displaylink-620.zip "https://www.synaptics.com/sites/default/files/exe_files/2025-09/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu6.2-EXE.zip"
+  services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
 
   # Enable OpenRGB
   # services.hardware.openrgb.enable = true;
