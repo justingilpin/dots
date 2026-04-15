@@ -99,6 +99,10 @@
 		unzip
 
     vscode-extensions.ms-vscode-remote.remote-ssh
+
+    #---------Vim Games-----------#
+    pacvim
+    vimgolf
   ];
 
   fonts.packages = with pkgs; [
