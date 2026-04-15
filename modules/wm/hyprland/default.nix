@@ -94,7 +94,10 @@
 
       settings = {
 
-        monitor = ",highres,auto,1";
+        monitor = [
+          ",highres,auto,1"
+          "DVI-I-1,1024x600@60,1920x0,1"
+        ];
 
         # ── Autostart ─────────────────────────────────────────────────────────
         # hypridle and dunst are intentionally NOT here — basic/default.nix adds

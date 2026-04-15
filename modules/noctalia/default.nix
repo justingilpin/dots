@@ -682,6 +682,10 @@ TOML
 
       # Restart Noctalia shell
       bind = $mainMod SHIFT, Q,     exec, sh -c "pkill -x quickshell; sleep 0.5; noctalia-shell &"
+
+      # Teleprompter — launch QPrompt on the Elgato Prompter display (X11 on evdi/card0)
+      bind = $mainMod, T,           exec, teleprompter-launch
+      bind = $mainMod SHIFT, T,     exec, teleprompter-stop
     '';
 
   }; # end home-manager.users.justin

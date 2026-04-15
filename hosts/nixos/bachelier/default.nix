@@ -116,10 +116,72 @@
 #  };
 
   # DisplayLink — Elgato Teleprompter USB display (17e9:ff1a)
-  # Requires the installer to be pre-fetched via:
-  #   nix-prefetch-url --name displaylink-620.zip "https://www.synaptics.com/sites/default/files/exe_files/2025-09/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu6.2-EXE.zip"
+  # evdi has no render node so Hyprland/Wayland can't use it directly.
+  # Instead we run a minimal X11 server on card0 (evdi) alongside the Wayland session.
+  # Launch with Super+T keybind — starts Xorg on :1 + QPrompt on the teleprompter screen.
   services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
+
+  # Xorg config for the evdi/DisplayLink card only (card0, platform:evdi:00)
+  environment.etc."X11/teleprompter.conf".text = ''
+    Section "Device"
+      Identifier "DisplayLink"
+      Driver     "modesetting"
+      Option     "kmsdev" "/dev/dri/card0"
+    EndSection
+
+    Section "Screen"
+      Identifier "Teleprompter"
+      Device     "DisplayLink"
+      DefaultDepth 24
+      SubSection "Display"
+        Depth 24
+        Modes "1024x600"
+      EndSubSection
+    EndSection
+
+    Section "ServerLayout"
+      Identifier "TeleprompterLayout"
+      Screen "Teleprompter"
+    EndSection
+
+    Section "ServerFlags"
+      Option "AutoAddDevices" "false"
+      Option "AutoEnableDevices" "false"
+    EndSection
+  '';
+
+  environment.systemPackages = with pkgs; [
+    xorg.xorgserver   # Xorg server for the teleprompter X11 session
+    xorg.xinit        # startx / xinit
+
+    # teleprompter-launch: start X11 on the evdi display and open QPrompt
+    (pkgs.writeShellScriptBin "teleprompter-launch" ''
+      # Kill any existing teleprompter X session
+      pkill -f "Xorg :1" 2>/dev/null
+      sleep 0.5
+
+      # Start X server on display :1 using the evdi card, VT4
+      Xorg :1 -config /etc/X11/teleprompter.conf vt4 -nolisten tcp &
+      XORG_PID=$!
+      echo $XORG_PID > /tmp/teleprompter-xorg.pid
+
+      # Wait for X to be ready
+      for i in $(seq 1 20); do
+        DISPLAY=:1 xdpyinfo &>/dev/null && break
+        sleep 0.5
+      done
+
+      # Launch QPrompt on the teleprompter display
+      DISPLAY=:1 flatpak run com.cuperino.qprompt &
+    '')
+
+    (pkgs.writeShellScriptBin "teleprompter-stop" ''
+      pkill -f "com.cuperino.qprompt" 2>/dev/null
+      pkill -f "Xorg :1" 2>/dev/null
+      rm -f /tmp/teleprompter-xorg.pid
+    '')
+  ];
 
   # Enable OpenRGB
   # services.hardware.openrgb.enable = true;
