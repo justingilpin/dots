@@ -65,12 +65,12 @@
         start)
           # Kill any leftover recording before starting a new one
           [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
-          arecord -f S16_LE -r 16000 -c 1 -q "$WAVFILE" &
+          arecord -D plughw:1,0 -f S16_LE -r 16000 -c 1 -q "$WAVFILE" &
           echo $! > "$PIDFILE"
           ;;
         stop)
           if [ -f "$PIDFILE" ]; then
-            kill "$(cat "$PIDFILE")" 2>/dev/null
+            kill -INT "$(cat "$PIDFILE")" 2>/dev/null
             rm -f "$PIDFILE"
             sleep 0.1
             # Transcribe — strip timestamps and leading/trailing whitespace
