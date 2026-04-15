@@ -138,10 +138,9 @@
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
-      wlrobs                    # Wayland screen capture
+      wlrobs                     # Wayland screen capture
       obs-pipewire-audio-capture # PipeWire audio capture
-      obs-backgroundremoval     # background removal (useful with Cam Link)
-      obs-vkcapture             # Vulkan/game capture
+      obs-vkcapture              # Vulkan/game capture
     ];
   };
 
