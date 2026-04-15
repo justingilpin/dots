@@ -101,10 +101,6 @@
     # Proton-GE: install into compatibilitytools.d so Steam lists it as a Proton version.
     # Select it per-game in Steam → game properties → Compatibility.
     extraCompatPackages = [ pkgs.proton-ge-bin ];
-    # NVIDIA + Wayland: use NVK/EGL for better Wayland compatibility
-    extraEnv = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/justin/.steam/root/compatibilitytools.d";
-    };
   };
 
   # Gamemode — lets games request CPU/GPU performance boost while running
