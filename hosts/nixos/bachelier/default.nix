@@ -115,7 +115,7 @@
 
   # DisplayLink — required for Elgato Teleprompter USB display (17e9:ff1a)
   # evdi is the kernel module DisplayLink uses to create virtual display adapters.
-  services.displaylink.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.evdi ];
 
   # Enable OpenRGB
