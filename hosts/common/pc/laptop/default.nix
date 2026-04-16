@@ -4,7 +4,7 @@
   imports = [ ../. ];
 
   # TLP for laptop power/heat tuning — disable power-profiles-daemon (they conflict)
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = lib.mkForce false;
   services.tlp = {
     enable = true;
     settings = {
