@@ -35,6 +35,8 @@ let
   kaleido = pkgs.python3Packages.buildPythonPackage rec {
     pname = "kaleido";
     version = "0.2.1";
+    pyproject = true;
+    build-system = [ pkgs.python3Packages.setuptools ];
     src = pkgs.fetchFromGitHub {
       owner = "plotly";
       repo = "kaleido";
