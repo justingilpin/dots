@@ -61,7 +61,11 @@ let
       rev = "v${version}";
       sha256 = "sha256-T68znWNqvolxoUlEF+8XkORmHcZzMRjiQpILhgP+5KY=";
     };
-    propagatedBuildInputs = with pkgs.python3Packages; [ numpy pandas kaleido ];
+    propagatedBuildInputs = with pkgs.python3Packages; [
+      numpy pandas kaleido scipy matplotlib plotly ipywidgets numba
+      dill tqdm dateparser imageio scikit-learn schedule requests
+      mypy-extensions
+    ];
     meta = with pkgs.lib; {
       description = "Python library for backtesting and analyzing trading strategies at scale";
       homepage = "https://github.com/polakowo/vectorbt";
