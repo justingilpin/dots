@@ -53,6 +53,8 @@ let
   vectorbt = pkgs.python3Packages.buildPythonPackage rec {
     pname = "vectorbt";
     version = "0.20.0";
+    pyproject = true;
+    build-system = [ pkgs.python3Packages.setuptools ];
     src = pkgs.fetchFromGitHub {
       owner = "polakowo";
       repo = pname;
