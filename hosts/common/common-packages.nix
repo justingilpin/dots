@@ -103,6 +103,7 @@
     #---------Vim Games-----------#
     pacvim
     vimgolf
+
   ];
 
   fonts.packages = with pkgs; [

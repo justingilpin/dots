@@ -16,9 +16,12 @@
 
      # Pick One Shell or Bar
      # ./../../../modules/basic
-     # ./../../../modules/shell      
+     # ./../../../modules/shell
       ./../../../modules/noctalia
      # ./../../../modules/DankMaterialShell
+
+      # Trading / backtesting: VectorBT + NautilusTrader + Dukascopy data
+      ./../../../modules/vectorbt
     ];
 
   # Quick fix for Obsidian to allow insecure install
