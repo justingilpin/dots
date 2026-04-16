@@ -35,13 +35,13 @@ let
   kaleido = pkgs.python3Packages.buildPythonPackage rec {
     pname = "kaleido";
     version = "0.2.1";
-    pyproject = true;
-    build-system = [ pkgs.python3Packages.setuptools ];
-    src = pkgs.fetchFromGitHub {
-      owner = "plotly";
-      repo = "kaleido";
-      rev = "v${version}";
-      sha256 = "sha256:/ZDPZCbm/y5ycQ4KaPuptR/FIcdP7gUjWHURBXlr+1w=";
+    format = "wheel";
+    src = pkgs.fetchPypi {
+      inherit pname version format;
+      python = "py2.py3";
+      abi = "none";
+      platform = "manylinux1_x86_64";
+      sha256 = "sha256-qiHPG/HHj4+lCp99ReEAPDh709b+CnZ8+780S5W9w6g=";
     };
     meta = with pkgs.lib; {
       description = "Static image export for web-based visualization libraries";
