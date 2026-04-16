@@ -116,6 +116,8 @@
           # Export wayland env then activate session target so systemd services
           # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"
+          # RGB — set Logitech G403 Hero and Razer BlackWidow to static color D79921
+          "openrgb --noautoconnect -c D79921 --mode static"
           # Whisper server — keeps model loaded in VRAM for instant dictation response
           "whisper-server -m $HOME/.local/share/whisper-cpp/ggml-large-v3-turbo.bin --port 8178 --host 127.0.0.1 -l en --no-gpu false"
         ];

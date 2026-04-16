@@ -126,9 +126,12 @@
   # Revisit if Hyprland adds evdi/DisplayLink support in the future.
 
 
-  # Enable OpenRGB
-  # services.hardware.openrgb.enable = true;
-  # services.hardware.openrgb.motherboard = "amd";
+  # OpenRGB — controls RGB for Logitech G403 Hero and Razer BlackWidow
+  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb.motherboard = "amd";
+  # After rebuild, run once to set static color D79921 (215,153,33):
+  #   openrgb --noautoconnect -c D79921 --mode static
+  environment.systemPackages = with pkgs; [ openrgb-with-all-plugins ];
 
   # USB
   services.usbmuxd.enable = true;
