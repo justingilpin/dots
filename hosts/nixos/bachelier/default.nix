@@ -99,12 +99,6 @@
     "w /proc/acpi/wakeup - - - - XHC0"
   ];
 
-  # Re-enable wakeup for the Razer BlackWidow keyboard only (USB path 3-2)
-  services.udev.extraRules = ''
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", GROUP="plugdev", MODE="0660", TAG+="uaccess"
-    ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Razer BlackWidow Elite", ATTR{power/wakeup}="enabled"
-  '';
-
   # Enable sound.
  # hardware.pulseaudio = { 
 #		enable = true;
@@ -156,10 +150,10 @@
   # USB
   services.usbmuxd.enable = true;
 
-  # Stream Deck udev rules — allows justin to access the device without root.
-  # streamdeck-ui reads/writes the HID device directly.
+  # udev rules — Stream Deck access + Razer BlackWidow wakeup from suspend
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+    ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Razer BlackWidow Elite", ATTR{power/wakeup}="enabled"
   '';
   users.groups.plugdev = {};
 
