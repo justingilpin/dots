@@ -93,12 +93,11 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "multi-user.target" ];
     serviceConfig.Type = "oneshot";
+    path = [ pkgs.gnugrep ];
     script = ''
       disable() {
         local dev=$1
-        local status
-        status=$(grep "^$dev " /proc/acpi/wakeup | awk '{print $3}')
-        if [ "$status" = "*enabled" ]; then
+        if grep -q "^$dev .*\*enabled" /proc/acpi/wakeup; then
           echo "$dev" > /proc/acpi/wakeup
         fi
       }
