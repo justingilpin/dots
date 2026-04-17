@@ -121,7 +121,7 @@
           # RGB — set Logitech G403 Hero and Razer BlackWidow to static color D79921
           "openrgb --noautoconnect -c D79921 --mode static"
           # Whisper server — keeps model loaded in VRAM for instant dictation response
-          "whisper-server -m $HOME/.local/share/whisper-cpp/ggml-large-v3-turbo.bin --port 8178 --host 127.0.0.1 -l en --no-gpu false"
+          "whisper-server -m $HOME/.local/share/whisper-cpp/ggml-small.en.bin --port 8178 --host 127.0.0.1 -l en"
         ];
 
         # ── Variables ─────────────────────────────────────────────────────────
@@ -307,16 +307,15 @@
 
     # ── Whisper model setup ────────────────────────────────────────────────
     # Downloads large-v3-turbo on first login if not already present.
-    # large-v3-turbo is ~1.6 GB — near large-v3 accuracy, optimized for speed.
-    # Runs fast on the RTX 4070 Ti via Vulkan; usable on laptop integrated GPU.
+    # small.en is ~150 MB — fast inference (<1s on RTX 4070 Ti), good accuracy for English dictation.
     home.activation.downloadWhisperModel = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       MODEL_DIR="$HOME/.local/share/whisper-cpp"
-      MODEL="$MODEL_DIR/ggml-large-v3-turbo.bin"
+      MODEL="$MODEL_DIR/ggml-small.en.bin"
       if [ ! -f "$MODEL" ]; then
         mkdir -p "$MODEL_DIR"
-        echo "Downloading Whisper large-v3-turbo model (~1.6 GB)..."
+        echo "Downloading Whisper small.en model (~150 MB)..."
         ${pkgs.curl}/bin/curl -L --progress-bar \
-          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin" \
+          "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin" \
           -o "$MODEL" || rm -f "$MODEL"
       fi
     '';
