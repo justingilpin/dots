@@ -114,6 +114,20 @@
     '';
   };
 
+  # AMD 500 Series USB controller (0000:02:00.0) throws USBSTS 0x401 on resume,
+  # causing an immediate phantom wakeup. Rebinding the driver after suspend clears it.
+  systemd.services.fix-xhci-resume = {
+    description = "Rebind AMD 500 Series USB controller after resume to fix USBSTS 0x401";
+    wantedBy = [ "suspend.target" ];
+    after = [ "suspend.target" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      echo "0000:02:00.0" > /sys/bus/pci/drivers/xhci_hcd/unbind 2>/dev/null || true
+      sleep 0.5
+      echo "0000:02:00.0" > /sys/bus/pci/drivers/xhci_hcd/bind 2>/dev/null || true
+    '';
+  };
+
   # Enable sound.
  # hardware.pulseaudio = { 
 #		enable = true;
