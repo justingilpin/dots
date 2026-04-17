@@ -34,7 +34,7 @@
   # which gives better single-core boost critical for gaming on 3D V-Cache CPUs.
   # consoleBlank=300 — blanks the TTY/greeter screen after 5 minutes of inactivity.
   # This covers the greetd login screen which has no Wayland compositor for DPMS.
-  boot.kernelParams = [ "amd_pstate=active" "consoleBlank=300" "xhci_hcd.quirks=0x80000" ];
+  boot.kernelParams = [ "amd_pstate=active" "consoleBlank=300" ];
   powerManagement.cpuFreqGovernor = "performance";
 
   networking.hostName = "bachelier"; # Define your hostname.
@@ -81,8 +81,11 @@
   };
 
   # Scarlett 4th Gen — enable enhanced kernel driver with full mixer/routing support
+  # xhci_hcd quirks=0x80000 — XHCI_RESET_ON_RESUME: force full controller reset on resume
+  # to fix "xHC error in resume, USBSTS 0x401" on the AMD 500 Series USB controller (PTXH)
   boot.extraModprobeConfig = ''
     options snd_usb_audio vid=0x1235 pid=0x8219 device_setup=1
+    options xhci_hcd quirks=0x80000
   '';
 
   # Suspend wakeup — only allow XHC0 (the USB controller the keyboard is on) to wake.
