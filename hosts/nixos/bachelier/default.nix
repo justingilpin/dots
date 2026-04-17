@@ -85,6 +85,18 @@
     options snd_usb_audio vid=0x1235 pid=0x8219 device_setup=1
   '';
 
+  # Disable PCIe bridge wakeup — prevents phantom wakeups from network/PCIe devices.
+  # PTXH and XHC0 (USB controllers) are left enabled so keyboard/mouse can wake the machine.
+  systemd.tmpfiles.rules = [
+    "w /proc/acpi/wakeup - - - - GP12"
+    "w /proc/acpi/wakeup - - - - GP13"
+    "w /proc/acpi/wakeup - - - - GPP0"
+    "w /proc/acpi/wakeup - - - - GPP8"
+    "w /proc/acpi/wakeup - - - - PT24"
+    "w /proc/acpi/wakeup - - - - PT28"
+    "w /proc/acpi/wakeup - - - - PT29"
+  ];
+
   # Enable sound.
  # hardware.pulseaudio = { 
 #		enable = true;
