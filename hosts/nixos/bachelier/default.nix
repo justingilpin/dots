@@ -34,7 +34,7 @@
   # which gives better single-core boost critical for gaming on 3D V-Cache CPUs.
   # consoleBlank=300 — blanks the TTY/greeter screen after 5 minutes of inactivity.
   # This covers the greetd login screen which has no Wayland compositor for DPMS.
-  boot.kernelParams = [ "amd_pstate=active" "consoleBlank=300" ];
+  boot.kernelParams = [ "amd_pstate=active" "consoleBlank=300" "mem_sleep_default=s2idle" ];
   powerManagement.cpuFreqGovernor = "performance";
 
   networking.hostName = "bachelier"; # Define your hostname.
