@@ -152,13 +152,18 @@
     # Select it per-game in Steam → game properties → Compatibility.
     extraCompatPackages = [
       pkgs.proton-ge-bin
-      (pkgs.proton-ge-bin.overrideAttrs (_: {
+      (pkgs.stdenvNoCC.mkDerivation {
+        pname = "proton-ge-bin";
         version = "GE-Proton10-34";
         src = pkgs.fetchurl {
           url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton10-34/GE-Proton10-34.tar.gz";
           hash = "sha256-UcWAtmqDPHOZj+APBxfurFcZdlQECi8u1RiePuaNdz0=";
         };
-      }))
+        installPhase = ''
+          mkdir -p $out
+          cp -r . $out/
+        '';
+      })
     ];
   };
 
