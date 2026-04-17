@@ -150,7 +150,16 @@
     dedicatedServer.openFirewall = true;
     # Proton-GE: install into compatibilitytools.d so Steam lists it as a Proton version.
     # Select it per-game in Steam → game properties → Compatibility.
-    extraCompatPackages = [ pkgs.proton-ge-bin ];
+    extraCompatPackages = [
+      pkgs.proton-ge-bin
+      (pkgs.proton-ge-bin.overrideAttrs (_: {
+        version = "GE-Proton10-34";
+        src = pkgs.fetchurl {
+          url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton10-34/GE-Proton10-34.tar.gz";
+          sha256 = "18xsbvkxs3q1szd1pvzispp1jpd3yxc5hx3h9xl979rbhxhyqcwp";
+        };
+      }))
+    ];
   };
 
   # Gamemode — lets games request CPU/GPU performance boost while running
