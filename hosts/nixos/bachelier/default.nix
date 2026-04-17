@@ -87,17 +87,30 @@
 
   # Suspend wakeup — only allow XHC0 (the USB controller the keyboard is on) to wake.
   # XHC0 = 0000:09:00.3, which is the bus the Razer BlackWidow Elite is connected to.
-  # PTXH and all PCIe bridges are disabled to prevent phantom wakeups.
-  systemd.tmpfiles.rules = [
-    "w /proc/acpi/wakeup - - - - GP12"
-    "w /proc/acpi/wakeup - - - - GP13"
-    "w /proc/acpi/wakeup - - - - GPP0"
-    "w /proc/acpi/wakeup - - - - GPP8"
-    "w /proc/acpi/wakeup - - - - PT24"
-    "w /proc/acpi/wakeup - - - - PT28"
-    "w /proc/acpi/wakeup - - - - PT29"
-    "w /proc/acpi/wakeup - - - - PTXH"
-  ];
+  # tmpfiles can't write the same path multiple times, so a oneshot service is used instead.
+  systemd.services.disable-wakeup-sources = {
+    description = "Disable ACPI wakeup sources except keyboard USB controller";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "multi-user.target" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      disable() {
+        local dev=$1
+        local status
+        status=$(grep "^$dev " /proc/acpi/wakeup | awk '{print $3}')
+        if [ "$status" = "*enabled" ]; then
+          echo "$dev" > /proc/acpi/wakeup
+        fi
+      }
+      disable GP13
+      disable GPP0
+      disable GPP8
+      disable PT24
+      disable PT28
+      disable PT29
+      disable PTXH
+    '';
+  };
 
   # Enable sound.
  # hardware.pulseaudio = { 
