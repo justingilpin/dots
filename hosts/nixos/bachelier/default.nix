@@ -156,7 +156,7 @@
         version = "GE-Proton10-34";
         src = pkgs.fetchurl {
           url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton10-34/GE-Proton10-34.tar.gz";
-          sha256 = "18xsbvkxs3q1szd1pvzispp1jpd3yxc5hx3h9xl979rbhxhyqcwp";
+          hash = "sha256-UcWAtmqDPHOZj+APBxfurFcZdlQECi8u1RiePuaNdz0=";
         };
       }))
     ];
