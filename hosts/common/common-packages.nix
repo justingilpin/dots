@@ -93,7 +93,7 @@
 		flatpak
 
     #---------Media----------------#
-    stremio
+    stremio-linux-shell
     vlc
     vesktop
     zoom-us
