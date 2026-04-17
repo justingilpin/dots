@@ -546,7 +546,7 @@
           fadeDuration       = 5;
           screenOffCommand   = "";
           lockCommand        = "";
-          suspendCommand     = "";
+          suspendCommand     = "systemctl suspend";
           resumeScreenOffCommand = "";
           resumeLockCommand  = "";
           resumeSuspendCommand = "";
@@ -658,22 +658,8 @@ TOML
     '';
 
     # ── Hyprland integration for Noctalia ───────────────────────────────
-    # Noctalia handles screen-off and lock natively.
-    # hypridle runs alongside only for suspend — Noctalia's idle daemon doesn't
-    # signal logind, so systemctl suspend never fires from the lock screen.
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd  = "hyprctl dispatch dpms on";
-        };
-        listener = [{
-          timeout  = 1800;
-          on-timeout = "systemctl suspend";
-        }];
-      };
-    };
+    # Noctalia handles screen-off, lock, and suspend natively via idle.suspendCommand.
+    # hypridle is not used.
     wayland.windowManager.hyprland.extraConfig = ''
       # Noctalia dynamic border/group colors — written by the hyprland template
       # on every color scheme change. File is created on first Noctalia launch.
