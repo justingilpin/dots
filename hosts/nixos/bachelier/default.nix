@@ -85,8 +85,9 @@
     options snd_usb_audio vid=0x1235 pid=0x8219 device_setup=1
   '';
 
-  # Suspend wakeup — only allow the Razer BlackWidow keyboard to wake the machine.
-  # All ACPI wakeup sources are disabled; keyboard wakeup is re-enabled per USB device.
+  # Suspend wakeup — only allow XHC0 (the USB controller the keyboard is on) to wake.
+  # XHC0 = 0000:09:00.3, which is the bus the Razer BlackWidow Elite is connected to.
+  # PTXH and all PCIe bridges are disabled to prevent phantom wakeups.
   systemd.tmpfiles.rules = [
     "w /proc/acpi/wakeup - - - - GP12"
     "w /proc/acpi/wakeup - - - - GP13"
@@ -96,7 +97,6 @@
     "w /proc/acpi/wakeup - - - - PT28"
     "w /proc/acpi/wakeup - - - - PT29"
     "w /proc/acpi/wakeup - - - - PTXH"
-    "w /proc/acpi/wakeup - - - - XHC0"
   ];
 
   # Enable sound.

@@ -540,8 +540,8 @@
         # suspendTimeout:   suspend after 30 min
         idle = {
           enabled            = true;
-          screenOffTimeout   = 10;
-          lockTimeout        = 15;
+          screenOffTimeout   = 15;
+          lockTimeout        = 10;
           suspendTimeout     = 20;
           fadeDuration       = 5;
           screenOffCommand   = "";
