@@ -116,6 +116,8 @@
           # Export wayland env then activate session target so systemd services
           # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"
+          # WirePlumber sometimes misses USB audio devices on boot — restart to re-enumerate
+          "systemctl --user restart wireplumber"
           # RGB — set Logitech G403 Hero and Razer BlackWidow to static color D79921
           "openrgb --noautoconnect -c D79921 --mode static"
           # Whisper server — keeps model loaded in VRAM for instant dictation response
