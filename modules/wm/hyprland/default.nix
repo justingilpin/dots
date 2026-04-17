@@ -204,7 +204,11 @@
         debug.disable_logs = false;
 
         # ── Window rules ──────────────────────────────────────────────────────
-        windowrulev2 = "immediate, class:^(cs2)$";
+        windowrulev2 = [
+          "immediate, class:^(cs2)$"
+          "idleinhibit fullscreen, class:^(firefox)$"
+          "idleinhibit fullscreen, class:^(stremio)$"
+        ];
 
         # ── Keybinds ──────────────────────────────────────────────────────────
         "$mainMod" = "SUPER";
