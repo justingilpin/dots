@@ -199,7 +199,7 @@
 
   # Reduce global stop timeout — default 1m30s causes long shutdown delays when
   # services or user processes (e.g. whisper-server) don't exit cleanly.
-  systemd.extraConfig = "DefaultTimeoutStopSec=15s";
+  systemd.settings.Manager.DefaultTimeoutStopSec = "15s";
   systemd.user.extraConfig = "DefaultTimeoutStopSec=15s";
 
   # udev rules — Stream Deck access + Razer BlackWidow wakeup from suspend
