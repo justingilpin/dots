@@ -53,9 +53,7 @@
   ## or
   ## xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];  ## for KDE based desktops
 
-  # Keyring — fixes VS Code "OS keyring couldn't be identified" dialog on Hyprland
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
+  # gnome-keyring is enabled in modules/wm/hyprland; PAM unlock via greetd is in nixos-common.nix
 
   # Shell
   programs.zsh.enable = true; # configured in /modules/shell
@@ -197,6 +195,12 @@
 
   # USB
   services.usbmuxd.enable = true;
+  systemd.services.usbmuxd.serviceConfig.TimeoutStopSec = lib.mkForce "5s"; # default 1m30s causes slow shutdown
+
+  # Reduce global stop timeout — default 1m30s causes long shutdown delays when
+  # services or user processes (e.g. whisper-server) don't exit cleanly.
+  systemd.extraConfig = "DefaultTimeoutStopSec=15s";
+  systemd.user.extraConfig = "DefaultTimeoutStopSec=15s";
 
   # udev rules — Stream Deck access + Razer BlackWidow wakeup from suspend
   services.udev.extraRules = ''

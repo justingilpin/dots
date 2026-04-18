@@ -24,7 +24,7 @@
 
   # ── Session security ────────────────────────────────────────────────────────
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
+  # PAM unlock is handled in nixos-common.nix via security.pam.services.greetd.enableGnomeKeyring
 
   # ── System packages ─────────────────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
@@ -111,6 +111,8 @@
           # Both are appended via extraConfig from their respective module.
           # nm-applet and blueman-applet are basic-only — shell has its own network/bluetooth widgets.
           # Both are appended via extraConfig from modules/basic.
+          # Start gnome-keyring-daemon so PAM can unlock it and VS Code doesn't prompt for the keyring password.
+          "gnome-keyring-daemon --start --components=secrets"
           # Export wayland env then activate session target so systemd services
           # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"
@@ -195,6 +197,7 @@
         # ── Misc ──────────────────────────────────────────────────────────────
         misc = {
           force_default_wallpaper = 0;
+          vrr = 0; # Disable VRR — NVIDIA GPU context resets (GL_GUILTY_CONTEXT_RESET) when monitor sleeps
         };
 
         ecosystem.no_update_news = true;
