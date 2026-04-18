@@ -190,6 +190,11 @@
   #   openrgb --noautoconnect -c D79921 --mode static
   environment.systemPackages = with pkgs; [ openrgb-with-all-plugins ];
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true; # Blueman GUI applet for pairing/managing devices
+
   # USB
   services.usbmuxd.enable = true;
 
