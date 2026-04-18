@@ -32,11 +32,11 @@
     options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
   };
 
-  # Shared M.2 data drive (exFAT, dual-boot with Windows), label: Data
+  # Shared M.2 data drive (NTFS, converted from exFAT), label: Storage
   fileSystems."/mnt/Storage" = {
-    device = "/dev/disk/by-uuid/6E1D-743C";
-    fsType = "exfat";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=1000" "gid=100" "umask=022" "x-systemd.device-timeout=5s" ];
+    device = "/dev/disk/by-uuid/DC6849C96849A2DE";
+    fsType = "ntfs3";
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
   };
 
 
