@@ -206,6 +206,7 @@
           "immediate, class:^(cs2)$"
           "idleinhibit fullscreen, class:^(firefox)$"
           "idleinhibit fullscreen, class:^(stremio)$"
+          "idleinhibit fullscreen, class:^(steam_app_.*)$"
         ];
 
         # ── Keybinds ──────────────────────────────────────────────────────────
