@@ -77,6 +77,7 @@
     watch
     wireguard-tools
     #----------Utilies--------------#
+    gparted
     mesa # video drivers
 
     #-------Favorite Software-------#
