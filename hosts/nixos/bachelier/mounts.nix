@@ -36,7 +36,7 @@
   fileSystems."/mnt/Storage" = {
     device = "/dev/disk/by-uuid/DC6849C96849A2DE";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-systemd.device-timeout=5s" ];
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=1000" "gid=100" "umask=022" "x-systemd.device-timeout=5s" ];
   };
 
 
