@@ -194,6 +194,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.xpadneo.enable = true; # Xbox controller Bluetooth driver
+  services.blueman.enable = true;
 
   # USB
   services.usbmuxd.enable = true;
