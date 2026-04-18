@@ -193,7 +193,7 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true; # Blueman GUI applet for pairing/managing devices
+  hardware.xpadneo.enable = true; # Xbox controller Bluetooth driver
 
   # USB
   services.usbmuxd.enable = true;
