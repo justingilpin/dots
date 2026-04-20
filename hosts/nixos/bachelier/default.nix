@@ -193,6 +193,39 @@
   hardware.bluetooth.powerOnBoot = true;
   hardware.xpadneo.enable = true; # Xbox controller Bluetooth driver
 
+  # Prevent idle/lock/suspend while a Steam game is running.
+  # Xbox controller input is not a Wayland seat event so the idle timer runs
+  # even during active gameplay. This service polls hyprctl every 10 s and
+  # holds a systemd idle+sleep inhibitor for the duration of any steam_app_*.
+  systemd.user.services.steam-idle-inhibit = {
+    description = "Inhibit idle and suspend while a Steam game is running";
+    wantedBy = [ "default.target" ];
+    path = [ pkgs.hyprland pkgs.python3 pkgs.systemd ];
+    serviceConfig = {
+      Type      = "simple";
+      Restart   = "always";
+      RestartSec = "5s";
+    };
+    script = ''
+      while true; do
+        if hyprctl clients -j 2>/dev/null | python3 -c "
+import sys, json, re
+clients = json.load(sys.stdin)
+exit(0 if any(re.match(\"steam_app_\", c.get(\"class\", \"\")) for c in clients) else 1)
+        " 2>/dev/null; then
+          systemd-inhibit \
+            --what=idle:sleep \
+            --who=steam-idle-inhibit \
+            --why="Steam game is running" \
+            --mode=block \
+            sleep 10
+        else
+          sleep 10
+        fi
+      done
+    '';
+  };
+
   # USB
   services.usbmuxd.enable = true;
   systemd.services.usbmuxd.serviceConfig.TimeoutStopSec = lib.mkForce "5s"; # default 1m30s causes slow shutdown
