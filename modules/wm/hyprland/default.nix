@@ -209,7 +209,7 @@
           "immediate, class:^(cs2)$"
           "idleinhibit fullscreen, class:^(firefox)$"
           "idleinhibit fullscreen, class:^(stremio)$"
-          "idleinhibit always, class:^(steam_app_.*)$"
+          "idleinhibit focus, class:^(steam_app_.*)$"
         ];
 
         # ── Keybinds ──────────────────────────────────────────────────────────

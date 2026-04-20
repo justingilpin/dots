@@ -211,7 +211,14 @@
         if hyprctl clients -j 2>/dev/null | python3 -c "
 import sys, json, re
 clients = json.load(sys.stdin)
-exit(0 if any(re.match(\"steam_app_\", c.get(\"class\", \"\")) for c in clients) else 1)
+# Only count a game as 'running' if the window is mapped, not hidden,
+# and on a real workspace (id > 0) — this excludes steam tray/minimised windows.
+def is_active_game(c):
+    return (re.match(\"steam_app_\", c.get(\"class\", \"\"))
+            and c.get(\"mapped\", False)
+            and not c.get(\"hidden\", True)
+            and c.get(\"workspace\", {}).get(\"id\", -1) > 0)
+exit(0 if any(is_active_game(c) for c in clients) else 1)
         " 2>/dev/null; then
           systemd-inhibit \
             --what=idle:sleep \
