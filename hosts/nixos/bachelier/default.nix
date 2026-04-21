@@ -116,13 +116,33 @@
   # causing an immediate phantom wakeup. Rebinding the driver after suspend clears it.
   systemd.services.fix-xhci-resume = {
     description = "Rebind AMD 500 Series USB controller after resume to fix USBSTS 0x401";
-    wantedBy = [ "suspend.target" ];
-    after = [ "suspend.target" ];
+    # Use post-sleep hook — wantedBy suspend.target causes a lingering start job
+    # that blocks shutdown after resume.
+    wantedBy = [ "post-sleep.target" ];
+    after = [ "post-sleep.target" ];
     serviceConfig.Type = "oneshot";
     script = ''
       echo "0000:02:00.0" > /sys/bus/pci/drivers/xhci_hcd/unbind 2>/dev/null || true
       sleep 0.5
       echo "0000:02:00.0" > /sys/bus/pci/drivers/xhci_hcd/bind 2>/dev/null || true
+    '';
+  };
+
+  # Restore Scarlett 2i2 audio after resume — the USB audio driver loses state
+  # on suspend. Reload snd_usb_audio then restart wireplumber as the user so
+  # pipewire re-enumerates the device with the correct profile.
+  systemd.services.fix-audio-resume = {
+    description = "Reload USB audio and restart wireplumber after resume";
+    wantedBy = [ "post-sleep.target" ];
+    after = [ "post-sleep.target" "fix-xhci-resume.service" ];
+    serviceConfig.Type = "oneshot";
+    path = [ pkgs.kmod pkgs.coreutils pkgs.systemd ];
+    script = ''
+      modprobe -r snd_usb_audio || true
+      sleep 1
+      modprobe snd_usb_audio || true
+      sleep 1
+      runuser -l justin -c 'XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus systemctl --user restart wireplumber'
     '';
   };
 
