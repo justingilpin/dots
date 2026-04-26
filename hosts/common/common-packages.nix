@@ -98,6 +98,7 @@
     vlc
     vesktop
     zoom-us
+    telegram-desktop
 		unzip
 
     vscode-extensions.ms-vscode-remote.remote-ssh
