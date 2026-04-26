@@ -82,6 +82,7 @@
 
     #-------Favorite Software-------#
  #       gimp-with-plugins
+    tradingview
     yazi # modern terminal file manager
     kdePackages.dolphin # GUI file manager
     sioyek # pdf viewer
