@@ -32,6 +32,12 @@ in
     };
   };
 
+  # ── Docker ─────────────────────────────────────────────────────────────────
+  # Docker Compose is the environment strategy for all dev/research workloads
+  # (VectorBT, NautilusTrader, PostgreSQL). See infra/ in the Backtesting Engine.
+  virtualisation.docker.enable = true;
+  users.users.justin.extraGroups = [ "docker" ];
+
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [

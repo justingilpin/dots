@@ -20,8 +20,8 @@
       ./../../../modules/noctalia
      # ./../../../modules/DankMaterialShell
 
-      # Trading / backtesting: VectorBT + NautilusTrader + Dukascopy data
-      ./../../../modules/vectorbt
+      # Trading / backtesting: environment managed via Docker Compose in infra/
+      # See ~/Automation/Backtesting Engine/infra/docker-compose.yml
     ];
 
   # Quick fix for Obsidian to allow insecure install

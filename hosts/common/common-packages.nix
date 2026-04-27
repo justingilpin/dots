@@ -42,8 +42,7 @@
 #    dua # Modern Unix `du`
 #    duf # Modern Unix `df`
 #    du-dust # Modern Unix `du`
-#    docker
-#    docker-compose
+    docker-compose
 #    drill
 #    entr # Modern Unix `watch`
     firefox
