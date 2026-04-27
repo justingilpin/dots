@@ -15,8 +15,10 @@
     };
   };
 
-  # thermald as thermal backstop — prevents CPU from running dangerously hot
+  # thermald as thermal backstop — needs --ignore-cpuid-check for ThinkPad dytc_lapmode
   services.thermald.enable = true;
+  systemd.services.thermald.serviceConfig.ExecStart = lib.mkForce
+    "/run/current-system/sw/sbin/thermald --no-daemon --adaptive --dbus-enable --ignore-cpuid-check";
 
   # Laptop hypridle — dims backlight and suspends after 30 min idle
   home-manager.users.justin.home.file.".config/hypr/hypridle.conf".source =
