@@ -21,7 +21,8 @@
     nix-prefetch-git
     ripgrep #neovim telescope grep requirement
     lua # requirement for neovim to be modified / treesitter
-    python3 # required by Noctalia's VS Code theme helper script
+    # python3
+    (python3.withPackages (ps: with ps; [ pytest ]))
 		(pkgs.symlinkJoin {
       name = "calibre";
       paths = [ pkgs.calibre ];
