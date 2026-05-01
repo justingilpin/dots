@@ -18,15 +18,31 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Noctalia shell — minimal Quickshell-based Wayland desktop shell
+    # Requires nixpkgs-unstable (depends on latest Quickshell)
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixarr, home-manager, disko, vscode-server, nixvim, noctalia, ... }:
   let
     system = "x86_64-linux";
 
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
+    };
+
+    # Noctalia binary cache — skip local compilation of Quickshell/QML deps.
+    # Add to /etc/nix/nix.conf or trusted-users if substituters are restricted.
+    noctaliaCacheModule = {
+      nix.settings = {
+        extra-substituters = [ "https://noctalia.cachix.org" ];
+        extra-trusted-public-keys = [
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+        ];
+      };
     };
 
     mkSystem = { host, home ? ./home/justin.nix, extraModules ? [] }:
@@ -40,6 +56,7 @@
         modules = [
           ./hosts/nixos/${host}/default.nix
           home-manager.nixosModules.home-manager
+          noctaliaCacheModule
           {
             home-manager.useGlobalPkgs        = true;
             home-manager.useUserPackages      = true;
@@ -48,6 +65,7 @@
             home-manager.users.justin.imports = [
               home
               nixvim.homeModules.nixvim
+              noctalia.homeModules.default # registers programs.noctalia-shell — safe when inactive
             ];
           }
         ] ++ extraModules;

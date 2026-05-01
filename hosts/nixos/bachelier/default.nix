@@ -19,7 +19,8 @@
     ./../../../modules/wm/hyprland
 
 # Choose One Shell or Bar
-    ./../../../modules/basic
+   # ./../../../modules/basic
+    ./../../../modules/noctalia
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -15,7 +15,8 @@
       ./../../../modules/wm/hyprland
 
      # Pick One Shell or Bar
-      ./../../../modules/basic
+     # ./../../../modules/basic
+      ./../../../modules/noctalia
 
       # Trading / backtesting: environment managed via Docker Compose in infra/
       # See ~/Automation/Backtesting Engine/infra/docker-compose.yml

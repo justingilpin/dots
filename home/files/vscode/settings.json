@@ -1,6 +1,8 @@
 {
   // ── Theme ────────────────────────────────────────────────────────────────
-  "workbench.colorTheme": "Default Dark Modern",
+  // Noctalia VSCode extension — auto-installed via activation script.
+  // Colors are written dynamically by Noctalia's template engine.
+  "workbench.colorTheme": "NoctaliaTheme",
 
   // ── NixOS: disable update nags ───────────────────────────────────────────
   // VSCode is managed by Nix — in-app updates don't work.

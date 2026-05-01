@@ -51,3 +51,7 @@ nix flake update
 - [nixvim](https://github.com/nix-community/nixvim)
 - [nixarr](https://github.com/rasmus-kirk/nixarr)
 - [disko](https://github.com/nix-community/disko)
+
+## Credits
+
+- [Noctalia](https://github.com/noctalia-dev/noctalia-shell) — desktop shell used on Hyprland hosts
