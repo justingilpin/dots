@@ -17,7 +17,6 @@
 #    ./../../../modules/wm/plasma5
     ./../../../modules/wm/hyprland
     ./../../../modules/basic
-    # ./../../../modules/shell
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -42,7 +41,7 @@
   ## xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];  ## for KDE based desktops
 
   # Shell
-  programs.zsh.enable = true; # configured in /modules/shell
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [zsh]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
   users.defaultUserShell = pkgs.zsh;

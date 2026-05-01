@@ -15,10 +15,7 @@
       ./../../../modules/wm/hyprland
 
      # Pick One Shell or Bar
-     # ./../../../modules/basic
-     # ./../../../modules/shell
-      ./../../../modules/noctalia
-     # ./../../../modules/DankMaterialShell
+      ./../../../modules/basic
 
       # Trading / backtesting: environment managed via Docker Compose in infra/
       # See ~/Automation/Backtesting Engine/infra/docker-compose.yml
@@ -60,7 +57,7 @@
   services.tailscale.enable = true;
 
   # Shell
-  programs.zsh.enable = true; # configured in /modules/shell
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
   # Also check that user has shell enabled

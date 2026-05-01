@@ -1,11 +1,10 @@
 # modules/wm/hyprland/default.nix
 #
 # Core Hyprland compositor — always loaded.
-# Pair with modules/basic (simple UI) or modules/shell (advanced UI).
+# Pair with modules/basic for Waybar, dunst, and hypridle.
 #
 # hyprland.conf is managed here via wayland.windowManager.hyprland.settings.
 # basic/default.nix appends its own exec-once lines (hypridle, dunst) via extraConfig.
-# shell/default.nix does not — the shell manages idle and notifications itself.
 
 { pkgs, lib, ... }:
 
@@ -104,7 +103,7 @@
 
         # ── Autostart ─────────────────────────────────────────────────────────
         # hypridle and dunst are intentionally NOT here — basic/default.nix adds
-        # them via extraConfig so they are absent when using modules/shell instead.
+        # them via extraConfig so they are absent when using a full shell instead.
         exec-once = [
           # hyprpaper is basic-only — shell manages wallpaper itself via its own daemon.
           # hypridle and dunst are basic-only — shell manages idle/notifications itself.
@@ -114,7 +113,7 @@
           # Start gnome-keyring-daemon so PAM can unlock it and VS Code doesn't prompt for the keyring password.
           "gnome-keyring-daemon --start --components=secrets"
           # Export wayland env then activate session target so systemd services
-          # (waybar, caelestia, etc.) have WAYLAND_DISPLAY set before starting.
+          # (waybar, etc.) have WAYLAND_DISPLAY set before starting.
           "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start --no-block hyprland-session.target"
           # WirePlumber sometimes misses USB audio devices on boot — restart to re-enumerate
           "systemctl --user restart wireplumber"
@@ -325,4 +324,3 @@
   }; # end home-manager.users.justin
 
 }
-

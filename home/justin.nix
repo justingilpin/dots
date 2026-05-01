@@ -132,7 +132,7 @@
     mimeType = [ "x-scheme-handler/discord" ];
   };
 
-  # Pywalfox — native messenger for Firefox theming via Noctalia
+  # Pywalfox native messenger for Firefox theming.
   # The extension must be installed in Firefox manually (search "Pywalfox" in add-ons)
   programs.firefox = {
     enable = true;
@@ -140,8 +140,6 @@
   };
 
   # Kitty — primary terminal, replaces alacritty.
-  # Theme comes from Noctalia's template engine
-  # (writes ~/.config/kitty/themes/noctalia.conf on color scheme changes).
   programs.kitty = {
     enable = true;
     font = {
@@ -157,18 +155,10 @@
       tab_bar_style           = "powerline";
       tab_powerline_style     = "slanted";
     };
-    extraConfig = ''
-      # Colors — written by Noctalia's template engine on each palette change
-      include themes/noctalia.conf
-    '';
   };
 
-  # btop — use the theme written by Noctalia's template engine
   programs.btop = {
     enable = true;
-    settings = {
-      color_theme = "noctalia";
-    };
   };
 
   programs.yazi = {
@@ -234,7 +224,7 @@
       vscodevim.vim
 
       # ── NOT in nixpkgs — auto-installed via activation script below ─────
-      # anthropic.claude-code, openai.chatgpt, noctalia.noctaliatheme, ms-python.debugpy
+      # anthropic.claude-code, openai.chatgpt, ms-python.debugpy
     ];
   };
 
@@ -309,7 +299,6 @@ EOF
       for ext in \
         anthropic.claude-code \
         openai.chatgpt \
-        noctalia.noctaliatheme \
         ms-python.debugpy; do
         code --install-extension "$ext" --force 2>/dev/null || true
       done

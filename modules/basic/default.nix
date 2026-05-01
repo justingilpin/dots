@@ -1,7 +1,6 @@
 # modules/basic/default.nix
 #
-# Simple UI addon for Hyprland. Import alongside modules/wm/hyprland.
-# Swap this out for modules/shell when moving to the advanced shell setup.
+# Simple UI module: Waybar, dunst, and hypridle.
 
 { pkgs, ... }:
 
@@ -25,7 +24,7 @@
   ];
 
   # Inject basic-only autostart and launcher variable into the Nix-managed
-  # hyprland config. These are absent when using modules/shell — the shell
+  # hyprland config. These are absent when using a full shell — the shell
   # handles idle, notifications, and launching itself.
   home-manager.users.justin.wayland.windowManager.hyprland = {
 

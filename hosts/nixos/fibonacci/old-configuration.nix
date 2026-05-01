@@ -69,7 +69,7 @@
   services.tailscale.enable = true;
 
   # Shell
-  programs.zsh.enable = true; # configured in /modules/shell
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
   # users.defaultUserShell = pkgs.zsh;
@@ -181,4 +181,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-

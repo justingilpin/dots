@@ -19,9 +19,7 @@
     ./../../../modules/wm/hyprland
 
 # Choose One Shell or Bar
-   # ./../../../modules/basic
-    ./../../../modules/noctalia
-  #  ./../../../modules/shell
+    ./../../../modules/basic
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -56,7 +54,7 @@
   # gnome-keyring is enabled in modules/wm/hyprland; PAM unlock via greetd is in nixos-common.nix
 
   # Shell
-  programs.zsh.enable = true; # configured in /modules/shell
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [zsh]; # Many programs look if user is a 'normal' user
   environment.binsh = "${pkgs.dash}/bin/dash";
   users.defaultUserShell = pkgs.zsh;
