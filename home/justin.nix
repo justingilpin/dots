@@ -355,7 +355,7 @@ EOF
       };
     };
     matchBlocks."linode" = {
-      user = "admin";
+      user = "root";
     };
     #  extraConfig = ''
     #  Host *
