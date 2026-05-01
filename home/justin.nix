@@ -354,6 +354,9 @@ EOF
         ControlPersist = "no";
       };
     };
+    matchBlocks."linode" = {
+      user = "admin";
+    };
     #  extraConfig = ''
     #  Host *
     #    StrictHostKeyChecking no
