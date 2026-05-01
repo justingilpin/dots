@@ -287,6 +287,7 @@ exit(0 if any(is_active_game(c) for c in clients) else 1)
      #  gimp
       chromium
       krita
+			nodejs_22 # Used for Codex
       #---------Audio--------------#
       pwvucontrol               # PipeWire volume control (audio mixer GUI)
       #---------Elgato / Streaming--------------#

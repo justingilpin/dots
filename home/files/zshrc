@@ -175,6 +175,12 @@ alias ...='cd ../.. && ld'
 alias ,='cd'
 alias ,,='cd ..'
 
+# npm global binaries
+case ":$PATH:" in
+  *":$HOME/.npm-global/bin:"*) ;;
+  *) export PATH="$HOME/.npm-global/bin:$PATH" ;;
+esac
+
 #----------------Source--------------#
 
 SPACESHIP_TIME_12HR=true
