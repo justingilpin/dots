@@ -252,6 +252,45 @@ exit(0 if any(is_active_game(c) for c in clients) else 1)
     '';
   };
 
+  # Prevent idle/lock/suspend while a visible VS Code window is open.
+  # VS Code itself only takes a delay inhibitor before suspend, which lets it
+  # clean up but does not stop Noctalia's idle suspend timer from firing.
+  systemd.user.services.vscode-idle-inhibit = {
+    description = "Inhibit idle and suspend while VS Code is open";
+    wantedBy = [ "default.target" ];
+    path = [ pkgs.hyprland pkgs.python3 pkgs.systemd ];
+    serviceConfig = {
+      Type      = "simple";
+      Restart   = "always";
+      RestartSec = "5s";
+    };
+    script = ''
+      while true; do
+        if hyprctl clients -j 2>/dev/null | python3 -c "
+import sys, json, re
+clients = json.load(sys.stdin)
+# Only count visible VS Code windows on real workspaces, not background
+# Electron helper processes or special/scratchpad windows.
+def is_open_vscode(c):
+    return (re.match(\"^(Code|VSCodium|codium)$\", c.get(\"class\", \"\"), re.IGNORECASE)
+            and c.get(\"mapped\", False)
+            and not c.get(\"hidden\", True)
+            and c.get(\"workspace\", {}).get(\"id\", -1) > 0)
+exit(0 if any(is_open_vscode(c) for c in clients) else 1)
+        " 2>/dev/null; then
+          systemd-inhibit \
+            --what=idle:sleep \
+            --who=vscode-idle-inhibit \
+            --why="VS Code window is open" \
+            --mode=block \
+            sleep 10
+        else
+          sleep 10
+        fi
+      done
+    '';
+  };
+
   # USB
   services.usbmuxd.enable = true;
   systemd.services.usbmuxd.serviceConfig.TimeoutStopSec = lib.mkForce "5s"; # default 1m30s causes slow shutdown
@@ -287,7 +326,6 @@ exit(0 if any(is_active_game(c) for c in clients) else 1)
       chromium
       krita
 			nodejs_22 # Used for Codex
-      inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default
       #---------Audio--------------#
       pwvucontrol               # PipeWire volume control (audio mixer GUI)
       #---------Elgato / Streaming--------------#
