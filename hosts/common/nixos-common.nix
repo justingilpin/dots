@@ -44,6 +44,12 @@ in
     "electron-25.9.0"
   ];
 
+  # Temporary mitigation for CVE-2026-31431 ("Copy Fail") until every host is
+  # running a kernel with the algif_aead out-of-place fix.
+  boot.extraModprobeConfig = ''
+    install algif_aead ${pkgs.coreutils}/bin/false
+  '';
+
   environment.systemPackages = with pkgs; [
     wget
     git
